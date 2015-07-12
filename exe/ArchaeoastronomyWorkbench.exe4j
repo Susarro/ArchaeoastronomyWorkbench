@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="5.0.1" transformSequenceNumber="2">
+  <directoryPresets config="C:/programas/ArchaeoastronomyWorkbench/dist/lib" />
+  <application name="ArchaeoastronomyWorkbench" distributionSourceDir="C:/programas/ArchaeoastronomyWorkbench/exe">
+    <languages>
+      <principalLanguage id="en" customLocalizationFile="" />
+    </languages>
+  </application>
+  <executable name="ArchaeoastronomyWorkbench" type="2" iconSet="true" iconFile="C:/programas/ArchaeoastronomyWorkbench/src/com/resources/moon6.ico" executableDir="." redirectStderr="true" stderrFile="error.txt" stderrMode="append" redirectStdout="false" stdoutFile="salida.txt" stdoutMode="append" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="false" amd64="true">
+    <messageSet />
+    <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" companyName="" productVersion="" />
+  </executable>
+  <splashScreen show="false" width="0" height="0" bitmapFile="C:/programas/ClienteLamiN2/src/com/splash.bmp" windowsNative="false" textOverlay="false">
+    <text>
+      <statusLine x="20" y="20" text="" fontSize="8" fontColor="0,0,0" bold="false" />
+      <versionLine x="20" y="40" text="version %VERSION%" fontSize="8" fontColor="0,0,0" bold="false" />
+    </text>
+  </splashScreen>
+  <java mainClass="com.interfaz.Principal" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true" minVersion="1.8" maxVersion="" allowBetaVM="false" jdkOnly="false">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <classPath>
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/ArchaeoastronomyWorkbench.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/EsqueletoFX.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/GraficaSwing.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/jdom-2.0.6.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/jfreechart-1.0.13.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/log4j-1.2.17.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/xercesImpl.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/xml-apis.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/jfreechart-1.0.13-demo.jar" failOnError="false" />
+      <archive location="C:/programas/ArchaeoastronomyWorkbench/dist/lib/jcommon-1.0.16.jar" failOnError="false" />
+    </classPath>
+    <nativeLibraryDirectories />
+  </java>
+  <includedFiles />
+  <unextractableFiles />
+</exe4j>

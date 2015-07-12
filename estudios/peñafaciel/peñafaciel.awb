@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estudio nombre="Peñafaciel">
+  <alineamientos>
+    <alineamiento>
+      <lugar tipo="origen">
+        <nombre>Laberintos</nombre>
+        <coordenadas>
+          <latitud>42º23'22.000''</latitud>
+          <longitud>-6º18'56.000''</longitud>
+          <altitud>1169.0</altitud>
+        </coordenadas>
+      </lugar>
+      <lugar tipo="referencia">
+        <nombre>Sestil</nombre>
+        <coordenadas>
+          <latitud>42º21'9.000''</latitud>
+          <longitud>-6º24'22.000''</longitud>
+          <altitud>2031.0</altitud>
+        </coordenadas>
+      </lugar>
+      <direccion>
+        <acimut>-118.87766340812692</acimut>
+        <elevacion>5.735318246344139</elevacion>
+      </direccion>
+      <descripcion>Imbolc/Samain,-2000</descripcion>
+      <imagen />
+      <declinacion>-16.7</declinacion>
+    </alineamiento>
+    <alineamiento>
+      <lugar tipo="origen">
+        <nombre>Peñafaciel</nombre>
+        <coordenadas>
+          <latitud>42º23'29.000''</latitud>
+          <longitud>-6º18'51.000''</longitud>
+          <altitud>1193.0</altitud>
+        </coordenadas>
+      </lugar>
+      <lugar tipo="referencia">
+        <nombre>Teleno</nombre>
+      </lugar>
+      <direccion>
+        <acimut>127.78946374944951</acimut>
+        <elevacion>6.776039926995118</elevacion>
+      </direccion>
+      <descripcion />
+      <imagen>image039.jpg</imagen>
+      <declinacion>-21.7</declinacion>
+    </alineamiento>
+    <alineamiento>
+      <lugar tipo="origen">
+        <nombre>Peñafaciel</nombre>
+        <coordenadas>
+          <latitud>42º23'29.000''</latitud>
+          <longitud>6º18'51.000''</longitud>
+          <altitud>1193.0</altitud>
+        </coordenadas>
+      </lugar>
+      <lugar tipo="referencia">
+        <nombre>Becerril</nombre>
+        <coordenadas>
+          <latitud>42º26'28.000''</latitud>
+          <longitud>6º26'25.000''</longitud>
+          <altitud>1872.0</altitud>
+        </coordenadas>
+      </lugar>
+      <direccion>
+        <acimut>61.85283916826985</acimut>
+        <elevacion>3.245909122325488</elevacion>
+      </direccion>
+      <descripcion />
+      <imagen />
+      <declinacion>22.7</declinacion>
+    </alineamiento>
+  </alineamientos>
+</estudio>

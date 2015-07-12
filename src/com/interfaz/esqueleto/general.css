@@ -1,0 +1,1301 @@
+/* 
+    Document   : prueba
+    Created on : 23-oct-2013, 8:31:48
+    Author     : MIGUEL_ANGEL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+.root{    
+    //-fx-background-color: principal;   
+    //-fx-table-cell-border-color: #bbbbbb;
+    interior_control: white;
+    base: #d0d0d0;
+    base_tabla:derive(principal,20%);  
+    base_barra:derive(principal,20%);
+    base_tab:derive(principal,40%);     
+    
+    texto_oscuro:black;
+    texto_claro:white;
+    texto_medio:#292929;
+
+    interior_texto: ladder(
+        interior_control,
+        texto_claro 45%,
+        texto_oscuro  46%,
+        texto_oscuro  59%,
+        texto_medio   60%
+        );
+    principal:#343434;
+    trasero:#f4f4f4;
+    fondo_tabla: derive(base_tabla,-30%);
+    trasero: #f4f4f4;
+    
+    resalte_sombra:ladder(
+        trasero,
+        transparent 0%,
+        derive(trasero,40%)   5%,
+        derive(trasero,60%)  70%,
+        derive(trasero,100%) 85%,
+        derive(trasero,100%) 97%,
+        derive(trasero,-10%) 97.5%
+        );
+    
+    
+    
+    borde_exterior:linear-gradient(
+        to bottom,
+        derive(base,-9%) 0%, 
+        derive(base,-33%) 100%
+        );       
+
+    borde_interior: linear-gradient(
+        to bottom,
+        ladder(base, 
+        derive(base,80%) 60%, 
+        white 82%) 0%,
+        ladder(base, 
+        derive(base,20%) 10%, 
+        derive(base,-10%) 80%) 100%
+        );
+    
+    barra_seleccion: linear-gradient(
+        to bottom,
+        derive(trasero,-7%) 0%,
+        derive(trasero,-34%) 100%
+    );
+    
+    sobre_celda: #cce3f4;
+    
+    borde_caja_texto: ladder(
+        trasero,
+        black 10%,
+        derive(trasero, -15%) 30%
+    );
+    
+    foco: #0093ff;
+    
+    borde_interior_foco_celda: #85b9de;
+    
+     
+    borde_caja: ladder(base, black 20%,derive(base,-30%) 30%);
+    
+    color_aqua_palido: derive(aqua,80%);
+    color_verdeamarillo_palido: derive(greenyellow,80%);
+    color_oro_palido: derive(gold,80%);
+    color_naranja_palido: derive(orange,80%);
+    color_rojo_palido: derive(red,100%);
+
+}
+
+.ttip {        
+    -fx-background-color:linear-gradient(cyan  , deepskyblue);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 0 0 13 0;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+    -fx-font-size:14px;        
+}
+
+.fondo{
+    -fx-background-color: linear-gradient(to bottom, derive(principal, 40%), principal);    
+}
+
+.fondo-plano{
+
+    -fx-background-color: principal;    
+}
+
+
+.borde-panel{
+    -fx-border-color: blue; 
+    -fx-border-width:3;
+}
+
+.marco{
+
+    -fx-background-color: derive(principal,30%);
+    -fx-background-radius: 10;
+    -fx-padding: 1;
+    -fx-spacing: 2;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+
+}
+
+.etiqueta
+{
+    -fx-text-fill: greenyellow; 
+}
+.caption
+{
+    -fx-text-fill: white; 
+    -fx-font-weight: bold;
+}
+
+.aviso
+{
+    -fx-text-fill: red; 
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.check-box {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;   
+    -fx-font-weight: bold;
+}
+
+.check-box .box{
+    -fx-background-color: resalte_sombra, borde_exterior, borde_interior, white;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 2, 2, 1, 1;
+    -fx-padding: 0.25em; /* 3 -- padding from the outside edge to the mark */
+
+}
+
+.check-box:selected .mark {
+    -fx-background-color: blue;    
+}
+
+.check-menu-item:checked > .left-container > .check {    
+    -fx-background-color: white;
+    -fx-shape: "M0,5H2L4,8L8,0H10L5,10H3Z";
+    -fx-scale-shape: false;    
+}
+
+
+
+.combo-box
+{
+    -fx-background-color:linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+    -fx-background-radius: 9,8,5,4,3;
+    -fx-padding: 5 10 5 10;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1); 
+}
+
+.combo-box .list-cell 
+{
+    -fx-text-fill: white;
+}
+
+.combo-box .combo-box-popup .list-view .list-cell
+{
+    -fx-text-fill: black;
+}
+
+.combo-box .combo-box-popup .list-view .list-cell:selected
+{
+    -fx-background-color:barra_seleccion;  
+}
+
+.combo-box .combo-box-popup .list-view .list-cell:hover
+{
+    -fx-background-color:sobre_celda;  
+}
+
+
+
+.combo-box .arrow-button {
+    -fx-background-color: gray, black, linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%); 
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+    -fx-padding: 0.333333em 0.666667em 0.416667em 0.666667em; /* 4 8 5 8 */
+    -fx-text-fill: -fx-text-base-color;
+
+}
+
+.combo-box .arrow-button .arrow{
+    -fx-background-color: blue, white;
+    -fx-background-insets: 0 0 -1 0, 0;
+    -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em; /* 2 4 2 4 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.text-field {    
+    -fx-skin: "com.sun.javafx.scene.control.skin.TextFieldSkin";
+    -fx-background-color: resalte_sombra, borde_caja_texto, interior_control;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 2;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: interior_texto;
+    -fx-prompt-text-fill: derive(interior_control,-30%);
+    -fx-cursor: text;
+}
+
+.text-field:focused {
+    -fx-background-color: foco, borde_caja_texto, interior_control;
+    -fx-background-insets: -0.4, 1, 2;
+    -fx-background-radius: 3.4, 2, 2;
+    -fx-prompt-text-fill: transparent;
+}
+
+.text-field:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+
+.text-field-error {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TextFieldSkin";
+    -fx-background-color: foco, borde_caja_texto, red;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 2;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: interior_texto;
+    -fx-prompt-text-fill: derive(interior_control,-30%);
+    -fx-cursor: text;
+}
+
+.text-field-error:focused {
+    -fx-background-color: foco, borde_caja_texto, interior_control;
+    -fx-background-insets: -0.4, 1, 2;
+    -fx-background-radius: 3.4, 2, 2;
+    -fx-prompt-text-fill: transparent;
+}
+
+.text-field-error:disabled {
+    -fx-opacity: 0.4;
+}
+
+.table-row-cell {
+    -fx-cell-size: 2.0em; 
+}
+
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.table-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em; 
+
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-cell-size: 2.0em; 
+    -fx-text-fill: interior_texto;
+}
+
+
+
+.table-view .column-header-background {    
+    -fx-background-color:
+        linear-gradient(to right, derive(base_tabla,-30%), derive(base_tabla,-60%)),
+        linear-gradient(to right, derive(base_tabla,30%) 2%, derive(base_tabla,-10%) 95%);
+    -fx-background-insets: 0, 0 1 0 1;
+    -fx-background-radius: 0 ;  
+    -fx-padding:0;
+    -fx-spacing: 0.333em;
+}
+
+.table-view .column-header .label, .table-view .filler{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;      
+    -fx-background-color:         
+        linear-gradient(to bottom, derive(base_tabla,30%) 2%, derive(base_tabla,-10%) 95%);
+    -fx-background-insets: 0, 0 1 0 1;
+    -fx-background-radius: 0 ;  
+    -fx-padding:0;
+    -fx-spacing: 0.333em; 
+
+    -fx-border-style: solid;
+    -fx-border-color: 
+        derive(base_tabla, 80%)
+        linear-gradient(to bottom, derive(base_tabla,30%) 20%, derive(base_tabla,10%) 90%)
+        derive(base_tabla, 10%)
+        linear-gradient(to bottom, derive(base_tabla,30%) 20%, derive(base_tabla, 10%) 90%),
+        transparent fondo_tabla fondo_tabla transparent;
+    -fx-border-insets: 0 1 1 0, 0 0 0 0;
+    -fx-border-width: 0.083333em, 0.083333em;       
+}
+
+
+
+
+.encabezado_columna   {    
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    
+    -fx-background-color:         
+        linear-gradient(to bottom, derive(base_tabla,30%) 2%, derive(base_tabla,-10%) 95%);
+    -fx-background-insets: 0, 0 1 0 1;
+    -fx-background-radius: 0 ;  
+    -fx-padding:0;
+    -fx-spacing: 0.333em;   
+
+    -fx-border-style: solid;
+    -fx-border-color:        
+
+        derive(base_tabla, 80%)
+        linear-gradient(to bottom, derive(base_tabla,30%) 20%, derive(base_tabla,10%) 90%)
+        derive(base_tabla, 10%)
+        linear-gradient(to bottom, derive(base_tabla,30%) 20%, derive(base_tabla, 10%) 90%),
+
+        transparent fondo_tabla fondo_tabla transparent;
+    -fx-border-insets: 0 1 1 0, 0 0 0 0;
+    -fx-border-width: 0.083333em, 0.083333em;      
+}
+
+.color-muerto{
+    -fx-background-color: red;   
+}
+
+.color-defecto{
+    -fx-background-color: red;   
+}
+
+.color-blanco:filled{
+    -fx-background-color: white;   
+}
+
+.color-blanco:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+
+.color01:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color02:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color03:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color04:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color05:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color06:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color07:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color08:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color09:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color10:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color11:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color12:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color13:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color14:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color15:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color16:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color17:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color18:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color19:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+.color20:filled:selected{
+    -fx-background-color: foco, borde_interior_foco_celda, barra_seleccion;
+}
+
+
+
+.color01:filled{
+    -fx-background-color: paleturquoise;
+}
+
+.color01:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+.color02:filled{
+    -fx-background-color: tan;
+}
+
+.color02:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color03:filled{
+    -fx-background-color: lightgreen;
+}
+
+.color03:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color04:filled{
+    -fx-background-color: lightblue;
+}
+
+.color04:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color05:filled{
+    -fx-background-color: gold;
+}
+
+.color05:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color06:filled{
+    -fx-background-color: lightpink;
+}
+
+.color06:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color07:filled{
+    -fx-background-color: thistle;
+}
+
+.color07:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color08:filled{
+    -fx-background-color: khaki;
+}
+
+.color08:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color09:filled{
+    -fx-background-color: lightsalmon;
+}
+
+.color09:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color10:filled{
+    -fx-background-color: lightcyan;
+}
+
+.color10:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color11:filled{
+    -fx-background-color: beige;
+}
+
+.color11:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color12:filled{
+    -fx-background-color: bisque;
+}
+
+.color12:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color13:filled{
+    -fx-background-color: plum;
+}
+
+.color13:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color14:filled{
+    -fx-background-color: yellow;
+}
+
+.color14:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color15:filled{
+    -fx-background-color: greenyellow;
+}
+
+.color15:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color16:filled{
+    -fx-background-color: lavender;
+}
+
+.color16:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color17:filled{
+    -fx-background-color: lightgray;
+}
+
+.color17:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color18:filled{
+    -fx-background-color: papayawhip;
+}
+
+.color18:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color19:filled{
+    -fx-background-color: aqua;
+}
+
+.color19:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.color20:filled{
+    -fx-background-color: aquamarine;
+}
+
+.color20:filled:hover{
+    -fx-background-color: derive(#cce3f4,-5%);
+}
+
+.rojo { 
+    -fx-background-color: gray, red;
+}
+
+.rojo:odd { 
+    -fx-background-color:  gray, derive(red,-5%);     
+}
+
+.rojo:hover { 
+    -fx-background-color:  gray, #cce3f4;      
+}
+
+.rojo:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;       
+}
+
+.rojo_palido { 
+    -fx-background-color: gray, color_rojo_palido;
+}
+
+.rojo_palido:odd { 
+    -fx-background-color:  gray, derive(color_rojo_palido,-5%);     
+}
+
+.rojo_palido:hover { 
+    -fx-background-color:  gray, #cce3f4;      
+}
+
+.rojo_palido:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;       
+}
+
+
+.verdeamarillo { 
+    -fx-background-color: gray, greenyellow;   
+}
+
+.verdeamarillo:odd { 
+    -fx-background-color:  gray, derive(greenyellow,-5%);        
+}
+
+.verdeamarillo:hover { 
+    -fx-background-color:  gray, #cce3f4;      
+}
+
+.verdeamarillo:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;       
+}
+
+.verdeamarillo_palido { 
+    -fx-background-color: gray, color_verdeamarillo_palido;   
+}
+
+.verdeamarillo_palido:odd { 
+    -fx-background-color:  gray, derive(color_verdeamarillo_palido,-5%);        
+}
+
+.verdeamarillo_palido:hover { 
+    -fx-background-color:  gray, #cce3f4;      
+}
+
+.verdeamarillo_palido:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;       
+}
+
+
+.naranja { 
+    -fx-background-color: gray, orange;         
+}
+
+.naranja:odd { 
+    -fx-background-color:  gray, derive(orange,-5%);          
+}
+
+.naranja:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.naranja:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+.naranja_palido { 
+    -fx-background-color: gray, color_naranja_palido;         
+}
+
+.naranja_palido:odd { 
+    -fx-background-color:  gray, derive(color_naranja_palido,-5%);          
+}
+
+.naranja_palido:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.naranja_palido:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+
+.agua { 
+    -fx-background-color: gray, aqua;         
+}
+
+.agua:odd { 
+    -fx-background-color:  gray, derive(aqua,-5%);          
+}
+
+.agua:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.agua:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+.agua_palido { 
+    -fx-background-color: gray, color_aqua_palido;         
+}
+
+.agua_palido:odd { 
+    -fx-background-color:  gray, derive(color_aqua_palido,-5%);          
+}
+
+.agua_palido:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.agua_palido:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+
+
+.oro { 
+    -fx-background-color: gray, gold;         
+}
+
+.oro:odd { 
+    -fx-background-color:  gray, derive(gold,-5%);          
+}
+
+.oro:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.oro:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+.oro_palido { 
+    -fx-background-color: gray, color_oro_palido;         
+}
+
+.oro_palido:odd { 
+    -fx-background-color:  gray, derive(color_oro_palido,-5%);          
+}
+
+.oro_palido:hover { 
+    -fx-background-color:  gray, #cce3f4;     
+}
+
+.oro_palido:selected { 
+    -fx-background-color:  foco, borde_interior_foco_celda, barra_seleccion;        
+}
+
+
+
+.button{
+
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+
+    -fx-background-radius: 9,8,5,4,3;
+    -fx-padding: 10 20 10 20;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1); 
+}
+
+.button:hover {  
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);    
+    -fx-text-fill: white;
+}
+
+.button:armed {  
+    -fx-background-color:black;    
+    -fx-text-fill: gray;
+}
+
+
+.roundbutton{
+
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+    -fx-background-radius: 20,19,16,15,14;
+    -fx-background-position: center;
+    -fx-padding: 12 12 12 12;    
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);     
+    -fx-min-width: 40;
+    -fx-max-width: 40;
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+}
+
+.roundbutton:hover{
+
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+}
+
+.roundbutton:armed {  
+    -fx-background-color:black;   
+    -fx-opacity:0.5;
+
+}
+
+
+
+
+
+.toggle-button{
+
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+
+    -fx-background-radius: 9,8,5,4,3;
+    -fx-padding: 10 20 10 20;
+    -fx-font-family: "Segoe UI Semibold";   
+    -fx-background-insets: 0,1,4,5,6;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1); 
+}
+
+.toggle-button:hover {  
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);    
+    -fx-text-fill: white;
+}
+
+.toggle-button:armed {  
+    -fx-background-color:black;    
+    -fx-text-fill: gray;
+}
+
+.tool-bar:vertical {    
+    -fx-background-color:
+        linear-gradient(to right, derive(base_barra,-30%), derive(base_barra,-60%)),
+        linear-gradient(to right, derive(base_barra,30%) 2%, derive(base_barra,-10%) 95%);
+    -fx-background-insets: 0, 0 1 0 1;
+    -fx-background-radius: 0 ;
+    -fx-padding: 0.833em 0.416667em 0.833em 0.416667em;
+    -fx-spacing: 0.333em; 
+    -fx-alignment: TOP_LEFT;
+}
+
+.tool-bar .separator:vertical .line {
+    -fx-border-style: solid;
+    -fx-background-color: null;
+    -fx-border-color:  transparent derive(base_barra,-35%) transparent transparent;
+}
+
+.tool-bar .separator:horizontal .line {
+    -fx-border-style: solid;
+    -fx-background-color: null;
+    -fx-border-color:  transparent transparent derive(base_barra,-35%) transparent;
+}
+
+.tool-bar:horizontal {   
+    -fx-background: derive(base_barra,-30%);
+    -fx-background-color:
+
+        linear-gradient(to bottom, derive(base_barra,30%) 2%, derive(base_barra,-10%) 95%);    
+    -fx-background-radius: 0, 0 ;
+    -fx-padding: 0.416667em 0.833em 0.416667em 0.833em;
+    -fx-spacing: 0.1em; 
+    -fx-alignment: CENTER_LEFT;
+}
+
+.tool-bar:horizontal .separator {
+    -fx-orientation: vertical;
+    -fx-padding: 0.0835em 0.0em 0.0835em 0.0em;
+}
+
+.tool-bar:vertical .separator {
+    -fx-orientation: horizontal;    
+    -fx-padding: 0.0em 0.0835em 0.0em 0.0835em; 
+}
+
+.tool-bar .button
+{
+    -fx-skin: "com.sun.javafx.scene.control.skin.ButtonSkin";
+    -fx-background-color:    
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);  
+    -fx-background-insets: 0,1,2,5,6;
+    -fx-background-radius: 0, 0, 0, 0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em;
+    -fx-text-fill: white;        
+    -fx-content-display: LEFT;
+}
+
+.tool-bar .button:hover
+{
+    -fx-skin: "com.sun.javafx.scene.control.skin.ButtonSkin";
+    -fx-background-color:    
+        blue,
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);  
+    -fx-background-insets: 0,1,2,5,6;
+    -fx-background-radius: 0, 0, 0, 0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em;
+    -fx-text-fill: white;        
+    -fx-content-display: LEFT;
+}
+
+.tool-bar .button:armed {  
+    -fx-background-color:black;    
+    -fx-text-fill: gray;
+}
+
+
+.label{  
+
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.borderedLabel{  
+
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;    
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-background-color:derive(black,20%);
+    -fx-padding:2;
+}
+
+
+.titled-pane
+{
+    -fx-font-family: "Segoe UI Semibold"; 
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+.titled-pane > .title {
+    -fx-background-color:   
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%); 
+
+    -fx-background-insets:  0,1,4,5,6;
+    -fx-background-radius: 9,8,5,4,3;
+    -fx-padding: 10 20 10 20;   
+
+}
+
+.titled-pane > .title:hover  {
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);    
+}
+
+.titled-pane .title .arrow-button .arrow{
+    -fx-background-color: -fx-mark-highlight-color, white;
+    -fx-background-insets: 1 0 -1 0, 0;  
+}
+
+.titled-pane .label
+{
+    -fx-text-fill:black;  
+}
+
+.titled-pane .combo-box-base
+{
+    -fx-background-color: resalte_sombra, borde_exterior, borde_interior, darkgray;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.titled-pane .combo-box-base:hover
+{
+    -fx-background-color: blue, blue, borde_interior, darkgray;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+
+.tree-view {    
+    -fx-background-color:
+        borde_caja,
+        linear-gradient(to bottom, derive(base,-02%), derive(base,65%) 12%, derive(base,23%) 88%, derive(base,50%) 99%, borde_caja);
+    -fx-background-insets: 0, 0 1 1 1;
+    -fx-padding: 0.167em;
+    -fx-font-size:14px;
+
+}
+
+.tree-cell
+{
+    -fx-background-color:transparent;
+    -fx-border-width: 3 3 3 3;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+}
+
+.tree-cell:filled:hover {
+    -fx-background-color: derive(aquamarine,40%);
+    -fx-border-color: transparent;    
+}
+
+.tree-cell:filled:selected {
+    -fx-background-color: foco;    
+    -fx-text-fill:white;
+    -fx-border-color: transparent;    
+}
+.tree-cell  .tree-disclosure-node .arrow {    
+    -fx-shape: null;
+    -fx-padding: 0.333333em; 
+    -fx-shape: "M 0 -4 L 8 0 L 0 4 z";
+    -fx-background-color: royalblue; 
+}
+
+.tree-cell:filled:hover .tree-disclosure-node .arrow {
+    -fx-background-color: white;      
+}
+
+.tree-cell:expanded .tree-disclosure-node .arrow {
+
+    -fx-rotate: 90;    
+    -fx-background-color: royalblue;
+
+}
+
+
+.tab-header-background
+{    
+    -fx-background-color:       
+        linear-gradient(to bottom, derive(base_tab,30%) 2%, derive(base_tab,-10%) 95%);
+}
+
+.tab
+{
+    -fx-background-color: 
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);  
+    -fx-fondo:principal;         
+}
+
+
+.tab:selected {    
+    -fx-background-color:#d0d0d0;
+    -fx-fondo:#d0d0d0;    
+}
+
+.tab:hover
+{
+    -fx-background-color: 
+        blue,
+        blue,
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);  
+
+    -fx-background-insets: 0, 1,2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.083333em 0.5em 0.083333em 0.5em;
+}
+
+.tab:selected:hover {
+    -fx-background-color:#d0d0d0;
+    -fx-background-insets: 0, 1,2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.083333em 0.5em 0.083333em 0.5em;
+
+}
+
+.tab-label
+{
+    -fx-font-family: "Segoe UI Semibold"; 
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+    -fx-text-fill: ladder(-fx-fondo, white 49%, black 50%);
+}
+
+.tab-label:selected
+{
+    -fx-font-family: "Segoe UI Semibold"; 
+    -fx-text-fill: darkgray;
+    -fx-font-weight: bold;
+}
+
+
+
+.control-buttons-tab:hover {
+    -fx-background-color:   
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+
+}
+
+.tab-close-button:hover {    
+    -fx-background-image: url("CloseIcon-small.png");
+
+}
+
+.tab-content-area {    
+    -fx-background-color:borde_caja,linear-gradient(to bottom, derive(principal, 40%), principal);     
+    -fx-background-insets: 0, 0 1 1 1;
+    -fx-padding: 0.167em;
+
+}
+
+.tab-content-area .label
+{
+    -fx-text-fill:white;  
+}
+
+
+
+
+.split-pane 
+{
+    -fx-background-color:linear-gradient(to bottom, principal,derive(principal,-50%));    
+}
+
+.split-pane:horizontal > * > .split-pane-divider {
+    -fx-border-color: transparent borde_caja transparent #BBBBBB;
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+    -fx-background-insets: 0, 0 1 0 1;
+}
+
+.split-pane:horizontal > * > .split-pane-divider:hover {
+    -fx-border-color: blue;
+    -fx-background-color:linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+    -fx-background-insets: 0, 0 1 0 1;
+}
+
+.split-pane:vertical > * > .split-pane-divider {
+    -fx-border-color: transparent borde_caja transparent #BBBBBB;
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+    -fx-background-insets: 0, 0 1 0 1;
+}
+
+.split-pane:vertical > * > .split-pane-divider:hover {
+    -fx-border-color: blue;
+    -fx-background-color:linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+
+    -fx-background-insets: 0, 0 1 0 1;
+}
+
+
+
+.context-menu {    
+    -fx-background-color:
+        linear-gradient(to right, derive(base_barra,-30%), derive(base_barra,-60%)),
+        linear-gradient(to right, derive(base_barra,10%) 2%, derive(base_barra,-10%) 95%);
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; 
+}
+
+.menu-bar {    
+    -fx-background-color:
+        linear-gradient(to right, derive(base_barra,-30%), derive(base_barra,-60%)),
+        linear-gradient(to right, derive(base_barra,10%) 2%, derive(base_barra,-10%) 95%);
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; 
+}
+
+.bordered-titled-title {
+    -fx-translate-x:  8;
+    -fx-translate-y: -10;
+    -fx-padding: 0 0 0 4;
+    -fx-background-color: derive(principal, 60%);
+    -fx-background-radius: 5;
+
+}
+
+.bordered-titled-border {
+    -fx-content-display: top;
+    -fx-border-insets: 2 0 0 0;
+    -fx-border-color: derive(principal, 60%);
+    -fx-border-width: 1;
+}
+
+.bordered-titled-content {
+    -fx-padding: 18 5 5 5;
+}
+
+.tooltip {    
+    -fx-background-color: linear-gradient(#e2ecfe, #99bcfd);
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+.page-corner {
+    -fx-background-color: linear-gradient(from 0% 0% to 50% 50%,#3278fa,#99bcfd);
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}

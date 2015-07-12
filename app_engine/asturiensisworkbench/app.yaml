@@ -1,0 +1,10 @@
+application: asturiensisworkbench
+version: 1
+runtime: python
+api_version: 1
+handlers:
+- url: /javafx
+  static_dir: javafx
+- url: .*
+  script: mainpp.py
+
