@@ -90,6 +90,7 @@ public class ImageManager extends ModalDialog
     {
         super(padre, new VBox(10), true);
         this.path = p + System.getProperty("file.separator") + "imagenes";
+        new File(this.path).mkdirs();
         tempDir = "";
         lista = new ListView(items);
         panel.getChildren().add(lista);

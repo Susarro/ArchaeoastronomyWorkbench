@@ -984,7 +984,7 @@ public class Principal extends Application
 
     }
 
-    private boolean NuevoProyecto(TabPane tp)
+    private boolean NuevoProyecto(TabPane tp) throws IOException
     {
         String nombre = inputDialog("Nombre estudio", "prueba");
         if (nombre.isEmpty())
@@ -993,7 +993,7 @@ public class Principal extends Application
         }
         Estudio estudio;
         estudios.add(estudio = new Estudio(nombre));
-
+        estudio.Guardar();
         Tab tab = NuevoTab("Estudio " + nombre);
         tab.setContent(estudio.getVisualizacion(Principal.this));
         tab.setClosable(true);
@@ -1428,7 +1428,7 @@ public class Principal extends Application
         Scene scene = new Scene(raiz);
         scene.getStylesheets().add(Esqueleto.class.getResource("general.css").toExternalForm());
         esqueleto.scene = scene;
-        primaryStage.setTitle("Archaeoastronomy Work Bench");
+        primaryStage.setTitle("Archaeoastronomy Workbench");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         raiz.getStyleClass().add("fondo");
@@ -1464,7 +1464,14 @@ public class Principal extends Application
         m.getItems().add(mi);
         mi.setOnAction((ActionEvent event) ->
         {
-            NuevoProyecto(tp);
+            try
+            {
+                NuevoProyecto(tp);
+            }
+            catch (IOException ex)
+            {
+                Global.info.Registra(ex);
+            }
         });
         mi = new MenuItem("Abrir proyecto");
         m.getItems().add(mi);

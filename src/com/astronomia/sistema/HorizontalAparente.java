@@ -33,8 +33,8 @@ public class HorizontalAparente extends Horizontal
         h.setElevacion(this.getElevacion().minus(getRefraccionFromAparente(this.getElevacion())));
         Grados p = getParalaje(planeta, dia, h.getElevacion());
         h.setElevacion(h.getElevacion().plus(p));
-        
-         Grados semidisco = null;
+
+        Grados semidisco = null;
         switch (planeta)
         {
             case SOL:
@@ -61,7 +61,7 @@ public class HorizontalAparente extends Horizontal
     public Horizontal toAstronomico(enumPlaneta planeta, Disco disco) throws Excepcion
     {
         Horizontal h = new Horizontal(this.getAcimut(), this.getElevacion());
-        Grados R=getRefraccionFromAparente(this.getElevacion());
+        Grados R = getRefraccionFromAparente(this.getElevacion());
         h.setElevacion(this.getElevacion().minus(R));
         Grados p = getParalaje(planeta, h.getElevacion());
         h.setElevacion(h.getElevacion().plus(p));
@@ -95,21 +95,25 @@ public class HorizontalAparente extends Horizontal
     {
         Grados d = Grados.acos(seno(hasta.getLatitud()) * seno(desde.getLatitud()) + coseno(hasta.getLatitud()) * coseno(desde.getLatitud()) * coseno(hasta.getLongitud().minus(desde.getLongitud())));
         Grados A = Grados.asin(coseno(hasta.getLatitud()) * seno(hasta.getLongitud().minus(desde.getLongitud())) / seno(d));
-        if(hasta.getLongitud().getSignedValue() == desde.getLongitud().getSignedValue())
+        if (hasta.getLongitud().getSignedValue() == desde.getLongitud().getSignedValue())
         {
-            if(hasta.getLatitud().getSignedValue() >= desde.getLatitud().getSignedValue())
+            if (hasta.getLatitud().getSignedValue() >= desde.getLatitud().getSignedValue())
             {
                 A = new Grados(0);
-            }    
+            }
             else
             {
                 A = new Grados(180);
-            }    
-        }    
-        else if (hasta.getLongitud().getSignedValue() < desde.getLongitud().getSignedValue())
-        {
-            A = new Grados(180).minus(A);
+            }
         }
+        else 
+        {
+            if (hasta.getLatitud().getSignedValue() < desde.getLatitud().getSignedValue())
+            {
+                A = new Grados(180).minus(A);
+            }                
+        }        
+
         double R = 6378135;
         Grados h = Grados.atan2((R + hasta.getAltitud()) * coseno(d) - (R + desde.getAltitud() + 1.7), (R + desde.getAltitud()) * seno(d));
 
