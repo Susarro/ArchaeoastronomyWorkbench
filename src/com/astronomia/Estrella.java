@@ -21,19 +21,24 @@ import static java.lang.Math.pow;
  */
 public class Estrella extends Ecuatorial
 {
-    
+
     Ecuatorial movimientoPropio;
     DiaJuliano epoch;
     public double magnitudVisual;
-    public String nombre;
+    String nombre;
 
-    public Estrella(String nombre,Ecuatorial coordenadasEcuatoriales, Ecuatorial movimientoPropio, DiaJuliano diaJuliano, double magnitud)
+    public String toString()
+    {
+        return nombre;
+    }
+
+    public Estrella(String nombre, Ecuatorial coordenadasEcuatoriales, Ecuatorial movimientoPropio, DiaJuliano diaJuliano, double magnitud)
     {
         super(coordenadasEcuatoriales);
-        this.nombre=nombre;
+        this.nombre = nombre;
         this.movimientoPropio = movimientoPropio;
         this.epoch = diaJuliano;
-        this.magnitudVisual=magnitud;
+        this.magnitudVisual = magnitud;
     }
 
     public Ecuatorial Precesion(DiaJuliano nuevoEpoch, tipoCalculo tipo) throws Excepcion
@@ -41,8 +46,8 @@ public class Estrella extends Ecuatorial
         double T = epoch.getSiglosDesde2000();
         double t = (nuevoEpoch.getValue() - epoch.getValue()) / 36525;
 
-        Grados D = getDeclinacion().plus(new Grados(movimientoPropio.getDeclinacion().getSignedValue()*t * 100));
-        Hora AR = getAscensionRecta().plus(new Hora(movimientoPropio.getAscensionRecta().getSignedValue()*t * 100));
+        Grados D = getDeclinacion().plus(new Grados(movimientoPropio.getDeclinacion().getSignedValue() * t * 100));
+        Hora AR = getAscensionRecta().plus(new Hora(movimientoPropio.getAscensionRecta().getSignedValue() * t * 100));
 
         Ecuatorial ce = new Ecuatorial(D, AR);
 
@@ -65,41 +70,53 @@ public class Estrella extends Ecuatorial
 
         Hora ascensionRecta = Hora.atan2(A, B).plus(A2);
         Grados declinacion = Grados.asin(C);
+
+        double nutacionLongitud = nuevoEpoch.getNutacionLongitud().getSignedValue();
+        double nutacionEcliptica = nuevoEpoch.getNutacionOblicuidadEcliptica().getSignedValue();
+        Grados ecliptica = nuevoEpoch.getOblicuidadEcliptica(tipo.PRECISO);
+
+        Hora correccionAscensionRecta = new Hora(nutacionLongitud*(coseno(ecliptica) + seno(ecliptica) * seno(ascensionRecta) * tangente(declinacion))-(nutacionEcliptica*(coseno(ascensionRecta) * tangente(declinacion))));
+        Grados correccionDeclinacion =  new Grados(nutacionLongitud*seno(ecliptica) * coseno(ascensionRecta)+nutacionEcliptica*seno(ascensionRecta));
+        
+        //Grados correccionDeclinacion = nutacionLongitud.by(seno(ecliptica) * coseno(ascensionRecta)).plus(nutacionEcliptica.by(seno(ascensionRecta)));
+
+        declinacion=declinacion.plus(correccionDeclinacion);
+        ascensionRecta=ascensionRecta.plus(correccionAscensionRecta);
+        
         return new Ecuatorial(declinacion, ascensionRecta);
     }
-    
-     /*public Ecliptica Precesion(DiaJuliano nuevoEpoch, tipoCalculo tipo) throws Excepcion
-    {
-        double T = epoch.getSiglosDesde2000();
-        double t = (nuevoEpoch.getValue() - epoch.getValue()) / 36525;
 
-        Grados D = coordenadasEcuatoriales.declinacion.plus(movimientoPropio.declinacion.by(t * 100));
-        Hora AR = coordenadasEcuatoriales.ascensionRecta.plus(movimientoPropio.ascensionRecta.by(t * 100));
+    /*public Ecliptica Precesion(DiaJuliano nuevoEpoch, tipoCalculo tipo) throws Excepcion
+     {
+     double T = epoch.getSiglosDesde2000();
+     double t = (nuevoEpoch.getValue() - epoch.getValue()) / 36525;
 
-        Ecuatorial ce = new Ecuatorial(D, AR);
+     Grados D = coordenadasEcuatoriales.declinacion.plus(movimientoPropio.declinacion.by(t * 100));
+     Hora AR = coordenadasEcuatoriales.ascensionRecta.plus(movimientoPropio.ascensionRecta.by(t * 100));
 
-        if (tipo == tipoCalculo.PRECISO)
-        {
-            ce = ce.CorreccionAberracion(nuevoEpoch);
-        }
+     Ecuatorial ce = new Ecuatorial(D, AR);
 
-        double a1 = ((47.0029 - 0.06603 * T + 0.000598 * pow(T, 2)) * t + (-0.03302 + 0.000598 * T) * pow(t, 2) + 0.000060 * pow(t, 3)); //segundos
-        double a2 = (174.876384*3600 + 3289.4789 * T + 0.60622 * pow(T, 2)) * t - (869.8089 + 0.50491 * T) * pow(t, 2 + 0.03536 * pow(t, 3));//segundos
-        double a3 = (5029.0966 + 2.22226 * T - 0.000042 * pow(T, 2)) * t + (1.11113 - 0.000042 * T) * pow(t, 2) - 0.000006 * pow(t, 3);//segundos
+     if (tipo == tipoCalculo.PRECISO)
+     {
+     ce = ce.CorreccionAberracion(nuevoEpoch);
+     }
 
-        Hora A1 = Hora.valueOf(new Grados(a1 / 3600));
-        Hora A2 = Hora.valueOf(new Grados(a2 / 3600));
-        Hora A3 = Hora.valueOf(new Grados(a3 / 3600));
+     double a1 = ((47.0029 - 0.06603 * T + 0.000598 * pow(T, 2)) * t + (-0.03302 + 0.000598 * T) * pow(t, 2) + 0.000060 * pow(t, 3)); //segundos
+     double a2 = (174.876384*3600 + 3289.4789 * T + 0.60622 * pow(T, 2)) * t - (869.8089 + 0.50491 * T) * pow(t, 2 + 0.03536 * pow(t, 3));//segundos
+     double a3 = (5029.0966 + 2.22226 * T - 0.000042 * pow(T, 2)) * t + (1.11113 - 0.000042 * T) * pow(t, 2) - 0.000006 * pow(t, 3);//segundos
 
-        double A = coseno(ce.declinacion) * seno(ce.ascensionRecta.plus(A1));
-        double B = coseno(A3) * coseno(ce.declinacion) * coseno(ce.ascensionRecta.plus(A1)) - seno(A3) * seno(ce.declinacion);
-        double C = seno(A3) * coseno(ce.declinacion) * coseno(ce.ascensionRecta.plus(A1)) + coseno(A3) * seno(ce.declinacion);
+     Hora A1 = Hora.valueOf(new Grados(a1 / 3600));
+     Hora A2 = Hora.valueOf(new Grados(a2 / 3600));
+     Hora A3 = Hora.valueOf(new Grados(a3 / 3600));
 
-        Hora ascensionRecta = Hora.atan2(A, B).plus(A2);
-        Grados declinacion = Grados.asin(C);
-        return new Ecuatorial(declinacion, ascensionRecta);
-    }*/
+     double A = coseno(ce.declinacion) * seno(ce.ascensionRecta.plus(A1));
+     double B = coseno(A3) * coseno(ce.declinacion) * coseno(ce.ascensionRecta.plus(A1)) - seno(A3) * seno(ce.declinacion);
+     double C = seno(A3) * coseno(ce.declinacion) * coseno(ce.ascensionRecta.plus(A1)) + coseno(A3) * seno(ce.declinacion);
 
+     Hora ascensionRecta = Hora.atan2(A, B).plus(A2);
+     Grados declinacion = Grados.asin(C);
+     return new Ecuatorial(declinacion, ascensionRecta);
+     }*/
     public Ecuatorial getPosicionAparente(DiaJuliano nuevoEpoch, tipoCalculo tipo) throws Excepcion
     {
         double T = epoch.getSiglosDesde2000();
@@ -116,8 +133,8 @@ public class Estrella extends Ecuatorial
 
         Grados stl = Sol.getLongitudVerdaderaSol(nuevoEpoch);
 
-        double incrAR = 3600*((coseno(oe) + seno(oe) * seno(AR) * tangente(D)) * nl.getSignedValue() - coseno(AR) * tangente(D) * ne.getSignedValue());
-        double incrD = 3600*(seno(oe) * coseno(AR) * nl.getSignedValue() + seno(AR) * ne.getSignedValue());
+        double incrAR = 3600 * ((coseno(oe) + seno(oe) * seno(AR) * tangente(D)) * nl.getSignedValue() - coseno(AR) * tangente(D) * ne.getSignedValue());
+        double incrD = 3600 * (seno(oe) * coseno(AR) * nl.getSignedValue() + seno(AR) * ne.getSignedValue());
 
         double k = 20.49552; //constante de aberración
 

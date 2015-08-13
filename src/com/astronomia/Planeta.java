@@ -37,6 +37,11 @@ public class Planeta
 {
     enumPlaneta planeta;
     
+    public String toString()
+    {
+        return planeta.toString();
+    }        
+    
     public Planeta(enumPlaneta planeta)
     {
         this.planeta=planeta;                

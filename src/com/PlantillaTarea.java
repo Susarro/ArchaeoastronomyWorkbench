@@ -22,25 +22,30 @@ public abstract class PlantillaTarea<T> extends Task<String>
     String nombre;
     private final T desde;
     private final T hasta;
-    private final T incremento;
+    private T incremento;
     private T actual;
-    
+
     public T getActual()
     {
         return actual;
-    }     
-    
+    }
+
     public void setActual(T entrada)
     {
-        actual=entrada;
+        actual = entrada;
     }
-    
-    abstract public void cloneActual(T entrada);    
-    
-    
+
+    public void setIncremento(T entrada)
+    {
+        incremento = entrada;
+    }
+
+    abstract public void cloneActual(T entrada);
 
     abstract public double doubleValue(T entrada);
+
     abstract public String toString(T entrada);
+
     public abstract void addActual(T incremento);
 
     public abstract int compara(T objeto, T referencia);
@@ -83,14 +88,19 @@ public abstract class PlantillaTarea<T> extends Task<String>
         updateMessage("Iniciando...");
 
         updateProgress(0, doubleValue(hasta) - doubleValue(desde));
-        
+
         cloneActual(desde);
 
-        while (compara(actual,hasta)<0)
+        while (compara(actual, hasta) < 0)
         {
+            if (isCancelled())
+            {
+                updateMessage("Cancelled");
+                break;
+            }
             ciclo();
             updateProgress(doubleValue(actual) - doubleValue(desde), doubleValue(hasta) - doubleValue(desde));
-            updateMessage("Procesando: " + toString(actual));            
+            updateMessage("Procesando: " + toString(actual));
             addActual(incremento);
         }
 

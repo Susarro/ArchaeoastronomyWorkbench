@@ -6,13 +6,14 @@
 package com;
 
 import com.astronomia.DiaJuliano;
-import static com.astronomia.Disco.CENTRO;
 import static com.astronomia.Disco.SUPERIOR;
+import com.astronomia.Estrella;
 import com.astronomia.sistema.Ecuatorial;
 import com.astronomia.sistema.Geodesica;
 import com.astronomia.sistema.Horizontal;
 import com.astronomia.sistema.HorizontalAparente;
 import com.unidades.Grados;
+import com.unidades.Hora;
 
 /**
  *
@@ -23,11 +24,13 @@ public class Principal
 
     public Principal() throws Excepcion
     {
-        Geodesica peñafaciel = new Geodesica(Grados.valueOf("42º23'29''"), Grados.valueOf("-6º18'51''"), 1193);
-        Geodesica teleno = new Geodesica(Grados.valueOf("42º20'45''"), Grados.valueOf("-6º23'37''"), 2183);
-        HorizontalAparente ha = HorizontalAparente.valueOf(peñafaciel, teleno);
-        Horizontal h = ha.toAstronomico(enumPlaneta.SOL, SUPERIOR);
-        Ecuatorial e = h.toEcuatorial(peñafaciel.getLatitud(), peñafaciel.getLongitud(), DiaJuliano.valueOf("1/1/-2000"));
+        Ecuatorial coord = new Ecuatorial(Grados.valueOf("49º13'42.48''"), Hora.valueOf("2:44:11.986"));
+        Ecuatorial mp = new Ecuatorial(new Grados(-89.5 / 3600000), new Hora(34.25 / 3600000));
+        Estrella estrella = new Estrella("Polar", coord, mp, DiaJuliano.valueOf("1/1/2000"), 0.77);
+        
+        Ecuatorial eq=estrella.Precesion(new DiaJuliano(2462088.69), tipoCalculo.PRECISO);
+
+      
     }
 
     public static void main(String args[]) throws Excepcion
