@@ -166,6 +166,7 @@ public class Alineamiento
 
     public Alineamiento(Element e) throws Excepcion
     {
+        pObservaciones=new SimpleStringProperty();
         for (Element el : e.getChildren())
         {
             switch (el.getName())
@@ -189,7 +190,7 @@ public class Alineamiento
                     break;
                 case "descripcion":
                     descripcion = new Tag("descripcion", el);
-                    pObservaciones=new SimpleStringProperty(descripcion.getValor());
+                    pObservaciones.set(descripcion.getValor());
                     break;
                  case "imagen":
                     imagenPath = new Tag("imagen", el);                    

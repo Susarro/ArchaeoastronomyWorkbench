@@ -23,13 +23,13 @@ import com.unidades.Grados;
 import static com.unidades.Grados.cos;
 import static com.unidades.Herramienta.coseno;
 import static com.unidades.Herramienta.seno;
-import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import static java.lang.Math.abs;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -51,7 +51,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -76,8 +75,6 @@ public class PanelAlineamiento extends TabPane
     DiaJuliano dia;
     private TextField tfAnno;
     private ComboBox lista;
-
-    
 
     Tab tabDetalles = new Tab();
     Tab tabValidacion = new Tab();
@@ -126,10 +123,11 @@ public class PanelAlineamiento extends TabPane
                         + "imagenes"
                         + System.getProperty("file.separator")
                         + alineamiento.getImagenPath());
-                BufferedImage bufferedImage = ImageIO.read(f);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                BufferedInputStream bis;
+                Image image = new Image(bis=new BufferedInputStream(new FileInputStream(estudio.getDirTrabajo()+"imagenes"+System.getProperty("file.separator")+f.getName())));                                                
                 vistaImagen.setImage(image);
-                vistaImagen.setCache(true);
+                bis.close();
+                //vistaImagen.setCache(true);
             }
             catch (IOException ex)
             {
@@ -405,21 +403,23 @@ public class PanelAlineamiento extends TabPane
 
         btnActualizar.setOnAction((ActionEvent event) ->
         {
-            ImageManager im = new ImageManager(principal.esqueleto, estudio.getDirTrabajo());
+            ImageManager im = new ImageManager(principal.esqueleto, estudio.getDirTrabajo());            
             if (im.ShowModal())
             {
                 try
-                {
-                    BufferedImage bufferedImage = ImageIO.read(im.getImagen());
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                    vistaImagen.setImage(image);
-                    vistaImagen.setCache(true);
-                    alineamiento.setImagenPath(im.getImagen().getName());
+                {                                                                                
+                    BufferedInputStream bis;                                    
+                    vistaImagen.setImage(new Image(bis=new BufferedInputStream(new FileInputStream(estudio.getDirTrabajo()+"imagenes"+System.getProperty("file.separator")+im.getImagen().getName()))));    
+                    bis.close();
+                    //vistaImagen.setCache(true);                                       
+                    alineamiento.setImagenPath(im.getImagen().getName());                                       
                 }
-                catch (IOException | NullPointerException ex)
+                //catch (IOException | NullPointerException ex)
+                catch (Exception ex)
                 {
                     Global.info.Registra(ex);
                 }
+
             }
         });
     }

@@ -976,6 +976,12 @@ root {
     -fx-text-fill: gray;
 }
 
+.label_negro{  
+
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
 
 .label{  
 

@@ -8,24 +8,30 @@ package com.astronomia.estudio;
 import com.Global;
 import com.interfaz.esqueleto.Esqueleto;
 import com.interfaz.esqueleto.ModalDialog;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -37,15 +43,51 @@ public class ImageManager extends ModalDialog
     private final String path;
     String tempDir;
     private final ListView lista;
+    boolean ok = false;
+
+    public String inputDialog(String text, String valor)
+    {
+        HBox p = new HBox(10);
+        p.setAlignment(Pos.CENTER);
+        TextField tf;
+        p.getChildren().addAll(new Label(text), tf = new TextField(valor));
+
+        tf.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) ->
+        {
+            if (new File(this.path + System.getProperty("file.separator") + newValue + ".jpg").exists())
+            {
+                tf.setStyle("-fx-background-color: red");
+                ok = false;
+            }
+            else
+            {
+                tf.setStyle("");
+                ok = true;
+            }
+        });
+
+        ModalDialog dialogo = new ModalDialog(null, p, true);
+        if (dialogo.ShowModal() && ok)
+        {
+            return tf.getText();
+        }
+        else
+        {
+            return "";
+        }
+    }
 
     public class MuestraImagen
     {
 
         private File fichero;
+        public ImageView thumbsnail;
 
-        public MuestraImagen(File f)
+        public MuestraImagen(File f) throws FileNotFoundException
         {
             this.fichero = f;
+            thumbsnail = new ImageView(new Image(new FileInputStream(f), 300, 0, true, true));
+
         }
 
         /**
@@ -81,7 +123,38 @@ public class ImageManager extends ModalDialog
             File[] files = directorio.listFiles((File dir, String name) -> name.toLowerCase().endsWith("jpg"));
             for (File f : files)
             {
-                items.add(new MuestraImagen(f));
+                try
+                {
+                    items.add(new MuestraImagen(f));
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Global.info.Registra(ex);
+                }
+                //Global.info.Info(f.getName());
+            }
+        }
+    }
+
+    class MuestraImagenCell extends ListCell<MuestraImagen>
+    {
+
+        VBox v = new VBox(10);
+        Label label = new Label("Hola");
+        ImageView imagen = new ImageView();
+
+        public MuestraImagenCell()
+        {
+            v.getChildren().addAll(label, imagen);
+        }
+
+        @Override
+        protected void updateItem(MuestraImagen t, boolean bln)
+        {
+            if (t != null)
+            {
+                imagen.setImage(t.thumbsnail.getImage());
+                setGraphic(v);
             }
         }
     }
@@ -105,37 +178,26 @@ public class ImageManager extends ModalDialog
 
                 ListCell<MuestraImagen> cell = new ListCell<MuestraImagen>()
                 {
-                    ImageView imageView = new ImageView();
-
                     @Override
                     protected void updateItem(MuestraImagen t, boolean bln)
                     {
                         super.updateItem(t, bln);
                         if (t != null)
                         {
-                            BufferedImage bufferedImage;
-                            try
-                            {
-                                imageView.setFitHeight(300 / 1.8);
-                                imageView.setFitWidth(300);
-                                bufferedImage = ImageIO.read(t.getFichero());
-                                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                                imageView.setImage(image);
-                                setGraphic(imageView);
-                            }
-                            catch (IOException ex)
-                            {
-
-                            }
-
+                            VBox v = new VBox(5);
+                            Label l;
+                            v.getChildren().addAll(l = new Label(t.getFichero().getName().split("\\.")[0]), t.thumbsnail);
+                            l.getStyleClass().clear();
+                            l.getStyleClass().add("label_negro");
+                            setGraphic(v);
                         }
                     }
-
                 };
 
                 return cell;
             }
         }));
+
         lista.setItems(items);
 
         Button btnImportar = new Button("Importar");
@@ -155,14 +217,25 @@ public class ImageManager extends ModalDialog
             {
                 try
                 {
-                    Files.copy(Paths.get(file.getAbsolutePath()), Paths.get(new File(this.path + System.getProperty("file.separator") + file.getName()).getAbsolutePath()));
-                    tempDir = file.getAbsolutePath().replace(file.getName(), "");
+                    String nombre = inputDialog("Nombre imagen", "");
+                    if (!nombre.isEmpty())
+                    {
+                        Files.copy(Paths.get(file.getAbsolutePath()), Paths.get(new File(this.path + System.getProperty("file.separator") + nombre +".jpg").getAbsolutePath()));
+                        tempDir = file.getAbsolutePath().replace(file.getName(), "");
+                    }
                 }
                 catch (IOException ex)
                 {
                     Global.info.Registra(ex);
                 }
-                update();
+                lista.setVisible(false);
+                Platform.runLater(() ->
+                {
+                    update();
+                    lista.setVisible(true);
+
+                });
+
             }
         });
 

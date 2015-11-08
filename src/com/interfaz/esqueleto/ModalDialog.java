@@ -4,7 +4,6 @@
  */
 package com.interfaz.esqueleto;
 
-import com.interfaz.esqueleto.Esqueleto;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;

@@ -338,8 +338,23 @@ public class Estudio extends VBox
                             DialogoInputAlineamiento dlg = new DialogoInputAlineamiento(padre, rowData);
                             if (dlg.ShowModal())
                             {
+                                String img=rowData.getImagenPath();
+                                String obs=rowData.getDescripcion();
                                 rowData.set(dlg.alineamiento);
+                                rowData.setImagenPath(img);
+                                rowData.setDescripcion(obs);
                                 setCambio(true);
+                            }
+                        });
+                        cm.getItems().add(mmi);
+                        mmi = new MenuItem("Copiar");
+                        mmi.setOnAction((ActionEvent event1) ->
+                        {
+                            DialogoInputAlineamiento dlg = new DialogoInputAlineamiento(padre, rowData);
+                            if (dlg.ShowModal())
+                            {
+                                
+                                data.add(dlg.alineamiento);                                
                             }
                         });
                         cm.getItems().add(mmi);
