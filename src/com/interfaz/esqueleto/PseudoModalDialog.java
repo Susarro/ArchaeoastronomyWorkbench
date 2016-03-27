@@ -6,7 +6,7 @@
 package com.interfaz.esqueleto;
 
 import com.interfaz.esqueleto.ModalDialog;
-import com.interfaz.esqueleto.Esqueleto;
+import com.interfaz.esqueleto.Skeleton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 public abstract class PseudoModalDialog extends ModalDialog
 {
 
-    public PseudoModalDialog(Esqueleto padre, Pane pane, boolean keyEnter)
+    public PseudoModalDialog(Skeleton padre, Pane pane, boolean keyEnter)
     {
         super(padre, pane, keyEnter);
         btnAceptar.setOnAction(new EventHandler<ActionEvent>()

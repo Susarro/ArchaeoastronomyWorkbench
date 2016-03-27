@@ -7,12 +7,15 @@
     <offline-allowed/>
   </information>
   <resources>
+    <jfx:javafx-runtime version="8.0+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ArchaeoastronomyWorkbench.jar" size="371014" download="eager" />
-    <jar href="lib/jcommon-1.0.16.jar" size="333373" download="eager" />
-    <jar href="lib/jdom-2.0.6.jar" size="327080" download="eager" />
-    <jar href="lib/jfreechart-1.0.13-demo.jar" size="837955" download="eager" />
-    <jar href="lib/jfreechart-1.0.13.jar" size="1493792" download="eager" />
+    <jar href="ArchaeoastronomyWorkbench.jar" size="375925" download="eager" />
+    <jar href="lib/jcommon-1.0.16.jar" size="333370" download="eager" />
+    <jar href="lib/jdom-2.0.6.jar" size="327079" download="eager" />
+    <jar href="lib/jfreechart-1.0.13-demo.jar" size="837957" download="eager" />
+    <jar href="lib/jfreechart-1.0.13.jar" size="1493791" download="eager" />
     <jar href="lib/log4j-1.2.17.jar" size="519925" download="eager" />
   </resources>
 <security>

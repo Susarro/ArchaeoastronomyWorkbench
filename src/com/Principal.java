@@ -5,15 +5,7 @@
  */
 package com;
 
-import com.astronomia.DiaJuliano;
-import static com.astronomia.Disco.SUPERIOR;
-import com.astronomia.Estrella;
-import com.astronomia.sistema.Ecuatorial;
-import com.astronomia.sistema.Geodesica;
-import com.astronomia.sistema.Horizontal;
-import com.astronomia.sistema.HorizontalAparente;
-import com.unidades.Grados;
-import com.unidades.Hora;
+import com.astronomy.JulianDay;
 
 /**
  *
@@ -22,18 +14,19 @@ import com.unidades.Hora;
 public class Principal
 {
 
-    public Principal() throws Excepcion
+    public Principal() throws ProcessException
     {
-        Ecuatorial coord = new Ecuatorial(Grados.valueOf("49º13'42.48''"), Hora.valueOf("2:44:11.986"));
-        Ecuatorial mp = new Ecuatorial(new Grados(-89.5 / 3600000), new Hora(34.25 / 3600000));
-        Estrella estrella = new Estrella("Polar", coord, mp, DiaJuliano.valueOf("1/1/2000"), 0.77);
+        double d=JulianDay.valueOf("1/1/2000 12:00").getValue();
+        //Ecuatorial coord = new Ecuatorial(SexagesimalDegree.valueOf("49º13'42.48''"), HourAngle.valueOf("2:44:11.986"));
+        //Ecuatorial mp = new Ecuatorial(new SexagesimalDegree(-89.5 / 3600000), new HourAngle(34.25 / 3600000));
+        //Star estrella = new Star("Polar", coord, mp, 0.77);
         
-        Ecuatorial eq=estrella.Precesion(new DiaJuliano(2462088.69), tipoCalculo.PRECISO);
+        //Ecuatorial eq=estrella.Precession(new JulianDay(2462088.69), CalculusType.PRECISE);
 
       
     }
 
-    public static void main(String args[]) throws Excepcion
+    public static void main(String args[]) throws ProcessException
     {
         new Principal();
 

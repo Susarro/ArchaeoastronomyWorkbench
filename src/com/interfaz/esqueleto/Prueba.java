@@ -5,7 +5,7 @@
  */
 package com.interfaz.esqueleto;
 
-import com.interfaz.esqueleto.Esqueleto;
+import com.interfaz.esqueleto.Skeleton;
 import com.interfaz.esqueleto.BorderedTitledPane;
 import com.Global;
 import javafx.application.Application;
@@ -32,18 +32,18 @@ import javafx.stage.Stage;
 public class Prueba extends Application
 {
 
-    Esqueleto esqueleto;
+    Skeleton esqueleto;
     VBox raiz;
     private Button btn;
 
     @Override
     public void start(Stage primaryStage)
     {
-        esqueleto = new Esqueleto(System.getProperty("user.home") + "\\N2ROLDAN", "prueba", primaryStage, null);
+        esqueleto = new Skeleton(System.getProperty("user.home") + "\\N2ROLDAN", "prueba", primaryStage, null);
         raiz = new VBox();
         Scene scene = new Scene(raiz);
-        scene.getStylesheets().add(Esqueleto.class.getResource("general.css").toExternalForm());
-        esqueleto.scene = scene;
+        scene.getStylesheets().add(Skeleton.class.getResource("general.css").toExternalForm());
+        esqueleto.setScene(scene);
         primaryStage.setTitle("Prueba");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);

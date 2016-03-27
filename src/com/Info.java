@@ -26,29 +26,46 @@ import org.apache.log4j.Logger;
  */
 public class Info
 {
-
+    /**
+     * Logger
+     */
     public static Logger logger;
     
-    String clase;
-    protected TextArea areaTexto = null;
-    ObservableList<String> items = FXCollections.observableArrayList(
-            "Single", "Double", "Suite", "Family App");
+    /**
+     * Class name
+     */
+    String className;
+    
+    /**
+     * Text area for log messages
+     */
+    protected TextArea textArea = null;
+    /**
+     * Log items
+     */
+    ObservableList<String> logItems = FXCollections.observableArrayList();
+    /**
+     * List view
+     */
     ListView<String> list = new ListView<>();
     
     
-
-    public Info(String clase)
+ /**
+  * 
+  * @param className Class name
+  */
+    public Info(String className)
     {
-        this.clase = clase;
-        logger = Logger.getLogger(clase);
-        areaTexto = new TextArea();
-        areaTexto.setPrefRowCount(100);
-        areaTexto.setWrapText(true);
-        areaTexto.setPrefWidth(1000);
-        items = FXCollections.observableArrayList();
+        this.className = className;
+        logger = Logger.getLogger(className);
+        textArea = new TextArea();
+        textArea.setPrefRowCount(100);
+        textArea.setWrapText(true);
+        textArea.setPrefWidth(1000);
+        logItems = FXCollections.observableArrayList();
         list = new ListView<>();
 
-        list.setItems(items);
+        list.setItems(logItems);
 
         list.setCellFactory(new Callback<ListView<String>, ListCell<String>>()
         {
@@ -73,7 +90,7 @@ public class Info
                             {
                                 setTextFill(Color.RED);
                             }
-                            else if (t.contains("AVISO"))
+                            else if (t.contains("WARNING"))
                             {
                                 setTextFill(Color.ORANGE);
                             }
@@ -89,11 +106,20 @@ public class Info
         });
     }
 
+    /**
+     * 
+     * @return list view
+     */
     public ListView getListView()
     {
         return list;
     }
 
+    /**
+     * 
+     * @param e Exception
+     * @return Stack trace of exception
+     */
     public static String getStackTrace(Exception e)
     {
         StringWriter sWriter = new StringWriter();
@@ -102,11 +128,20 @@ public class Info
         return sWriter.toString();
     }
 
+    /**
+     * Message thread
+     */
     class Msg implements Runnable
     {
-
+/**
+ * Message
+ */
         private final String msg;
 
+        /**
+         * 
+         * @param msg Exception message 
+         */
         public Msg(String msg)
         {
             this.msg = msg;
@@ -115,71 +150,86 @@ public class Info
         @Override
         public void run()
         {
-            items.add(msg);
-            if (items.size() > 20)
+            logItems.add(msg);
+            if (logItems.size() > 20)
             {
-                items.remove(0);
+                logItems.remove(0);
             }
-            list.scrollTo(items.size());
+            list.scrollTo(logItems.size());
         }
 
     }
 
-    public void Registra(String texto, tipoInfo tipo)
+    public void Log(String text, InfoOption infoOption)
     {
         long millisecs = System.currentTimeMillis();
         Timestamp ts = new java.sql.Timestamp(millisecs);
 
-        String strTipo = "TIPO";
+        String strTipo = "";
 
-        if (tipo == tipoInfo.DEBUG)
+        if (infoOption == InfoOption.DEBUG)
         {
-            logger.debug(texto);
+            logger.debug(text);
             strTipo = "DEBUG";
         }
-        if (tipo == tipoInfo.INFO)
+        if (infoOption == InfoOption.INFO)
         {
-            logger.info(texto);
+            logger.info(text);
             strTipo = "INFO";
         }
-        else if (tipo == tipoInfo.AVISO)
+        else if (infoOption == InfoOption.WARNING)
         {
-            logger.warn(texto);
-            strTipo = "AVISO";
+            logger.warn(text);
+            strTipo = "WARNING";
         }
-        else if (tipo == tipoInfo.ERROR)
+        else if (infoOption == InfoOption.ERROR)
         {
-            logger.error(texto);
+            logger.error(text);
             strTipo = "ERROR";
         }
-        //final String msg = ffh.format(new Date()) + "\t" + strTipo + "\t" + texto;
-        Platform.runLater(new Msg(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + "\t" + strTipo + "\t" + texto));
+       
+        Platform.runLater(new Msg(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + "\t" + strTipo + "\t" + text));
 
         
     }
-        
-    public void Debug(String texto)
+    /**
+     * 
+     * @param text Debug text
+     */    
+    public void Debug(String text)
     {
-        Registra(texto,tipoInfo.DEBUG);
+        Log(text,InfoOption.DEBUG);
     }
     
-    public void Info(String texto)
+    /**
+     * 
+     * @param text Information text
+     */
+    public void Info(String text)
     {
-        Registra(texto,tipoInfo.INFO);
+        Log(text,InfoOption.INFO);
     }
     
-    public void Aviso(String texto)
+    /**
+     * 
+     * @param text Warning text
+     */
+    public void Warning(String text)
     {
-        Registra(texto,tipoInfo.AVISO);
+        Log(text,InfoOption.WARNING);
     }
     
-    public void Error(String texto)
+    /**
+     * 
+     * @param text Error text
+     */
+    public void Error(String text)
     {
-        Registra(texto,tipoInfo.ERROR);
+        Log(text,InfoOption.ERROR);
     }
    
-    public void Registra(Exception e)
+    public void Log(Exception e)
     {
-        Registra("Ocurrió una excepción: " + getStackTrace(e), tipoInfo.ERROR);
+        Log("Exception: " + getStackTrace(e), InfoOption.ERROR);
     }
 }

@@ -12,12 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/PlantillaTarea.java</file>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/interfaz/Principal.java</file>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/astronomia/sistema/Ecuatorial.java</file>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/astronomia/estudio/DialogoInputAlineamiento.java</file>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/TareaTemporal.java</file>
-            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/astronomia/estudio/ImageManager.java</file>
+            <file>file:/D:/MIGUEL%20ANGEL/programas/ArchaeoastronomyWorkbench/src/com/chart/CategoriaGrafica.java</file>
         </group>
     </open-files>
 </project-private>

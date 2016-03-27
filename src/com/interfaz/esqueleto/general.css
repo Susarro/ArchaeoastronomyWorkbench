@@ -12,8 +12,7 @@ root {
 
 
 .root{    
-    //-fx-background-color: principal;   
-    //-fx-table-cell-border-color: #bbbbbb;
+   
     interior_control: white;
     base: #d0d0d0;
     base_tabla:derive(principal,20%);  

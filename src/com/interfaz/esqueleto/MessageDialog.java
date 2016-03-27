@@ -5,7 +5,7 @@
  */
 package com.interfaz.esqueleto;
 
-import com.interfaz.esqueleto.Esqueleto;
+import com.interfaz.esqueleto.Skeleton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,7 +27,7 @@ public class MessageDialog
     
     ModalDialog dialogo;
 
-    public MessageDialog(Esqueleto padre, String msg, TipoMensaje tipoMensaje)
+    public MessageDialog(Skeleton padre, String msg, TipoMensaje tipoMensaje)
     {
         Image icono;
 

@@ -7,34 +7,32 @@ package com.interfaz;
 
 import com.interfaz.esqueleto.ModalDialog;
 import com.interfaz.esqueleto.MessageDialog;
-import com.interfaz.esqueleto.Esqueleto;
+import com.interfaz.esqueleto.Skeleton;
 import com.CancelExcepcion;
-import com.Excepcion;
-import com.FX.LabelBorde;
-import com.FX.Rejilla;
+import com.ProcessException;
+import com.components.BordererLabel;
+import com.components.GridPane10;
 import com.Global;
-import com.TareaTemporal;
-import com.astronomia.Catalogo;
-import com.astronomia.DiaJuliano;
-import com.astronomia.Estrella;
-import com.astronomia.InfoLuna;
-import com.astronomia.Luna;
-import com.astronomia.Planeta;
-import com.astronomia.Sol;
-import com.astronomia.sistema.Ecuatorial;
-import com.astronomia.sistema.Horizontal;
-import com.astronomia.sistema.HorizontalAparente;
-import com.astronomia.estudio.Estudio;
+import com.TemporalTask;
+import com.astronomy.Catalogue;
+import com.astronomy.JulianDay;
+import com.astronomy.Star;
+import com.astronomy.InfoMoon;
+import com.astronomy.Moon;
+import com.astronomy.Planet;
+import com.astronomy.Sun;
+import com.astronomy.coordinate_system.Equatorial;
+import com.astronomy.coordinate_system.Horizontal;
+import com.astronomy.coordinate_system.ApparentHorizontal;
+import com.astronomy.estudio.Estudio;
 import com.calendario.FiestasMediaEstacion;
-import static com.enumEstrella.ALPHA_TAURI;
-import com.enumPlaneta;
-import static com.enumPlaneta.SATURNO;
-import com.grafica.CategoriaGrafica;
-import com.grafica.GraficaJuliano;
-import com.grafica.SimpleConfigSerie;
-import com.tipoCalculo;
-import com.unidades.Grados;
-import com.unidades.Radianes;
+import com.PlanetEnum;
+import com.chart.CategoriaGrafica;
+import com.chart.GraficaJuliano;
+import com.chart.SimpleConfigSerie;
+import com.CalculusType;
+import com.units.SexagesimalDegree;
+import com.units.Radian;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,8 +77,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import org.jdom2.JDOMException;
-import static com.unidades.Herramienta.seno;
-import static com.unidades.Herramienta.coseno;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
 
 /**
  *
@@ -89,16 +87,16 @@ import static com.unidades.Herramienta.coseno;
 public class Principal extends Application
 {
 
-    public Esqueleto esqueleto;
+    public static Skeleton skeleton;
     VBox raiz;
     TabPane tp;
     MenuBar menu;
 
-    public Grados latitud;
-    public Grados longitud;
+    public SexagesimalDegree latitud;
+    public SexagesimalDegree longitud;
 
-    DiaJuliano desde;
-    DiaJuliano hasta;
+    JulianDay desde;
+    JulianDay hasta;
     double incremento = 1;
     Stage st;
 
@@ -107,7 +105,7 @@ public class Principal extends Application
     private MenuItem miGuardarProyecto;
     private HBox hDiaJuliano = new HBox(10);
     
-    public String inputOpcion(String[] opcion) throws Excepcion, CancelExcepcion 
+    public String inputOpcion(String[] opcion) throws ProcessException, CancelExcepcion 
     { 
         
         GridPane gridPane = new GridPane(); 
@@ -119,7 +117,7 @@ public class Principal extends Application
         gridPane.add(lv = new ComboBox(FXCollections.observableArrayList(opcion)), 1, 0); 
         lv.getSelectionModel().select(0); 
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true); 
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true); 
         if (dialogo.ShowModal()) 
         { 
             return lv.getSelectionModel().getSelectedItem().toString(); 
@@ -131,7 +129,7 @@ public class Principal extends Application
     } 
 
 
-    public final void inputCoordenadasLocales() throws Excepcion, CancelExcepcion
+    public final void inputCoordenadasLocales() throws ProcessException, CancelExcepcion
     {
         TextField tfLatitud;
         TextField tfLongitud;
@@ -144,11 +142,11 @@ public class Principal extends Application
         gridPane.add(new Label("Longitud"), 0, 1);
         gridPane.add(tfLongitud = new TextField(longitud.toString()), 1, 1);
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true);
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
         if (dialogo.ShowModal())
         {
-            latitud = Grados.valueOf(tfLatitud.getText());
-            longitud = Grados.valueOf(tfLongitud.getText());
+            latitud = SexagesimalDegree.valueOf(tfLatitud.getText());
+            longitud = SexagesimalDegree.valueOf(tfLongitud.getText());
         }
         else
         {
@@ -156,12 +154,12 @@ public class Principal extends Application
         }
     }
 
-    public final void inputTiempo() throws Excepcion, CancelExcepcion 
+    public final void inputTiempo() throws ProcessException, CancelExcepcion 
     { 
         inputTiempo(true); 
     }         
 
-    public final void inputTiempo(boolean incr) throws Excepcion, CancelExcepcion 
+    public final void inputTiempo(boolean incr) throws ProcessException, CancelExcepcion 
     { 
         TextField tfDesde; 
         TextField tfHasta; 
@@ -180,11 +178,11 @@ public class Principal extends Application
             gridPane.add(tfIncremento = new TextField(String.valueOf(incremento)), 1, 2); 
         } 
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true); 
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true); 
         if (dialogo.ShowModal()) 
         { 
-            desde = DiaJuliano.valueOf(tfDesde.getText()); 
-            hasta = DiaJuliano.valueOf(tfHasta.getText()); 
+            desde = JulianDay.valueOf(tfDesde.getText()); 
+            hasta = JulianDay.valueOf(tfHasta.getText()); 
             if (incr) 
             { 
                 incremento = Double.valueOf(tfIncremento.getText()); 
@@ -200,7 +198,7 @@ public class Principal extends Application
         } 
     } 
     
-    public Planeta inputPlaneta() throws Excepcion, CancelExcepcion 
+    public Planet inputPlaneta() throws ProcessException, CancelExcepcion 
     { 
         TextField tfLatitud; 
         TextField tfLongitud; 
@@ -216,10 +214,10 @@ public class Principal extends Application
         })), 1, 0); 
         lv.getSelectionModel().select(0); 
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true); 
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true); 
         if (dialogo.ShowModal()) 
         {             
-            return new Planeta(Catalogo.getEnumPlaneta(lv.getSelectionModel().getSelectedItem().toString())); 
+            return new Planet(Catalogue.getPlanetEnum(lv.getSelectionModel().getSelectedItem().toString())); 
         } 
         else 
         { 
@@ -227,7 +225,7 @@ public class Principal extends Application
         } 
     }
 
-    public Estrella inputEstrella() throws Excepcion, CancelExcepcion
+    public Star inputEstrella() throws ProcessException, CancelExcepcion
     {
         TextField tfLatitud;
         TextField tfLongitud;
@@ -237,13 +235,13 @@ public class Principal extends Application
         gridPane.setPadding(new Insets(10, 10, 10, 10));
         gridPane.add(new Label("Estrella"), 0, 0);
         ComboBox lv;
-        gridPane.add(lv = new ComboBox(FXCollections.observableArrayList(Catalogo.getStrEstrellas())), 1, 0);
+        gridPane.add(lv = new ComboBox(FXCollections.observableArrayList(Catalogue.getStarStrings())), 1, 0);
         lv.getSelectionModel().select(0);
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true);
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
         if (dialogo.ShowModal())
         {
-            return Catalogo.getEstrella(Catalogo.getEnumEstrella(lv.getSelectionModel().getSelectedItem().toString()));
+            return Catalogue.getStar(Catalogue.getEnumEstrella(lv.getSelectionModel().getSelectedItem().toString()));
         }
         else
         {
@@ -274,7 +272,7 @@ public class Principal extends Application
             }
 
         }
-        for (String p : Catalogo.getStrEstrellas())
+        for (String p : Catalogue.getStarStrings())
         {
             String[] tt = new String[]
             {
@@ -290,7 +288,7 @@ public class Principal extends Application
         }
     }
 
-    public String[] inputVariables() throws Excepcion, CancelExcepcion
+    public String[] inputVariables() throws ProcessException, CancelExcepcion
     {
         ObservableList lista1 = FXCollections.observableArrayList();
         ObservableList lista2 = FXCollections.observableArrayList();
@@ -362,7 +360,7 @@ public class Principal extends Application
         lv1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lv2.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, h, true);
+        ModalDialog dialogo = new ModalDialog(skeleton, h, true);
         if (dialogo.ShowModal())
         {
             List<String> l = new ArrayList<>();
@@ -384,7 +382,7 @@ public class Principal extends Application
         p.setAlignment(Pos.CENTER);
         TextField tf;
         p.getChildren().addAll(new Label(text), tf = new TextField(valor));
-        ModalDialog dialogo = new ModalDialog(esqueleto, p, true);
+        ModalDialog dialogo = new ModalDialog(skeleton, p, true);
         if (dialogo.ShowModal())
         {
             return tf.getText();
@@ -395,7 +393,7 @@ public class Principal extends Application
         }
     }
 
-    public int inputOpciones(String msg, String[] opciones, String defecto) throws Excepcion
+    public int inputOpciones(String msg, String[] opciones, String defecto) throws ProcessException
     {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -407,7 +405,7 @@ public class Principal extends Application
         gridPane.add(lv = new ComboBox(FXCollections.observableArrayList(opciones)), 1, 0);
         lv.getSelectionModel().select(defecto);
 
-        ModalDialog dialogo = new ModalDialog(esqueleto, gridPane, true);
+        ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
         if (dialogo.ShowModal())
         {
             return lv.getSelectionModel().getSelectedIndex();
@@ -418,12 +416,12 @@ public class Principal extends Application
         }
     }
 
-    public Principal() throws Excepcion
+    public Principal() throws ProcessException
     {
-        latitud = Grados.valueOf("42º34'28''");
-        longitud = Grados.valueOf("6º20'01''");
-        desde = new DiaJuliano(1, 1, 2015);
-        hasta = new DiaJuliano(1, 1, 2016);
+        latitud = SexagesimalDegree.valueOf("42º34'28''");
+        longitud = SexagesimalDegree.valueOf("6º20'01''");
+        desde = new JulianDay(1, 1, 2015);
+        hasta = new JulianDay(1, 1, 2016);
     }
 
     public Tab NuevoTab(String nombre)
@@ -434,7 +432,7 @@ public class Principal extends Application
         return tab;
     }
 
-    private void FenomenoEstelar(TabPane tp) throws Excepcion
+    private void FenomenoEstelar(TabPane tp) throws ProcessException
     {
         try
         {
@@ -442,13 +440,13 @@ public class Principal extends Application
             inputCoordenadasLocales();
             String strAño = inputDialog("Año", "");
             String strAcimut = inputDialog("Acimut", "");
-            Estrella estrella = inputEstrella();
+            Star estrella = inputEstrella();
             tab = NuevoTab(estrella.toString() + " " + strAño);
             tab.setContent(FenomenoEstelar(Integer.valueOf(strAño), estrella, Double.valueOf(strAcimut), latitud, longitud));
         }
         catch (NullPointerException ex)
         {
-            Global.info.Registra(ex);
+            Global.info.Log(ex);
         }
         catch (CancelExcepcion ex)
         {
@@ -456,7 +454,7 @@ public class Principal extends Application
         }
     }
 
-    private void SimulacionAstro(TabPane tp) throws Excepcion
+    private void SimulacionAstro(TabPane tp) throws ProcessException
     {
         try
         {
@@ -469,7 +467,7 @@ public class Principal extends Application
         }
         catch (NullPointerException ex)
         {
-            Global.info.Registra(ex);
+            Global.info.Log(ex);
         }
         catch (CancelExcepcion ex)
         {
@@ -493,7 +491,7 @@ public class Principal extends Application
         }
     }
     
-    class TareaCoincidenciaElevacion extends TareaTemporal 
+    class TareaCoincidenciaElevacion extends TemporalTask 
     { 
 
         String momento; 
@@ -509,12 +507,12 @@ public class Principal extends Application
         //estad 
         boolean orto = false; 
 
-        Planeta planeta; 
-        Estrella estrella; 
+        Planet planeta; 
+        Star estrella; 
 
-        public TareaCoincidenciaElevacion(String nombre, Estrella estrella, Planeta planeta, DiaJuliano desde, DiaJuliano hasta, String momento) throws Excepcion 
+        public TareaCoincidenciaElevacion(String nombre, Star estrella, Planet planeta, JulianDay desde, JulianDay hasta, String momento) throws ProcessException 
         { 
-            super(esqueleto, nombre, desde, hasta, 0.005); 
+            super(nombre, desde, hasta, 0.005); 
             this.momento = momento; 
             this.estrella = estrella; 
             this.planeta = planeta; 
@@ -530,7 +528,7 @@ public class Principal extends Application
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h " + planeta.toString(), Color.WHITE, 4, "nulo")); 
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h " + estrella.toString(), Color.WHITE, 2, "nulo")); 
             categoria.listaConfigSerie.add(new SimpleConfigSerie("planeta-estrella", Color.CYAN, 2, "nulo")); 
-            grafica = new GraficaJuliano("", esqueleto, categorias, "DJ"); 
+            grafica = new GraficaJuliano("", skeleton, categorias, "DJ"); 
             if (momento.equals("Orto")) 
             { 
                 orto = true; 
@@ -538,26 +536,26 @@ public class Principal extends Application
         } 
 
         @Override 
-        public void ciclo() 
+        public void cycle() 
         { 
             try 
             { 
-                Ecuatorial eS = planeta.getPosicionAparente(getActual()); 
-                Ecuatorial eT = estrella.getPosicionAparente(getActual(), tipoCalculo.PRECISO); 
-                HorizontalAparente hS = eS.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SATURNO, getActual()); 
-                HorizontalAparente hT = eT.toHorizontal(latitud, longitud, getActual()).toAparente(); 
+                Equatorial eS = planeta.getApparentPosition(getCurrent()); 
+                Equatorial eT = estrella.getApparentPosition(getCurrent(), CalculusType.PRECISE); 
+                ApparentHorizontal hS = eS.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SATURN, getCurrent()); 
+                ApparentHorizontal hT = eT.toHorizontal(latitud, longitud, getCurrent()).toApparent(); 
 
-                double difH = hS.getElevacion().getSignedValue() - hT.getElevacion().getSignedValue(); 
+                double difH = hS.getAltitude().getSignedValue() - hT.getAltitude().getSignedValue(); 
 
                 if (temp != null) 
                 { 
                     if (estado == 0) 
                     { 
-                        if ((!orto & hS.getElevacion().getSignedValue() < temp) 
-                                || (orto & hS.getElevacion().getSignedValue() > temp)) 
+                        if ((!orto & hS.getAltitude().getSignedValue() < temp) 
+                                || (orto & hS.getAltitude().getSignedValue() > temp)) 
                         { 
-                            if ((!orto && hS.getElevacion().getSignedValue() <= 0 && temp > 0) 
-                                    || (orto && hS.getElevacion().getSignedValue() >= 0 && temp < 0)) 
+                            if ((!orto && hS.getAltitude().getSignedValue() <= 0 && temp > 0) 
+                                    || (orto && hS.getAltitude().getSignedValue() >= 0 && temp < 0)) 
                             { 
 
                                 /*grafica.addMuestra(getActual().getValue(), eS.getDeclinacion().getSignedValue(), "DE " + planeta.toString()); 
@@ -579,24 +577,24 @@ public class Principal extends Application
                                     if ((!orto && difH >= 0 && temp2 < 0) 
                                             || (orto && difH <= 0 && temp2 > 0)) 
                                     { 
-                                        if (Signo(hS.getAcimut().getSignedValue()) != Signo(hT.getAcimut().getSignedValue())) 
+                                        if (Signo(hS.getAzimuth().getSignedValue()) != Signo(hT.getAzimuth().getSignedValue())) 
                                         { 
                                             switch (planeta.toString()) 
                                             { 
                                                 case "Saturno": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break; 
                                                 case "Marte": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break; 
                                                 case "Júpiter": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break; 
                                                 case "Venus": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break; 
                                                 case "Mercurio": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break;     
                                             } 
                                             temp = null; 
@@ -605,29 +603,29 @@ public class Principal extends Application
                                         } 
                                         else 
                                         { 
-                                            grafica.addMuestra(getActual().getValue(), eS.getDeclinacion().getSignedValue(), "DE " + planeta.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), eT.getDeclinacion().getSignedValue(), "DE " + estrella.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), hS.getAcimut().getSignedValue(), "A " + planeta.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), hT.getAcimut().getSignedValue(), "A " + estrella.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), hS.getElevacion().getSignedValue(), "h " + planeta.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), hT.getElevacion().getSignedValue(), "h " + estrella.toString()); 
-                                            grafica.addMuestra(getActual().getValue(), difH, "planeta-estrella"); 
+                                            grafica.addMuestra(getCurrent().getValue(), eS.getDeclination().getSignedValue(), "DE " + planeta.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), eT.getDeclination().getSignedValue(), "DE " + estrella.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), hS.getAzimuth().getSignedValue(), "A " + planeta.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), hT.getAzimuth().getSignedValue(), "A " + estrella.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), hS.getAltitude().getSignedValue(), "h " + planeta.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), hT.getAltitude().getSignedValue(), "h " + estrella.toString()); 
+                                            grafica.addMuestra(getCurrent().getValue(), difH, "planeta-estrella"); 
                                             switch (planeta.toString()) 
                                             { 
                                                 case "Saturno": 
-                                                    addActual(365 * 29); 
+                                                    addToCurrent(365 * 29); 
                                                     break; 
                                                 case "Marte": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break; 
                                                 case "Júpiter": 
-                                                    addActual(365 * 10); 
+                                                    addToCurrent(365 * 10); 
                                                     break; 
                                                 case "Venus": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break;     
                                                 case "Mercurio": 
-                                                    addActual(0.8); 
+                                                    addToCurrent(0.8); 
                                                     break;     
                                             } 
                                             temp = null; 
@@ -638,7 +636,7 @@ public class Principal extends Application
                                     } 
                                     else 
                                     { 
-                                        addActual(0.95); 
+                                        addToCurrent(0.95); 
                                         temp = null; 
                                         temp2 = difH; 
                                         return; 
@@ -650,22 +648,22 @@ public class Principal extends Application
                     } 
                     else if (estado == 1) 
                     { 
-                        grafica.addMuestra(getActual().getValue(), eS.getDeclinacion().getSignedValue(), "DE Saturno"); 
-                        grafica.addMuestra(getActual().getValue(), eT.getDeclinacion().getSignedValue(), "DE Tauro"); 
-                        grafica.addMuestra(getActual().getValue(), hS.getAcimut().getSignedValue(), "A Saturno"); 
-                        grafica.addMuestra(getActual().getValue(), hT.getAcimut().getSignedValue(), "A Tauro"); 
-                        grafica.addMuestra(getActual().getValue(), hS.getElevacion().getSignedValue(), "h Saturno"); 
-                        grafica.addMuestra(getActual().getValue(), hT.getElevacion().getSignedValue(), "h Tauro"); 
-                        grafica.addMuestra(getActual().getValue(), difH, "diferencia"); 
+                        grafica.addMuestra(getCurrent().getValue(), eS.getDeclination().getSignedValue(), "DE Saturno"); 
+                        grafica.addMuestra(getCurrent().getValue(), eT.getDeclination().getSignedValue(), "DE Tauro"); 
+                        grafica.addMuestra(getCurrent().getValue(), hS.getAzimuth().getSignedValue(), "A Saturno"); 
+                        grafica.addMuestra(getCurrent().getValue(), hT.getAzimuth().getSignedValue(), "A Tauro"); 
+                        grafica.addMuestra(getCurrent().getValue(), hS.getAltitude().getSignedValue(), "h Saturno"); 
+                        grafica.addMuestra(getCurrent().getValue(), hT.getAltitude().getSignedValue(), "h Tauro"); 
+                        grafica.addMuestra(getCurrent().getValue(), difH, "diferencia"); 
 
                     } 
                 } 
-                temp = hS.getElevacion().getSignedValue(); 
+                temp = hS.getAltitude().getSignedValue(); 
 
             } 
-            catch (Excepcion ex) 
+            catch (ProcessException ex) 
             { 
-                Global.info.Registra(ex); 
+                Global.info.Log(ex); 
             } 
         } 
 
@@ -675,7 +673,7 @@ public class Principal extends Application
         } 
 
         @Override 
-        public void terminado() 
+        public void taskEnd() 
         { 
         } 
 
@@ -684,7 +682,7 @@ public class Principal extends Application
     } 
 
 
-   private void CoincidenciaElevacion(TabPane tp) throws Excepcion 
+   private void CoincidenciaElevacion(TabPane tp) throws ProcessException 
     { 
         try 
         { 
@@ -694,8 +692,8 @@ public class Principal extends Application
 
             inputTiempo(false); 
 
-            Estrella estrella = inputEstrella(); 
-            Planeta planeta = inputPlaneta(); 
+            Star estrella = inputEstrella(); 
+            Planet planeta = inputPlaneta(); 
             tab = NuevoTab(planeta.toString() + " & " + estrella.toString()); 
 
             TareaCoincidenciaElevacion conjuncion = new TareaCoincidenciaElevacion(planeta.toString() + " & " + estrella.toString(), estrella, planeta, desde, hasta, inputOpcion(new String[] 
@@ -703,7 +701,7 @@ public class Principal extends Application
                 "Orto", "Ocaso" 
             })); 
 
-            conjuncion.Inicia(); 
+            conjuncion.taskStart(); 
             tab.setContent(conjuncion.getGrafica()); 
 
         } 
@@ -715,7 +713,7 @@ public class Principal extends Application
     } 
 
 
-    private void LunaLlenaPrimavera(TabPane tp) throws Excepcion
+    private void LunaLlenaPrimavera(TabPane tp) throws ProcessException
     {
         try
         {
@@ -734,69 +732,69 @@ public class Principal extends Application
             categoria.listaConfigSerie.add(new SimpleConfigSerie("A Luna", Color.RED, 2, "nulo"));
             categoria.listaConfigSerie.add(new SimpleConfigSerie("A Sol", Color.RED, 1, "nulo"));
 
-            GraficaJuliano grafica = new GraficaJuliano("", esqueleto, categorias, "DJ");
+            GraficaJuliano grafica = new GraficaJuliano("", skeleton, categorias, "DJ");
             final int año = Integer.valueOf(strAño);
             final int n_año = Integer.valueOf(strNumero);
 
             tab = NuevoTab("Luna Primavera");
 
-            (new TareaTemporal(esqueleto, "Luna", new DiaJuliano(1, 1, año), new DiaJuliano(1, 1, año + n_año), 1.0) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
+            (new TemporalTask("Luna", new JulianDay(1, 1, año), new JulianDay(1, 1, año + n_año), 1.0) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
             {
                 Double h_temp = null;
                 Double h_temp2 = null;
                 Double d_temp = null;
-                DiaJuliano puestaSol;
+                JulianDay puestaSol;
                 int año_ = año;
                 Double temp = null;
 
                 //estado = 1 disco iluminado >=0.1
                 //estad
                 @Override
-                public void terminado()
+                public void taskEnd()
                 {
                     tab.setContent(grafica.getGrafica());
                 }
 
                 @Override
-                public void ciclo()
+                public void cycle()
                 {
                     try
                     {
-                        InfoLuna il_antes = Luna.getInfoLuna(getActual().minus(new DiaJuliano(1)));
-                        InfoLuna il = Luna.getInfoLuna(getActual());
-                        InfoLuna il_despues = Luna.getInfoLuna(getActual().plus(new DiaJuliano(1)));
+                        InfoMoon il_antes = Moon.getInfoLuna(getCurrent().minus(new JulianDay(1)));
+                        InfoMoon il = Moon.getInfoLuna(getCurrent());
+                        InfoMoon il_despues = Moon.getInfoLuna(getCurrent().plus(new JulianDay(1)));
                         boolean marca = false;
 
                         
 
-                        if (il_antes.discoIluminado < il.discoIluminado && il_despues.discoIluminado < il.discoIluminado)
+                        if (il_antes.fraction < il.fraction && il_despues.fraction < il.fraction)
                         {
 
-                            Ecuatorial el = Luna.getPosicionAparente(getActual());
-                            Ecuatorial es = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                            Grados Al = Grados.acos(seno(el.getDeclinacion()) / coseno(latitud));
-                            Grados As = Grados.acos(seno(es.getDeclinacion()) / coseno(latitud));
+                            Equatorial el = Moon.getPosicionAparente(getCurrent());
+                            Equatorial es = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                            SexagesimalDegree Al = SexagesimalDegree.acos(sine(el.getDeclination()) / cosine(latitud));
+                            SexagesimalDegree As = SexagesimalDegree.acos(sine(es.getDeclination()) / cosine(latitud));
                             if (temp != null)
                             {
                                 if (Al.minus(As).getSignedValue() > 0 && temp < 0)
                                 {
-                                    grafica.addMuestra(getActual().getValue(), il.discoIluminado, "Fase");
-                                    grafica.addMuestra(getActual().getValue(), Al.getSignedValue(), "A Luna");
-                                    grafica.addMuestra(getActual().getValue(), As.getSignedValue(), "A Sol");
+                                    grafica.addMuestra(getCurrent().getValue(), il.fraction, "Fase");
+                                    grafica.addMuestra(getCurrent().getValue(), Al.getSignedValue(), "A Luna");
+                                    grafica.addMuestra(getCurrent().getValue(), As.getSignedValue(), "A Sol");
 
                                 }
                             }
                             temp = Al.minus(As).getSignedValue();
-                            addActual(29);
+                            addToCurrent(29);
                         }
                     }
-                    catch (Excepcion ex)
+                    catch (ProcessException ex)
                     {
-                        Global.info.Registra(ex);
+                        Global.info.Log(ex);
                     }
 
                 }
-            }).Inicia();
+            }).taskStart();
         }
         catch (CancelExcepcion ex)
         {
@@ -805,7 +803,7 @@ public class Principal extends Application
 
     }
 
-    private void PrimeraLuna(TabPane tp) throws Excepcion
+    private void PrimeraLuna(TabPane tp) throws ProcessException
     {
         try
         {
@@ -826,7 +824,7 @@ public class Principal extends Application
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h Luna", Color.WHITE, 4, "nulo"));
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h Sol", Color.WHITE, 2, "nulo"));
 
-            GraficaJuliano grafica = new GraficaJuliano("", esqueleto, categorias, "DJ");
+            GraficaJuliano grafica = new GraficaJuliano("", skeleton, categorias, "DJ");
             final int año = Integer.valueOf(strAño);
             final int n_año = Integer.valueOf(strNumero);
 
@@ -836,7 +834,7 @@ public class Principal extends Application
             {
                 "Imbolc", "Beltaine", "Lugnasad", "Samain", "Solsticio de verano", "Solsticio de invierno", "Equinoccio primavera", "Equinoccio otoño"
             }, "Solsticio de invierno");
-            DiaJuliano referencia;
+            JulianDay referencia;
 
             tab = NuevoTab("Primera Luna " + oo[opcion]);
 
@@ -871,56 +869,56 @@ public class Principal extends Application
                     return;
             }
 
-            (new TareaTemporal(esqueleto, "Luna", referencia, new DiaJuliano(1, 1, año + n_año), 1.0 / (24.0 * 60)) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
+            (new TemporalTask("Luna", referencia, new JulianDay(1, 1, año + n_año), 1.0 / (24.0 * 60)) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
             {
                 Double h_temp = null;
                 Double h_temp2 = null;
                 Double d_temp = null;
-                DiaJuliano puestaSol;
+                JulianDay puestaSol;
                 int año_ = año;
                 int estado = 0;
                 //estado = 1 disco iluminado >=0.1
                 //estad
 
                 @Override
-                public void terminado()
+                public void taskEnd()
                 {
                     tab.setContent(grafica.getGrafica());
                 }
 
                 @Override
-                public void ciclo()
+                public void cycle()
                 {
                     try
                     {
-                        InfoLuna il = Luna.getInfoLuna(getActual());
+                        InfoMoon il = Moon.getInfoLuna(getCurrent());
                         boolean marca = false;
 
                         if (estado == 0)
                         {
                             if (d_temp != null)
                             {
-                                if (il.discoIluminado > d_temp)
+                                if (il.fraction > d_temp)
                                 {
-                                    if (il.discoIluminado < 0.1 & il.discoIluminado > 0 && d_temp <= il.discoIluminado)
+                                    if (il.fraction < 0.1 & il.fraction > 0 && d_temp <= il.fraction)
                                     {
                                         estado = 1;
                                     }
                                 }
                             }
-                            d_temp = il.discoIluminado;
+                            d_temp = il.fraction;
                         }
 
                         if (estado == 2)
                         {
-                            Ecuatorial e = Luna.getPosicionAparente(getActual());
-                            Ecuatorial ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                            HorizontalAparente h = e.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.LUNA, getActual());
-                            HorizontalAparente hs = ns.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SOL, getActual());
+                            Equatorial e = Moon.getPosicionAparente(getCurrent());
+                            Equatorial ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                            ApparentHorizontal h = e.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.MOON, getCurrent());
+                            ApparentHorizontal hs = ns.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SUN, getCurrent());
 
-                            double hPrueba = h.getElevacion().getSignedValue();
-                            double arco = h.getElevacion().getSignedValue() - hs.getElevacion().getSignedValue();
-                            Grados elong = Ecuatorial.getSeparacionAngular(e, ns);
+                            double hPrueba = h.getAltitude().getSignedValue();
+                            double arco = h.getAltitude().getSignedValue() - hs.getAltitude().getSignedValue();
+                            SexagesimalDegree elong = Equatorial.getAngularSeparation(e, ns);
 
                             if (h_temp != null)
                             {
@@ -928,29 +926,29 @@ public class Principal extends Application
                                 {
                                     if (hPrueba < 0 && h_temp >= 0)
                                     {
-                                        DiaJuliano puestaLuna = new DiaJuliano(getActual());
-                                        setActual(new DiaJuliano(puestaSol).plus(new DiaJuliano(4 * (puestaLuna.getValue() - puestaSol.getValue()) / 9)));
+                                        JulianDay puestaLuna = new JulianDay(getCurrent());
+                                        setCurrent(new JulianDay(puestaSol).plus(new JulianDay(4 * (puestaLuna.getValue() - puestaSol.getValue()) / 9)));
 
-                                        e = Luna.getPosicionAparente(getActual());
-                                        ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                        h = e.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.LUNA, getActual());
-                                        hs = ns.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SOL, getActual());
-                                        arco = h.getElevacion().getSignedValue() - hs.getElevacion().getSignedValue();
-                                        elong = Ecuatorial.getSeparacionAngular(e, ns);
-                                        il = Luna.getInfoLuna(getActual());
-                                        double w = il.discoIluminado * 15;
+                                        e = Moon.getPosicionAparente(getCurrent());
+                                        ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                        h = e.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.MOON, getCurrent());
+                                        hs = ns.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SUN, getCurrent());
+                                        arco = h.getAltitude().getSignedValue() - hs.getAltitude().getSignedValue();
+                                        elong = Equatorial.getAngularSeparation(e, ns);
+                                        il = Moon.getInfoLuna(getCurrent());
+                                        double w = il.fraction * 15;
                                         double v = arco - (-0.1018 * pow(w, 3) + 0.7319 * pow(w, 2) - 6.3226 * w + 7.1651);
 
                                         if (v > 5.65)
                                         {
-                                            grafica.addMuestra(getActual().getValue(), il.discoIluminado, "Fase");
-                                            grafica.addMuestra(getActual().getValue(), h.getAcimut().getSignedValue(), "A Luna");
-                                            grafica.addMuestra(getActual().getValue(), h.getElevacion().getSignedValue(), "h Luna");
-                                            grafica.addMuestra(getActual().getValue(), hs.getElevacion().getSignedValue(), "h Sol");
+                                            grafica.addMuestra(getCurrent().getValue(), il.fraction, "Fase");
+                                            grafica.addMuestra(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Luna");
+                                            grafica.addMuestra(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Luna");
+                                            grafica.addMuestra(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
 
                                             año_++;
                                             FiestasMediaEstacion fme = new FiestasMediaEstacion(año_);
-                                            DiaJuliano referencia;
+                                            JulianDay referencia;
                                             switch (opcion)
                                             {
                                                 case 0:
@@ -980,7 +978,7 @@ public class Principal extends Application
                                                 default:
                                                     return;
                                             }
-                                            setActual(referencia);
+                                            setCurrent(referencia);
                                             estado = 0;
                                             d_temp = null;
                                             return;
@@ -988,7 +986,7 @@ public class Principal extends Application
                                         else
                                         {
                                             estado = 1;
-                                            setActual(new DiaJuliano(puestaSol.getValue() + 0.9));
+                                            setCurrent(new JulianDay(puestaSol.getValue() + 0.9));
 
                                             h_temp = null;
                                             return;
@@ -1001,14 +999,14 @@ public class Principal extends Application
 
                         if (estado == 1)
                         {
-                            Ecuatorial e = Luna.getPosicionAparente(getActual());
-                            Ecuatorial ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                            HorizontalAparente h = e.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.LUNA, getActual());
-                            HorizontalAparente hs = ns.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SOL, getActual());
+                            Equatorial e = Moon.getPosicionAparente(getCurrent());
+                            Equatorial ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                            ApparentHorizontal h = e.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.MOON, getCurrent());
+                            ApparentHorizontal hs = ns.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SUN, getCurrent());
 
-                            double hPrueba = hs.getElevacion().getSignedValue();
-                            double arco = h.getElevacion().getSignedValue() - hs.getElevacion().getSignedValue();
-                            Grados elong = Ecuatorial.getSeparacionAngular(e, ns);
+                            double hPrueba = hs.getAltitude().getSignedValue();
+                            double arco = h.getAltitude().getSignedValue() - hs.getAltitude().getSignedValue();
+                            SexagesimalDegree elong = Equatorial.getAngularSeparation(e, ns);
 
                             if (h_temp != null)
                             {
@@ -1016,7 +1014,7 @@ public class Principal extends Application
                                 {
                                     if (hPrueba < 0 && h_temp >= 0)
                                     {
-                                        puestaSol = new DiaJuliano(getActual());
+                                        puestaSol = new JulianDay(getCurrent());
                                         estado = 2;
                                         h_temp = null;
                                         return;
@@ -1027,13 +1025,13 @@ public class Principal extends Application
 
                         }
                     }
-                    catch (Excepcion ex)
+                    catch (ProcessException ex)
                     {
-                        Global.info.Registra(ex);
+                        Global.info.Log(ex);
                     }
 
                 }
-            }).Inicia();
+            }).taskStart();
         }
         catch (CancelExcepcion ex)
         {
@@ -1042,7 +1040,7 @@ public class Principal extends Application
 
     }
 
-    private void UltimaLuna(TabPane tp) throws Excepcion
+    private void UltimaLuna(TabPane tp) throws ProcessException
     {
         try
         {
@@ -1063,7 +1061,7 @@ public class Principal extends Application
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h Luna", Color.WHITE, 4, "nulo"));
             categoria.listaConfigSerie.add(new SimpleConfigSerie("h Sol", Color.WHITE, 2, "nulo"));
 
-            GraficaJuliano grafica = new GraficaJuliano("", esqueleto, categorias, "DJ");
+            GraficaJuliano grafica = new GraficaJuliano("", skeleton, categorias, "DJ");
             final int año = Integer.valueOf(strAño);
             final int n_año = Integer.valueOf(strNumero);
 
@@ -1073,7 +1071,7 @@ public class Principal extends Application
             {
                 "Imbolc", "Beltaine", "Lugnasad", "Samain", "Solsticio de verano", "Solsticio de invierno", "Equinoccio primavera", "Equinoccio otoño"
             }, "Solsticio de invierno");
-            DiaJuliano referencia;
+            JulianDay referencia;
 
             tab = NuevoTab("Última Luna " + oo[opcion]);
 
@@ -1108,57 +1106,57 @@ public class Principal extends Application
                     return;
             }
 
-            (new TareaTemporal(esqueleto, "Luna", referencia, new DiaJuliano(1, 1, año + n_año), 1.0 / (24.0 * 60)) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
+            (new TemporalTask("Luna", referencia, new JulianDay(1, 1, año + n_año), 1.0 / (24.0 * 60)) //(new Tarea("Luna", fme.solsticioInvierno, new DiaJuliano(15, 3, año), 1.0 / (24.0 * 10))
             {
                 Double h_temp = null;
                 Double h_temp2 = null;
                 Double d_temp = null;
-                DiaJuliano puestaLunaTemp;
+                JulianDay puestaLunaTemp;
                 int año_ = año;
                 int estado = 0;
                 //estado = 1 disco iluminado >=0.1
                 //estad
 
                 @Override
-                public void terminado()
+                public void taskEnd()
                 {
                     tab.setContent(grafica.getGrafica());
                 }
 
                 @Override
-                public void ciclo()
+                public void cycle()
                 {
                     try
                     {
-                        InfoLuna il = Luna.getInfoLuna(getActual());
+                        InfoMoon il = Moon.getInfoLuna(getCurrent());
                         boolean marca = false;
 
                         if (estado == 0)
                         {
                             if (d_temp != null)
                             {
-                                if (il.discoIluminado > d_temp)
+                                if (il.fraction > d_temp)
                                 {
-                                    if (il.discoIluminado < 0.1 & il.discoIluminado > 0 && d_temp <= il.discoIluminado)
+                                    if (il.fraction < 0.1 & il.fraction > 0 && d_temp <= il.fraction)
                                     {
                                         estado = 1;
-                                        addActual(-10);
+                                        addToCurrent(-10);
                                     }
                                 }
                             }
-                            d_temp = il.discoIluminado;
+                            d_temp = il.fraction;
                         }
 
                         if (estado == 1)
                         {
-                            Ecuatorial e = Luna.getPosicionAparente(getActual());
-                            Ecuatorial ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                            HorizontalAparente h = e.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.LUNA, getActual());
-                            HorizontalAparente hs = ns.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SOL, getActual());
+                            Equatorial e = Moon.getPosicionAparente(getCurrent());
+                            Equatorial ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                            ApparentHorizontal h = e.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.MOON, getCurrent());
+                            ApparentHorizontal hs = ns.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SUN, getCurrent());
 
-                            double hPrueba = h.getElevacion().getSignedValue();
-                            double arco = h.getElevacion().getSignedValue() - hs.getElevacion().getSignedValue();
-                            Grados elong = Ecuatorial.getSeparacionAngular(e, ns);
+                            double hPrueba = h.getAltitude().getSignedValue();
+                            double arco = h.getAltitude().getSignedValue() - hs.getAltitude().getSignedValue();
+                            SexagesimalDegree elong = Equatorial.getAngularSeparation(e, ns);
 
                             if (h_temp != null)
                             {
@@ -1166,37 +1164,37 @@ public class Principal extends Application
                                 {
                                     if (hPrueba > 1 && h_temp <= 1)
                                     {
-                                        DiaJuliano puestaLuna = new DiaJuliano(getActual());
-                                        il = Luna.getInfoLuna(getActual());
-                                        double w = il.discoIluminado * 15;
+                                        JulianDay puestaLuna = new JulianDay(getCurrent());
+                                        il = Moon.getInfoLuna(getCurrent());
+                                        double w = il.fraction * 15;
                                         double v = arco - (-0.1018 * pow(w, 3) + 0.7319 * pow(w, 2) - 6.3226 * w + 7.1651);
 
                                         if (v > 5.65)
                                         {
-                                            puestaLunaTemp = new DiaJuliano(getActual());
-                                            addActual(0.9);
+                                            puestaLunaTemp = new JulianDay(getCurrent());
+                                            addToCurrent(0.9);
                                             h_temp = null;
                                             return;
                                         }
                                         else
                                         {
-                                            setActual(puestaLunaTemp);
-                                            e = Luna.getPosicionAparente(getActual());
-                                            ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                            h = e.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.LUNA, getActual());
-                                            hs = ns.toHorizontal(latitud, longitud, getActual()).toAparente(enumPlaneta.SOL, getActual());
-                                            arco = h.getElevacion().getSignedValue() - hs.getElevacion().getSignedValue();
-                                            elong = Ecuatorial.getSeparacionAngular(e, ns);
-                                            il = Luna.getInfoLuna(getActual());
+                                            setCurrent(puestaLunaTemp);
+                                            e = Moon.getPosicionAparente(getCurrent());
+                                            ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                            h = e.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.MOON, getCurrent());
+                                            hs = ns.toHorizontal(latitud, longitud, getCurrent()).toApparent(PlanetEnum.SUN, getCurrent());
+                                            arco = h.getAltitude().getSignedValue() - hs.getAltitude().getSignedValue();
+                                            elong = Equatorial.getAngularSeparation(e, ns);
+                                            il = Moon.getInfoLuna(getCurrent());
 
-                                            grafica.addMuestra(getActual().getValue(), il.discoIluminado, "Fase");
-                                            grafica.addMuestra(getActual().getValue(), h.getAcimut().getSignedValue(), "A Luna");
-                                            grafica.addMuestra(getActual().getValue(), h.getElevacion().getSignedValue(), "h Luna");
-                                            grafica.addMuestra(getActual().getValue(), hs.getElevacion().getSignedValue(), "h Sol");
+                                            grafica.addMuestra(getCurrent().getValue(), il.fraction, "Fase");
+                                            grafica.addMuestra(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Luna");
+                                            grafica.addMuestra(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Luna");
+                                            grafica.addMuestra(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
 
                                             año_++;
                                             FiestasMediaEstacion fme = new FiestasMediaEstacion(año_);
-                                            DiaJuliano referencia;
+                                            JulianDay referencia;
                                             switch (opcion)
                                             {
                                                 case 0:
@@ -1226,7 +1224,7 @@ public class Principal extends Application
                                                 default:
                                                     return;
                                             }
-                                            setActual(referencia);
+                                            setCurrent(referencia);
                                             estado = 0;
                                             d_temp = null;
                                             return;
@@ -1238,13 +1236,13 @@ public class Principal extends Application
                         }
 
                     }
-                    catch (Excepcion ex)
+                    catch (ProcessException ex)
                     {
-                        Global.info.Registra(ex);
+                        Global.info.Log(ex);
                     }
 
                 }
-            }).Inicia();
+            }).taskStart();
         }
         catch (CancelExcepcion ex)
         {
@@ -1272,7 +1270,7 @@ public class Principal extends Application
 
             if (activo.isCambio())
             {
-                if (new MessageDialog(esqueleto, "¿Guardar estudio " + nombre + "?", MessageDialog.TipoMensaje.AVISO).Show())
+                if (new MessageDialog(skeleton, "¿Guardar estudio " + nombre + "?", MessageDialog.TipoMensaje.AVISO).Show())
                 {
                     try
                     {
@@ -1332,29 +1330,29 @@ public class Principal extends Application
         }
         catch (JDOMException ex)
         {
-            new MessageDialog(esqueleto, "No comprendo el plan", MessageDialog.TipoMensaje.ERROR).Show();
+            new MessageDialog(skeleton, "No comprendo el plan", MessageDialog.TipoMensaje.ERROR).Show();
         }
         catch (IOException ex)
         {
-            new MessageDialog(esqueleto, "No encuentro el plan", MessageDialog.TipoMensaje.ERROR).Show();
+            new MessageDialog(skeleton, "No encuentro el plan", MessageDialog.TipoMensaje.ERROR).Show();
         }
-        catch (Excepcion ex)
+        catch (ProcessException ex)
         {
-            new MessageDialog(esqueleto, "Error en el formato de los campos del plan", MessageDialog.TipoMensaje.ERROR).Show();
+            new MessageDialog(skeleton, "Error en el formato de los campos del plan", MessageDialog.TipoMensaje.ERROR).Show();
         }
         return false;
     }
 
-    class TareaAstro extends TareaTemporal
+    class TareaAstro extends TemporalTask
     {
 
         String[] variables;
         List<CategoriaGrafica> categorias = new ArrayList<>();
         GraficaJuliano grafica;
 
-        public TareaAstro(String[] variables, DiaJuliano desde, DiaJuliano hasta, double incremento)
+        public TareaAstro(String[] variables, JulianDay desde, JulianDay hasta, double incremento)
         {
-            super(esqueleto, "", desde, hasta, incremento);
+            super("", desde, hasta, incremento);
             this.variables = variables;
             for (String var : variables)
             {
@@ -1375,20 +1373,20 @@ public class Principal extends Application
                 }
                 categoria.listaConfigSerie.add(new SimpleConfigSerie(var));
             }
-            grafica = new GraficaJuliano("", esqueleto, categorias, "DJ");
+            grafica = new GraficaJuliano("", skeleton, categorias, "DJ");
 
         }
 
         @Override
-        public void terminado()
+        public void taskEnd()
         {
 
         }
 
         @Override
-        public void ciclo()
+        public void cycle()
         {
-            Ecuatorial e;
+            Equatorial e;
             Horizontal h;
 
             for (String var : variables)
@@ -1402,22 +1400,22 @@ public class Principal extends Application
                         switch (v[1])
                         {
                             case "DE":
-                                e = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                valor = e.getDeclinacion().getSignedValue();
+                                e = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                valor = e.getDeclination().getSignedValue();
                                 break;
                             case "AR":
-                                e = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                valor = e.getAscensionRecta().getSignedValue();
+                                e = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                valor = e.getRightAscension().getSignedValue();
                                 break;
                             case "A":
-                                e = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getAcimut().getValor();
+                                e = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAzimuth().getValue();
                                 break;
                             case "h":
-                                e = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getElevacion().getSignedValue();
+                                e = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAltitude().getSignedValue();
                                 break;
                             default:
                         }
@@ -1427,22 +1425,22 @@ public class Principal extends Application
                         switch (v[1])
                         {
                             case "DE":
-                                e = Luna.getPosicionAparente(getActual());
-                                valor = e.getDeclinacion().getSignedValue();
+                                e = Moon.getPosicionAparente(getCurrent());
+                                valor = e.getDeclination().getSignedValue();
                                 break;
                             case "AR":
-                                e = Luna.getPosicionAparente(getActual());
-                                valor = e.getAscensionRecta().getSignedValue();
+                                e = Moon.getPosicionAparente(getCurrent());
+                                valor = e.getRightAscension().getSignedValue();
                                 break;
                             case "A":
-                                e = Luna.getPosicionAparente(getActual());
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getAcimut().getValor();
+                                e = Moon.getPosicionAparente(getCurrent());
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAzimuth().getValue();
                                 break;
                             case "h":
-                                e = Luna.getPosicionAparente(getActual());
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getElevacion().getSignedValue();
+                                e = Moon.getPosicionAparente(getCurrent());
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAltitude().getSignedValue();
                                 break;
                             default:
                         }
@@ -1452,22 +1450,22 @@ public class Principal extends Application
                         switch (v[1])
                         {
                             case "DE":
-                                e = new Planeta(Catalogo.getEnumPlaneta(v[0])).getPosicionAparente(getActual());
-                                valor = e.getDeclinacion().getSignedValue();
+                                e = new Planet(Catalogue.getPlanetEnum(v[0])).getApparentPosition(getCurrent());
+                                valor = e.getDeclination().getSignedValue();
                                 break;
                             case "AR":
-                                e = new Planeta(Catalogo.getEnumPlaneta(v[0])).getPosicionAparente(getActual());
-                                valor = e.getAscensionRecta().getSignedValue();
+                                e = new Planet(Catalogue.getPlanetEnum(v[0])).getApparentPosition(getCurrent());
+                                valor = e.getRightAscension().getSignedValue();
                                 break;
                             case "A":
-                                e = new Planeta(Catalogo.getEnumPlaneta(v[0])).getPosicionAparente(getActual());
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getAcimut().getValor();
+                                e = new Planet(Catalogue.getPlanetEnum(v[0])).getApparentPosition(getCurrent());
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAzimuth().getValue();
                                 break;
                             case "h":
-                                e = new Planeta(Catalogo.getEnumPlaneta(v[0])).getPosicionAparente(getActual());
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getElevacion().getSignedValue();
+                                e = new Planet(Catalogue.getPlanetEnum(v[0])).getApparentPosition(getCurrent());
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAltitude().getSignedValue();
                                 break;
                             default:
                         }
@@ -1477,37 +1475,37 @@ public class Principal extends Application
                         switch (v[1])
                         {
                             case "DE":
-                                e = Catalogo.getEstrella(Catalogo.getEnumEstrella(v[0])).getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                valor = e.getDeclinacion().getSignedValue();
+                                e = Catalogue.getStar(Catalogue.getEnumEstrella(v[0])).getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                valor = e.getDeclination().getSignedValue();
                                 break;
                             case "AR":
-                                e = Catalogo.getEstrella(Catalogo.getEnumEstrella(v[0])).getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                valor = e.getAscensionRecta().getSignedValue();
+                                e = Catalogue.getStar(Catalogue.getEnumEstrella(v[0])).getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                valor = e.getRightAscension().getSignedValue();
                                 break;
                             case "A":
-                                e = Catalogo.getEstrella(Catalogo.getEnumEstrella(v[0])).getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getAcimut().getValor();
+                                e = Catalogue.getStar(Catalogue.getEnumEstrella(v[0])).getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAzimuth().getValue();
                                 break;
                             case "h":
-                                e = Catalogo.getEstrella(Catalogo.getEnumEstrella(v[0])).getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                                h = e.toHorizontal(latitud, longitud, getActual());
-                                valor = h.getElevacion().getSignedValue();
+                                e = Catalogue.getStar(Catalogue.getEnumEstrella(v[0])).getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                                h = e.toHorizontal(latitud, longitud, getCurrent());
+                                valor = h.getAltitude().getSignedValue();
                                 break;
                             default:
                         }
                     }
-                    grafica.addMuestra(getActual().getValue(), valor, var);
+                    grafica.addMuestra(getCurrent().getValue(), valor, var);
                 }
-                catch (Excepcion ex)
+                catch (ProcessException ex)
                 {
-                    Global.info.Registra(ex);
+                    Global.info.Log(ex);
                 }
             }
         }
     }
 
-    public Node FenomenoEstelar(int año, Estrella estrella, double acimutUmbral, Grados latitud, Grados longitud) throws Excepcion
+    public Node FenomenoEstelar(int año, Star estrella, double acimutUmbral, SexagesimalDegree latitud, SexagesimalDegree longitud) throws ProcessException
     {
         List<CategoriaGrafica> categorias = new ArrayList<>();
         CategoriaGrafica categoria;
@@ -1529,15 +1527,15 @@ public class Principal extends Application
          categoria.listaConfigSerie.add(new SimpleConfigSerie("estándar", Color.GOLD, 2, "nulo"));
          categoria.listaConfigSerie.add(new SimpleConfigSerie("no estándar", Color.GOLD, 4, "nulo"));*/
 
-        GraficaJuliano grafica = new GraficaJuliano("", esqueleto, categorias, "DJ");
+        GraficaJuliano grafica = new GraficaJuliano("", skeleton, categorias, "DJ");
         grafica.listaEjes.get(grafica.listaEjes.size() - 1).setVisible(false);
 
-        (new TareaTemporal(esqueleto, "Elevacion Sol", new DiaJuliano(1, 1, año), new DiaJuliano(1, 1, año + 1), 1.0 / (24 * 60))
+        (new TemporalTask("Elevacion Sol", new JulianDay(1, 1, año), new JulianDay(1, 1, año + 1), 1.0 / (24 * 60))
         {
             Double a_temp = null;
 
             @Override
-            public void terminado()
+            public void taskEnd()
             {
                 try
                 {
@@ -1575,24 +1573,24 @@ public class Principal extends Application
                     grafica.addMuestra(fme.equinoccioOtoño.getValue(), Double.NaN, "fiestas");
 
                 }
-                catch (Excepcion ex)
+                catch (ProcessException ex)
                 {
-                    Global.info.Registra(ex);
+                    Global.info.Log(ex);
                 }
             }
 
             @Override
-            public void ciclo()
+            public void cycle()
             {
                 try
                 {
                     //Ecuatorial mp=new Ecuatorial(new Grados(0),new Hora(0));
-                    Ecuatorial ne = estrella.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                    Ecuatorial ns = Sol.getPosicionAparente(getActual(), tipoCalculo.PRECISO);
-                    Horizontal h = ne.toHorizontal(latitud, longitud, getActual());
-                    Horizontal hs = ns.toHorizontal(latitud, longitud, getActual());
-                    double hEstrella = h.getElevacion().getSignedValue();
-                    double AEstrella = h.getAcimut().getValor();
+                    Equatorial ne = estrella.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                    Equatorial ns = Sun.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                    Horizontal h = ne.toHorizontal(latitud, longitud, getCurrent());
+                    Horizontal hs = ns.toHorizontal(latitud, longitud, getCurrent());
+                    double hEstrella = h.getAltitude().getSignedValue();
+                    double AEstrella = h.getAzimuth().getValue();
 
                     boolean marca = false;
 
@@ -1608,19 +1606,19 @@ public class Principal extends Application
                     }
                     if (marca)
                     {
-                        grafica.addMuestra(getActual().getValue(), h.getAcimut().getValor(), "A Estrella");
-                        grafica.addMuestra(getActual().getValue(), hs.getAcimut().getValor(), "A Sol");
-                        grafica.addMuestra(getActual().getValue(), 0, "horizonte");
-                        grafica.addMuestra(getActual().getValue(), h.getElevacion().getSignedValue(), "h Estrella");
-                        grafica.addMuestra(getActual().getValue(), hs.getElevacion().getSignedValue(), "h Sol");
-                        grafica.addMuestra(getActual().getValue(), ne.getDeclinacion().getSignedValue(), "DE Estrella");
+                        grafica.addMuestra(getCurrent().getValue(), h.getAzimuth().getValue(), "A Estrella");
+                        grafica.addMuestra(getCurrent().getValue(), hs.getAzimuth().getValue(), "A Sol");
+                        grafica.addMuestra(getCurrent().getValue(), 0, "horizonte");
+                        grafica.addMuestra(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Estrella");
+                        grafica.addMuestra(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
+                        grafica.addMuestra(getCurrent().getValue(), ne.getDeclination().getSignedValue(), "DE Estrella");
 
-                        grafica.addMuestra(getActual().getValue(), estrella.magnitudVisual, "m Estrella");
-                        addActual(0.9);
+                        grafica.addMuestra(getCurrent().getValue(), estrella.apparentMagnitude, "m Estrella");
+                        addToCurrent(0.9);
 
-                        double distanciaAngular = abs(h.getAcimut().minus(hs.getAcimut()).getSignedValue()) * PI / 180;
-                        double Z = Radianes.valueOf(new Grados(90).minus(h.getElevacion())).getValor();
-                        double h0 = hs.getElevacion().getSignedValue() * PI / 180;
+                        double distanciaAngular = abs(h.getAzimuth().minus(hs.getAzimuth()).getSignedValue()) * PI / 180;
+                        double Z = Radian.valueOf(new SexagesimalDegree(90).minus(h.getAltitude())).getValue();
+                        double h0 = hs.getAltitude().getSignedValue() * PI / 180;
 
                         double log10_bst = 4.75 - distanciaAngular * Z / 3 + h0 * (12 + 8.21 * Z) + 2.86 * Z;
                         double bst = pow(10.0, log10_bst);
@@ -1648,53 +1646,53 @@ public class Principal extends Application
                         double X = 1 / (cos(Z) + 0.025 * exp(-11 * cos(Z)));
                         double m = -16.57 - 2.5 * log10(i) - kv * X;
                         double logb = log10(b);
-                        grafica.addMuestra(getActual().getValue(), log10_bst, "estándar");
-                        grafica.addMuestra(getActual().getValue(), logb, "no estándar");
+                        grafica.addMuestra(getCurrent().getValue(), log10_bst, "estándar");
+                        grafica.addMuestra(getCurrent().getValue(), logb, "no estándar");
 
                         if (m > -1)
                         {
-                            grafica.addMuestra(getActual().getValue(), m, "m crítica");
+                            grafica.addMuestra(getCurrent().getValue(), m, "m crítica");
                         }
                         else
                         {
-                            grafica.addMuestra(getActual().getValue(), Double.NaN, "m crítica");
+                            grafica.addMuestra(getCurrent().getValue(), Double.NaN, "m crítica");
                         }
                     }
                     a_temp = AEstrella;
 
                 }
-                catch (Excepcion ex)
+                catch (ProcessException ex)
                 {
-                    Global.info.Registra(ex);
+                    Global.info.Log(ex);
                 }
 
             }
-        }).Inicia();
+        }).taskStart();
 
         return grafica.getGrafica();
     }
 
-    public Node Astro(String[] variables, DiaJuliano desde, DiaJuliano hasta, double incremento) throws Excepcion
+    public Node Astro(String[] variables, JulianDay desde, JulianDay hasta, double incremento) throws ProcessException
     {
         TareaAstro astro;
         (astro = new TareaAstro(variables, desde, hasta, incremento)
         {
 
-        }).Inicia();
+        }).taskStart();
 
         return astro.grafica.getGrafica();
     }
 
     @Override
-    public void start(Stage primaryStage) throws Excepcion
+    public void start(Stage primaryStage) throws ProcessException
     {
         st = primaryStage;
         st.getIcons().add(new Image(getClass().getResourceAsStream("/com/resources/Icon.png")));
-        esqueleto = new Esqueleto(System.getProperty("user.home") + System.getProperty("file.separator") + "AWB", "awb", primaryStage, null);
+        skeleton = new Skeleton(System.getProperty("user.home") + System.getProperty("file.separator") + "AWB", "awb", primaryStage, null);
         raiz = new VBox();
         Scene scene = new Scene(raiz);
-        scene.getStylesheets().add(Esqueleto.class.getResource("general.css").toExternalForm());
-        esqueleto.scene = scene;
+        scene.getStylesheets().add(Skeleton.class.getResource("general.css").toExternalForm());
+        skeleton.setScene(scene);
         primaryStage.setTitle("Archaeoastronomy Workbench");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
@@ -1709,7 +1707,7 @@ public class Principal extends Application
             try
             {
                 double f = Double.valueOf(tf.getText().replace(",", "."));
-                DiaJulianoLabel.setText(new DiaJuliano(f).toString());
+                DiaJulianoLabel.setText(new JulianDay(f).toString());
             }
             catch (NumberFormatException ex)
             {
@@ -1737,7 +1735,7 @@ public class Principal extends Application
             }
             catch (IOException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
         mi = new MenuItem("Abrir proyecto");
@@ -1756,9 +1754,9 @@ public class Principal extends Application
             {
                 FenomenoEstelar(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
         
@@ -1771,9 +1769,9 @@ public class Principal extends Application
             {
                 SimulacionAstro(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
         
@@ -1788,9 +1786,9 @@ public class Principal extends Application
             {
                 PrimeraLuna(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
 
@@ -1802,9 +1800,9 @@ public class Principal extends Application
             {
                 UltimaLuna(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
 
@@ -1816,9 +1814,9 @@ public class Principal extends Application
             {
                 LunaLlenaPrimavera(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
 
@@ -1830,9 +1828,9 @@ public class Principal extends Application
             {
                 CoincidenciaElevacion(tp);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
 
@@ -1845,7 +1843,7 @@ public class Principal extends Application
             try
             {
                 FiestasMediaEstacion fme = new FiestasMediaEstacion(Integer.valueOf(strAño));
-                Rejilla rejilla = new Rejilla();
+                GridPane10 rejilla = new GridPane10();
                 rejilla.add(new Label("Fiesta media estación fin de invierno (Imbolc)"), 0, 0);
                 rejilla.add(new Label("Equinoccio aparente de primavera"), 0, 1);
                 rejilla.add(new Label("Fiesta media estación comienzo de verano (Beltaine)"), 0, 2);
@@ -1855,20 +1853,20 @@ public class Principal extends Application
                 rejilla.add(new Label("Fiesta media estación comienzo de invierno (Samain)"), 0, 6);
                 rejilla.add(new Label("Solsticio de invierno"), 0, 7);
 
-                rejilla.add(new LabelBorde(fme.imbolc.getFecha().toString()), 1, 0);
-                rejilla.add(new LabelBorde(fme.equinoccioPrimavera.getFecha().toString()), 1, 1);
-                rejilla.add(new LabelBorde(fme.beltaine.getFecha().toString()), 1, 2);
-                rejilla.add(new LabelBorde(fme.solsticioVerano.getFecha().toString()), 1, 3);
-                rejilla.add(new LabelBorde(fme.lugnasad.getFecha().toString()), 1, 4);
-                rejilla.add(new LabelBorde(fme.equinoccioOtoño.getFecha().toString()), 1, 5);
-                rejilla.add(new LabelBorde(fme.samain.getFecha().toString()), 1, 6);
-                rejilla.add(new LabelBorde(fme.solsticioInvierno.getFecha().toString()), 1, 7);
+                rejilla.add(new BordererLabel(fme.imbolc.getSimpleDate().toString()), 1, 0);
+                rejilla.add(new BordererLabel(fme.equinoccioPrimavera.getSimpleDate().toString()), 1, 1);
+                rejilla.add(new BordererLabel(fme.beltaine.getSimpleDate().toString()), 1, 2);
+                rejilla.add(new BordererLabel(fme.solsticioVerano.getSimpleDate().toString()), 1, 3);
+                rejilla.add(new BordererLabel(fme.lugnasad.getSimpleDate().toString()), 1, 4);
+                rejilla.add(new BordererLabel(fme.equinoccioOtoño.getSimpleDate().toString()), 1, 5);
+                rejilla.add(new BordererLabel(fme.samain.getSimpleDate().toString()), 1, 6);
+                rejilla.add(new BordererLabel(fme.solsticioInvierno.getSimpleDate().toString()), 1, 7);
 
                 NuevoTab("Calendario " + strAño).setContent(rejilla);
             }
-            catch (Excepcion ex)
+            catch (ProcessException ex)
             {
-                Global.info.Registra(ex);
+                Global.info.Log(ex);
             }
         });
 
@@ -1894,7 +1892,7 @@ public class Principal extends Application
         m.getItems().add(mi);
         mi.setOnAction((ActionEvent t) ->
         {
-            new MessageDialog(esqueleto, "Archaeoastronomy Work Bench 2015", MessageDialog.TipoMensaje.INFO).Show();
+            new MessageDialog(skeleton, "Archaeoastronomy Work Bench 2015", MessageDialog.TipoMensaje.INFO).Show();
         });
 
         mi = new MenuItem("Cerrar");

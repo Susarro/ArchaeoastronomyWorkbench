@@ -32,7 +32,7 @@ public class ModalDialog
     public boolean resultado = false;
     public Stage stage;
     public final Stage util;
-    public Esqueleto padre;
+    public Skeleton padre;
     public Pane panel;
     public VBox box;
     public HBox boxButtons;
@@ -76,7 +76,7 @@ public class ModalDialog
     
     
 
-    public ModalDialog(final Esqueleto padre, Pane pane, boolean keyEnter)
+    public ModalDialog(final Skeleton padre, Pane pane, boolean keyEnter)
     {
         this.padre = padre;
         panel = pane;

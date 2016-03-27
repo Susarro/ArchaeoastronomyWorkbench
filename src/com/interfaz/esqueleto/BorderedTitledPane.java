@@ -18,8 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 /**
- *
- * @author MIGUEL_ANGEL
+ * Bordered titled pane
+ * 
  */
 public class BorderedTitledPane extends StackPane
 {
@@ -36,6 +36,11 @@ public class BorderedTitledPane extends StackPane
         this("", null);
     }
 
+    /**
+     * 
+     * @param titleString Title
+     * @param contentNode Content
+     */
     public BorderedTitledPane(String titleString, Node contentNode)
     {
         final Label titleLabel = new Label();
@@ -77,61 +82,109 @@ public class BorderedTitledPane extends StackPane
 
     }
 
+    /**
+     * 
+     * @return title
+     */
     public String getTitle()
     {
         return title.get();
     }
 
+    /**
+     * 
+     * @return property title
+     */
     public StringProperty getTitleStringProperty()
     {
         return title;
     }
 
+    /**
+     * 
+     * @param title to set
+     */
     public void setTitle(String title)
     {
         this.title.set(title);
     }
 
+    /**
+     * 
+     * @return title alignment
+     */
     public Pos getTitleAlignment()
     {
         return titleAlignment.get();
     }
 
+    /**
+     * 
+     * @return property of tithe alignment
+     */
     public ObjectProperty<Pos> titleAlignmentProperty()
     {
         return titleAlignment;
     }
 
+    /**
+     * 
+     * @param titleAlignment title alignment to set
+     */
     public void setTitleAlignment(Pos titleAlignment)
     {
         this.titleAlignment.set(titleAlignment);
     }
 
+    /**
+     * 
+     * @return content
+     */
     public Node getContent()
     {
         return content.get();
     }
 
+    /**
+     * 
+     * @return property content
+     */
     public ObjectProperty<Node> contentProperty()
     {
         return content;
     }
 
+    /**
+     * 
+     * @param content Content to set
+     */
     public void setContent(Node content)
     {
         this.content.set(content);
     }
 
+    /**
+     * 
+     * @return graphic
+     */
     public Node getGraphic()
     {
         return graphic.get();
     }
 
+    /**
+     * 
+     * @return property graphic
+     */
     public ObjectProperty<Node> graphicProperty()
     {
         return graphic;
     }
 
+    /**
+     * 
+     * @param graphic Graphic to set
+     */
     public void setGraphic(Node graphic)
     {
         this.graphic.set(graphic);

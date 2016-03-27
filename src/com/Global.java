@@ -5,13 +5,18 @@
  */
 package com;
 
-import com.interfaz.esqueleto.Esqueleto;
+import com.interfaz.esqueleto.Skeleton;
 
 /**
+ * Global class
  *
  * @author MIGUEL_ANGEL
  */
 public class Global
-{   
-    public static final Info info = new Info(Esqueleto.class.getName());    
+{
+
+    /**
+     * Object for logging
+     */
+    public static final Info info = new Info(Skeleton.class.getName());
 }
