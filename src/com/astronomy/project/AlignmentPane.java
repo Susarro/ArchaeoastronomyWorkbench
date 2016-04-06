@@ -73,6 +73,30 @@ import static java.lang.Math.abs;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
 import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static java.lang.Math.abs;
 
 /**
  * Alignment tab pane

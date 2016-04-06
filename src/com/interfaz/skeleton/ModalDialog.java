@@ -160,7 +160,7 @@ public class ModalDialog
         }
 
         btnOK = new Button();
-        btnOK.setText("Aceptar");
+        btnOK.setText("OK");
 
         btnOK.setOnAction((ActionEvent event) ->
         {
@@ -169,7 +169,7 @@ public class ModalDialog
         boxButtons.getChildren().add(btnOK);
 
         btnCancel = new Button();
-        btnCancel.setText("Cancelar");
+        btnCancel.setText("Cancel");
 
         btnCancel.setOnAction((ActionEvent event) ->
         {

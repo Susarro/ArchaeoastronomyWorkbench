@@ -112,6 +112,38 @@ import static com.main.Dialogs.inputTimeInterval;
 import static java.lang.Math.abs;
 import static com.units.Tools.sine;
 import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
 
 /**
  *
@@ -218,7 +250,7 @@ public class Main extends Application
             String strAcimut = inputDialog("Azimuth of setting or rising star", "");
             Star star = inputStar();
             tab = newTab(star.toString() + " " + strYear);
-            tab.setContent(FenomenoEstelar(Integer.valueOf(strYear), star, Double.valueOf(strAcimut), latitude, longitude));
+            tab.setContent(stellarVisibilityPhenomena(Integer.valueOf(strYear), star, Double.valueOf(strAcimut), latitude, longitude));
         }
         catch (NullPointerException ex)
         {
@@ -527,10 +559,10 @@ public class Main extends Application
 
                                         if (v > 5.65)
                                         {
-                                            chart.addSample(getCurrent().getValue(), il.fraction, "Fase");
-                                            chart.addSample(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Luna");
-                                            chart.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Luna");
-                                            chart.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
+                                            chart.addSample(getCurrent().getValue(), il.fraction, "Phase");
+                                            chart.addSample(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Moon");
+                                            chart.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Moon");
+                                            chart.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sun");
 
                                             year_++;
                                             CrossQuarterFestivals fme = new CrossQuarterFestivals(year_);
@@ -776,10 +808,10 @@ public class Main extends Application
                                             elong = Equatorial.getAngularSeparation(e, ns);
                                             il = Moon.getInfoMoon(getCurrent());
 
-                                            chart.addSample(getCurrent().getValue(), il.fraction, "Fase");
-                                            chart.addSample(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Luna");
-                                            chart.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Luna");
-                                            chart.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
+                                            chart.addSample(getCurrent().getValue(), il.fraction, "Phase");
+                                            chart.addSample(getCurrent().getValue(), h.getAzimuth().getSignedValue(), "A Moon");
+                                            chart.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Moon");
+                                            chart.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sun");
 
                                             year_++;
                                             CrossQuarterFestivals fme = new CrossQuarterFestivals(year_);
@@ -947,32 +979,40 @@ public class Main extends Application
         return false;
     }
 
-    public Node FenomenoEstelar(int año, Star estrella, double acimutUmbral, SexagesimalDegree latitud, SexagesimalDegree longitud) throws ProcessException
+    /**
+     * 
+     * @param year Year
+     * @param star Star
+     * @param azimuth Azimuth 
+     * @param latitude Geographical latitude of observatory
+     * @param longitude Geographical longitude of observatory
+     * @return
+     * @throws ProcessException 
+     */
+    public Node stellarVisibilityPhenomena(int year, Star star, double azimuth, SexagesimalDegree latitude, SexagesimalDegree longitude) throws ProcessException
     {
-        List<AxisChart> categorias = new ArrayList<>();
-        AxisChart categoria;
-        categorias.add(categoria = new AxisChart("Elevación"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("h Estrella", Color.RED, 2, "nulo"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("h Sol", Color.RED, 4, "nulo"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("horizonte", Color.WHITE, 2, "nulo"));
-        categorias.add(categoria = new AxisChart("Acimut"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("A Estrella", Color.LIGHTGREEN, 2, "nulo"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("A Sol", Color.LIGHTGREEN, 4, "nulo"));
-        categorias.add(categoria = new AxisChart("Declinación"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("DE Estrella", Color.ORANGE, 2, "nulo"));
-        categorias.add(categoria = new AxisChart("Magnitud visual"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("m crítica", Color.CYAN, 4, "nulo"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("m Estrella", Color.CYAN, 2, "nulo"));
-        categorias.add(categoria = new AxisChart("Calendario"));
-        categoria.configSerieList.add(new SimpleSeriesConfiguration("fiestas", Color.WHITE, 4, "nulo"));
-        /*categorias.add(categoria = new CategoriaGrafica("Brillo cielo"));
-         categoria.listaConfigSerie.add(new SimpleSeriesConfiguration("estándar", Color.GOLD, 2, "nulo"));
-         categoria.listaConfigSerie.add(new SimpleSeriesConfiguration("no estándar", Color.GOLD, 4, "nulo"));*/
+        List<AxisChart> axes = new ArrayList<>();
+        AxisChart axis;
+        axes.add(axis = new AxisChart("Altitude"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("h Star", Color.RED, 2, "null"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("h Sun", Color.RED, 4, "null"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("horizon", Color.WHITE, 2, "null"));
+        axes.add(axis = new AxisChart("Azimuth"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("A Star", Color.LIGHTGREEN, 2, "null"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("A Sun", Color.LIGHTGREEN, 4, "null"));
+        axes.add(axis = new AxisChart("Declination"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("DE Star", Color.ORANGE, 2, "null"));
+        axes.add(axis = new AxisChart("Apparent magnitude"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("m Critical", Color.CYAN, 4, "null"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("m Star", Color.CYAN, 2, "null"));
+        axes.add(axis = new AxisChart("Calendar"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("festivals", Color.WHITE, 4, "null"));
+       
 
-        JulianChart grafica = new JulianChart("", categorias, "DJ");
-        grafica.AxesList.get(grafica.AxesList.size() - 1).setVisible(false);
+        JulianChart chart = new JulianChart("", axes, "JD");
+        chart.AxesList.get(chart.AxesList.size() - 1).setVisible(false);
 
-        (new TemporalTask("Elevacion Sol", new JulianDay(1, 1, año), new JulianDay(1, 1, año + 1), 1.0 / (24 * 60))
+        (new TemporalTask("Stellar visibility phenomena", new JulianDay(1, 1, year), new JulianDay(1, 1, year + 1), 1.0 / (24 * 60))
         {
             Double a_temp = null;
 
@@ -981,38 +1021,38 @@ public class Main extends Application
             {
                 try
                 {
-                    CrossQuarterFestivals fme = new CrossQuarterFestivals(año);
+                    CrossQuarterFestivals fme = new CrossQuarterFestivals(year);
 
-                    grafica.addSample(fme.winterSolstice.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.winterSolstice.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.winterSolstice.getValue(), Double.NaN, "fiestas");
-                    grafica.addSample(fme.summerSolstice.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.summerSolstice.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.summerSolstice.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.winterSolstice.getValue(), 0, "festivals");
+                    chart.addSample(fme.winterSolstice.getValue(), 1, "festivals");
+                    chart.addSample(fme.winterSolstice.getValue(), Double.NaN, "festivals");
+                    chart.addSample(fme.summerSolstice.getValue(), 0, "festivals");
+                    chart.addSample(fme.summerSolstice.getValue(), 1, "festivals");
+                    chart.addSample(fme.summerSolstice.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.imbolc.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.imbolc.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.imbolc.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.imbolc.getValue(), 0, "festivals");
+                    chart.addSample(fme.imbolc.getValue(), 1, "festivals");
+                    chart.addSample(fme.imbolc.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.beltaine.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.beltaine.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.beltaine.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.beltaine.getValue(), 0, "festivals");
+                    chart.addSample(fme.beltaine.getValue(), 1, "festivals");
+                    chart.addSample(fme.beltaine.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.lugnasad.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.lugnasad.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.lugnasad.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.lugnasad.getValue(), 0, "festivals");
+                    chart.addSample(fme.lugnasad.getValue(), 1, "festivals");
+                    chart.addSample(fme.lugnasad.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.samain.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.samain.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.samain.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.samain.getValue(), 0, "festivals");
+                    chart.addSample(fme.samain.getValue(), 1, "festivals");
+                    chart.addSample(fme.samain.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.apparentSpringEquinox.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.apparentSpringEquinox.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.apparentSpringEquinox.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.apparentSpringEquinox.getValue(), 0, "festivals");
+                    chart.addSample(fme.apparentSpringEquinox.getValue(), 1, "festivals");
+                    chart.addSample(fme.apparentSpringEquinox.getValue(), Double.NaN, "festivals");
 
-                    grafica.addSample(fme.apparentAutumnEquinox.getValue(), 0, "fiestas");
-                    grafica.addSample(fme.apparentAutumnEquinox.getValue(), 1, "fiestas");
-                    grafica.addSample(fme.apparentAutumnEquinox.getValue(), Double.NaN, "fiestas");
+                    chart.addSample(fme.apparentAutumnEquinox.getValue(), 0, "festivals");
+                    chart.addSample(fme.apparentAutumnEquinox.getValue(), 1, "festivals");
+                    chart.addSample(fme.apparentAutumnEquinox.getValue(), Double.NaN, "festivals");
 
                 }
                 catch (ProcessException ex)
@@ -1025,12 +1065,11 @@ public class Main extends Application
             public void cycle()
             {
                 try
-                {
-                    //Ecuatorial mp=new Ecuatorial(new Grados(0),new Hora(0));
-                    Equatorial ne = estrella.getApparentPosition(getCurrent(), CalculusType.PRECISE);
+                {                   
+                    Equatorial ne = star.getApparentPosition(getCurrent(), CalculusType.PRECISE);
                     Equatorial ns = Sun.getApparentEquatorialPosition(getCurrent(), CalculusType.PRECISE);
-                    Horizontal h = ne.toHorizontal(latitud, longitud, getCurrent());
-                    Horizontal hs = ns.toHorizontal(latitud, longitud, getCurrent());
+                    Horizontal h = ne.toHorizontal(latitude, longitude, getCurrent());
+                    Horizontal hs = ns.toHorizontal(latitude, longitude, getCurrent());
                     double hEstrella = h.getAltitude().getSignedValue();
                     double AEstrella = h.getAzimuth().getValue();
 
@@ -1040,7 +1079,7 @@ public class Main extends Application
                     {
                         if (AEstrella > a_temp)
                         {
-                            if (AEstrella >= acimutUmbral && a_temp < acimutUmbral)
+                            if (AEstrella >= azimuth && a_temp < azimuth)
                             {
                                 marca = true;
                             }
@@ -1048,14 +1087,14 @@ public class Main extends Application
                     }
                     if (marca)
                     {
-                        grafica.addSample(getCurrent().getValue(), h.getAzimuth().getValue(), "A Estrella");
-                        grafica.addSample(getCurrent().getValue(), hs.getAzimuth().getValue(), "A Sol");
-                        grafica.addSample(getCurrent().getValue(), 0, "horizonte");
-                        grafica.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Estrella");
-                        grafica.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sol");
-                        grafica.addSample(getCurrent().getValue(), ne.getDeclination().getSignedValue(), "DE Estrella");
+                        chart.addSample(getCurrent().getValue(), h.getAzimuth().getValue(), "A Star");
+                        chart.addSample(getCurrent().getValue(), hs.getAzimuth().getValue(), "A Sun");
+                        chart.addSample(getCurrent().getValue(), 0, "horizon");
+                        chart.addSample(getCurrent().getValue(), h.getAltitude().getSignedValue(), "h Star");
+                        chart.addSample(getCurrent().getValue(), hs.getAltitude().getSignedValue(), "h Sun");
+                        chart.addSample(getCurrent().getValue(), ne.getDeclination().getSignedValue(), "DE Star");
 
-                        grafica.addSample(getCurrent().getValue(), estrella.apparentMagnitude, "m Estrella");
+                        chart.addSample(getCurrent().getValue(), star.apparentMagnitude, "m Star");
                         addToCurrent(0.9);
 
                         double distanciaAngular = abs(h.getAzimuth().minus(hs.getAzimuth()).getSignedValue()) * PI / 180;
@@ -1087,17 +1126,15 @@ public class Main extends Application
                         double i = C * pow(1 + sqrt(K * b), 2);
                         double X = 1 / (cos(Z) + 0.025 * exp(-11 * cos(Z)));
                         double m = -16.57 - 2.5 * log10(i) - kv * X;
-                        double logb = log10(b);
-                        grafica.addSample(getCurrent().getValue(), log10_bst, "estándar");
-                        grafica.addSample(getCurrent().getValue(), logb, "no estándar");
+                        double logb = log10(b);                       
 
                         if (m > -1)
                         {
-                            grafica.addSample(getCurrent().getValue(), m, "m crítica");
+                            chart.addSample(getCurrent().getValue(), m, "m Critical");
                         }
                         else
                         {
-                            grafica.addSample(getCurrent().getValue(), Double.NaN, "m crítica");
+                            chart.addSample(getCurrent().getValue(), Double.NaN, "m Critical");
                         }
                     }
                     a_temp = AEstrella;
@@ -1111,7 +1148,7 @@ public class Main extends Application
             }
         }).taskStart();
 
-        return grafica.getChart();
+        return chart.getChart();
     }
 
     /**
