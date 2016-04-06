@@ -83,7 +83,7 @@ abstract public class AnnotationPane extends Pane implements InvalidationListene
             {
                 a.setX(x);
                 a.setY(y);
-                ((Label) a.getNode()).setText(FormatAnnotation(x, y));
+                ((Label) a.getNode()).setText(formatAnnotation(x, y));
 
                 update();
                 return;
@@ -91,7 +91,7 @@ abstract public class AnnotationPane extends Pane implements InvalidationListene
         }
     }
 
-    abstract String FormatAnnotation(double x, double y);
+    abstract String formatAnnotation(double x, double y);
 
     @Override
     public void invalidated(Observable o)

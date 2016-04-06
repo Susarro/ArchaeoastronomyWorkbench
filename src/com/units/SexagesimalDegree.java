@@ -83,7 +83,7 @@ public class SexagesimalDegree
      * @return Reduced sexagesimal degrees to a value greater than zero and less
      * than 360
      */
-    static public double Reduction(double value)
+    static public double reduction(double value)
     {
         if (value < 0)
         {
@@ -103,7 +103,7 @@ public class SexagesimalDegree
      *
      * @return Reduced sexagesimal degrees
      */
-    public SexagesimalDegree Reduction()
+    public SexagesimalDegree reduction()
     {
         return new SexagesimalDegree(this.value);
     }
@@ -113,7 +113,7 @@ public class SexagesimalDegree
      * @param signed If true final value greater than -180 and less than 180
      * @return Reduced sexagesimal degrees
      */
-    public SexagesimalDegree Reduction(boolean signed)
+    public SexagesimalDegree reduction(boolean signed)
     {
         if (signed)
         {
@@ -138,7 +138,7 @@ public class SexagesimalDegree
      */
     public SexagesimalDegree(double value)
     {
-        this.value = SexagesimalDegree.Reduction(value);
+        this.value = SexagesimalDegree.reduction(value);
     }
 
     /**
@@ -228,7 +228,7 @@ public class SexagesimalDegree
      */
     public SexagesimalDegree plus(SexagesimalDegree degrees)
     {
-        return new SexagesimalDegree(SexagesimalDegree.Reduction(this.value + degrees.value));
+        return new SexagesimalDegree(SexagesimalDegree.reduction(this.value + degrees.value));
     }
 
     /**
@@ -238,7 +238,7 @@ public class SexagesimalDegree
      */
     public SexagesimalDegree minus(SexagesimalDegree degrees)
     {
-        return new SexagesimalDegree(SexagesimalDegree.Reduction(this.value - degrees.value));
+        return new SexagesimalDegree(SexagesimalDegree.reduction(this.value - degrees.value));
     }
 
     /**
@@ -248,7 +248,7 @@ public class SexagesimalDegree
      */
     public static SexagesimalDegree negative(SexagesimalDegree degrees)
     {
-        return new SexagesimalDegree(SexagesimalDegree.Reduction(-degrees.value));
+        return new SexagesimalDegree(SexagesimalDegree.reduction(-degrees.value));
     }
 
     /**
@@ -258,7 +258,7 @@ public class SexagesimalDegree
      */
     public SexagesimalDegree by(double f)
     {
-        return new SexagesimalDegree(SexagesimalDegree.Reduction(f * this.value));
+        return new SexagesimalDegree(SexagesimalDegree.reduction(f * this.value));
     }
 
     /**

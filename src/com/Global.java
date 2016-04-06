@@ -5,7 +5,7 @@
  */
 package com;
 
-import com.interfaz.esqueleto.Skeleton;
+import com.interfaz.skeleton.Skeleton;
 
 /**
  * Global class

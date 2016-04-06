@@ -44,7 +44,7 @@ public class Geographic
     @Override
     public String toString()
     {
-        return "(" + getLatitude().toString() + "," + getLongitude().toString() + "," + String.valueOf(getAltitud()) + ")";
+        return "(" + getLatitude().toString() + "," + getLongitude().toString() + "," + String.valueOf(getElevation()) + ")";
     }
 
     /**
@@ -82,16 +82,16 @@ public class Geographic
     /**
      * @return elevation
      */
-    public double getAltitud()
+    public double getElevation()
     {
         return elevation;
     }
 
     /**
-     * @param altitud elevation to set
+     * @param elevation elevation to set
      */
-    public void setAltitud(double altitud)
+    public void setElevation(double elevation)
     {
-        this.elevation = altitud;
+        this.elevation = elevation;
     }
 }

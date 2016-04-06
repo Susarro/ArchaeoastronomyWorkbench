@@ -13,6 +13,27 @@ import com.PlanetEnum;
 import com.units.SexagesimalDegree;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.astronomy.coordinate_system.Horizontal.getParallax;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
 
 /**
  * Apparent Horizontal coordinates
@@ -43,9 +64,9 @@ public class ApparentHorizontal extends Horizontal
     public Horizontal toTrue(PlanetEnum planet, JulianDay julianDay, Disk disk) throws ProcessException
     {
         Horizontal h = new Horizontal(this.getAzimuth(), this.getAltitude());
-        h.setElevacion(getTrueAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
+        h.setAltitude(getTrueAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
         SexagesimalDegree p = getParallax(planet, julianDay, h.getAltitude());
-        h.setElevacion(h.getAltitude().plus(p));
+        h.setAltitude(h.getAltitude().plus(p));
 
         SexagesimalDegree semidisco = null;
         switch (planet)
@@ -62,10 +83,10 @@ public class ApparentHorizontal extends Horizontal
         switch (disk)
         {
             case UPPER_LIMB:
-                h.setElevacion(h.getAltitude().minus(semidisco));
+                h.setAltitude(h.getAltitude().minus(semidisco));
                 break;
             case LOWER_LIMB:
-                h.setElevacion(h.getAltitude().plus(semidisco));
+                h.setAltitude(h.getAltitude().plus(semidisco));
                 break;
         }
         return h;
@@ -81,9 +102,9 @@ public class ApparentHorizontal extends Horizontal
     public Horizontal toTrue(PlanetEnum planet, Disk disk) throws ProcessException
     {
         Horizontal h = new Horizontal(this.getAzimuth(), this.getAltitude());
-        h.setElevacion(getTrueAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
+        h.setAltitude(getTrueAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
         SexagesimalDegree p = getParallax(planet, h.getAltitude());
-        h.setElevacion(h.getAltitude().plus(p));
+        h.setAltitude(h.getAltitude().plus(p));
 
         SexagesimalDegree semidisco = null;
         switch (planet)
@@ -100,10 +121,10 @@ public class ApparentHorizontal extends Horizontal
         switch (disk)
         {
             case UPPER_LIMB:
-                h.setElevacion(h.getAltitude().minus(semidisco));
+                h.setAltitude(h.getAltitude().minus(semidisco));
                 break;
             case LOWER_LIMB:
-                h.setElevacion(h.getAltitude().plus(semidisco));
+                h.setAltitude(h.getAltitude().plus(semidisco));
                 break;
         }
 
@@ -112,8 +133,8 @@ public class ApparentHorizontal extends Horizontal
 
     /**
      * Obtain apparent horizontal coordinates based on coordinates of observation point and horizontal rerefence point
-     * @param observation
-     * @param reference
+     * @param observation Geographic ccordinates of observation site
+     * @param reference Geographic ccordinates of reference horizontal point
      * @return Apparen horizontal coordinates
      */
     public static ApparentHorizontal valueOf(Geographic observation, Geographic reference)
@@ -140,7 +161,7 @@ public class ApparentHorizontal extends Horizontal
         }
 
         double R = 6378135;
-        SexagesimalDegree h = SexagesimalDegree.atan2((R + reference.getAltitud()) * cosine(d) - (R + observation.getAltitud() + 1.7), (R + observation.getAltitud()) * sine(d));
+        SexagesimalDegree h = SexagesimalDegree.atan2((R + reference.getElevation()) * cosine(d) - (R + observation.getElevation() + 1.7), (R + observation.getElevation()) * sine(d));
 
         return new ApparentHorizontal(A, h);
     }

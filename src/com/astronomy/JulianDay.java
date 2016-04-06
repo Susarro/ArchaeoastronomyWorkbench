@@ -13,6 +13,37 @@ import static com.units.Tools.coefficientOfSineOfArgument;
 import static com.units.Tools.cosine;
 import com.units.HourAngle;
 import static java.lang.Math.pow;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
+import static com.units.Tools.cosine;
 
 /**
  * Julian date

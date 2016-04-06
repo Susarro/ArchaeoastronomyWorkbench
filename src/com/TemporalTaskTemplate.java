@@ -5,8 +5,8 @@
  */
 package com;
 
-import static com.interfaz.Principal.skeleton;
-import com.interfaz.esqueleto.ProgressDialog;
+import static com.main.Main.skeleton;
+import com.interfaz.skeleton.ProgressDialog;
 import javafx.concurrent.Task;
 
 /**
@@ -134,7 +134,7 @@ public abstract class TemporalTaskTemplate<T> extends Task<String>
     {
         t = new Thread(this);
         t.start();
-        progressDialog.Show();
+        progressDialog.show();
     }
 
     @Override
@@ -149,7 +149,7 @@ public abstract class TemporalTaskTemplate<T> extends Task<String>
     {
         super.succeeded();
         t.interrupt();
-        progressDialog.Aceptar();
+        progressDialog.OK();
         taskEnd();
     }
 

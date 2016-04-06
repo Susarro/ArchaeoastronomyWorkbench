@@ -49,7 +49,7 @@ public class HourAngle
      * @param value Hour angle as double
      * @return Reduced hour angle to a value greater tha zero and less than 24 
      */
-    public double Reduction(double value)
+    public double reduction(double value)
     {
         if (value < 0)
         {
@@ -69,7 +69,7 @@ public class HourAngle
      * 
      * @return Reduced hour angle
      */
-    public HourAngle Reduction()
+    public HourAngle reduction()
     {
         return new HourAngle(this.value);
     }
@@ -80,7 +80,7 @@ public class HourAngle
      */
     public HourAngle(double value)
     {
-        this.value = Reduction(value);
+        this.value = HourAngle.this.reduction(value);
     }
 
     /**
@@ -121,7 +121,7 @@ public class HourAngle
      */
     public HourAngle plus(HourAngle hours)
     {
-        return new HourAngle(Reduction(this.value + hours.value));
+        return new HourAngle(HourAngle.this.reduction(this.value + hours.value));
     }
 
     /**
@@ -131,7 +131,7 @@ public class HourAngle
      */
     public HourAngle minus(HourAngle hours)
     {
-        return new HourAngle(Reduction(this.value - hours.value));
+        return new HourAngle(HourAngle.this.reduction(this.value - hours.value));
     }
 
     /**
@@ -141,7 +141,7 @@ public class HourAngle
      */
     public HourAngle by(double factor)
     {
-        return new HourAngle(Reduction(factor * this.value));
+        return new HourAngle(HourAngle.this.reduction(factor * this.value));
     }
 
     /**

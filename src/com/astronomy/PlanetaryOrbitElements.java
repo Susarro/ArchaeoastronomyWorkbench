@@ -5,7 +5,6 @@
  */
 package com.astronomy;
 
-import com.astronomy.JulianDay;
 import com.PlanetEnum;
 import com.units.SexagesimalDegree;
 import static java.lang.Math.pow;
@@ -45,7 +44,7 @@ public class PlanetaryOrbitElements
     /**
      * 
      * @param planet Planet MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE
-     * @param julianDay
+     * @param julianDay Julian day
      * @return Elements of planetary orbits for the given julian day
      */
     public static PlanetaryOrbitElements get(PlanetEnum planet, JulianDay julianDay)

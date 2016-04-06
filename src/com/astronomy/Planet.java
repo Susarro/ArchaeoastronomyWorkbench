@@ -20,13 +20,13 @@ import static com.PlanetEnum.MOON;
 import static com.PlanetEnum.VENUS;
 import com.CalculusType;
 import com.units.SexagesimalDegree;
+import static java.lang.Math.log10;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
 import static com.units.Tools.tangent;
 import static java.lang.Math.abs;
-import static java.lang.Math.log10;
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
 
 /**
  * Planets
@@ -120,8 +120,8 @@ public class Planet
         }
         else if(planet==MOON)
         {
-           InfoMoon il=Moon.getInfoLuna(epoch);
-           return il.position.getDistancia();
+           InfoMoon il=Moon.getInfoMoon(epoch);
+           return il.position.getDistance();
         }                
         else
         {

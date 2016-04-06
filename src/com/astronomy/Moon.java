@@ -14,9 +14,9 @@ import com.CalculusType;
 import com.units.SexagesimalDegree;
 import static com.units.Tools.coefficientOfCosineOfArgument;
 import static com.units.Tools.coefficientOfSineOfArgument;
+import static java.lang.Math.pow;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
-import static java.lang.Math.pow;
 
 /**
  * Moon
@@ -34,8 +34,8 @@ public class Moon
      */
     public static double getTrueDistanceToEarth(JulianDay julianDay) throws ProcessException
     {
-        InfoMoon il = Moon.getInfoLuna(julianDay);
-        return il.position.getDistancia();
+        InfoMoon il = Moon.getInfoMoon(julianDay);
+        return il.position.getDistance();
     }
 
     /**
@@ -1421,7 +1421,7 @@ public class Moon
      * @return Apparent position of the Moon in the Ecuatorial Coordinate System
      * @throws ProcessException Format error
      */
-    public static Equatorial getPosicionAparente(JulianDay julianDay) throws ProcessException
+    public static Equatorial getApparentPosition(JulianDay julianDay) throws ProcessException
     {
         double LM = getMeanLongitude(julianDay).getValue();
         double D = getMeanElongation(julianDay).getValue();
@@ -1448,7 +1448,7 @@ public class Moon
      * @return Moon's position and its fraction illuminated
      * @throws ProcessException Format error
      */
-    public static InfoMoon getInfoLuna(JulianDay julianDay) throws ProcessException
+    public static InfoMoon getInfoMoon(JulianDay julianDay) throws ProcessException
     {
         double LM = getMeanLongitude(julianDay).getValue();
         double D = getMeanElongation(julianDay).getValue();

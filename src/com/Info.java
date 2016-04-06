@@ -160,7 +160,7 @@ public class Info
 
     }
 
-    public void Log(String text, InfoOption infoOption)
+    public void log(String text, InfoOption infoOption)
     {
         long millisecs = System.currentTimeMillis();
         Timestamp ts = new java.sql.Timestamp(millisecs);
@@ -196,40 +196,40 @@ public class Info
      * 
      * @param text Debug text
      */    
-    public void Debug(String text)
+    public void debug(String text)
     {
-        Log(text,InfoOption.DEBUG);
+        log(text,InfoOption.DEBUG);
     }
     
     /**
      * 
      * @param text Information text
      */
-    public void Info(String text)
+    public void info(String text)
     {
-        Log(text,InfoOption.INFO);
+        log(text,InfoOption.INFO);
     }
     
     /**
      * 
      * @param text Warning text
      */
-    public void Warning(String text)
+    public void warning(String text)
     {
-        Log(text,InfoOption.WARNING);
+        log(text,InfoOption.WARNING);
     }
     
     /**
      * 
      * @param text Error text
      */
-    public void Error(String text)
+    public void error(String text)
     {
-        Log(text,InfoOption.ERROR);
+        log(text,InfoOption.ERROR);
     }
    
-    public void Log(Exception e)
+    public void log(Exception e)
     {
-        Log("Exception: " + getStackTrace(e), InfoOption.ERROR);
+        log("Exception: " + getStackTrace(e), InfoOption.ERROR);
     }
 }

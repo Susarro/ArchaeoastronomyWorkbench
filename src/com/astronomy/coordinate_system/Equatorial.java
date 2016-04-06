@@ -10,15 +10,396 @@ import com.astronomy.JulianDay;
 import static com.CalculusType.APPROXIMATE;
 import static com.CalculusType.PRECISE;
 import com.units.SexagesimalDegree;
-import static com.units.Tools.sine;
-import static com.units.Tools.tangent;
-import static com.units.Tools.cosine;
 import com.units.HourAngle;
 import com.units.Radian;
 import static java.lang.Math.cos;
 import static java.lang.Math.pow;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
 
 /**
  * Equatorial coordinate system
@@ -89,8 +470,8 @@ public class Equatorial
      */
     public Ecliptic toEcliptic(SexagesimalDegree obliquity)
     {
-        SexagesimalDegree longitud = SexagesimalDegree.atan2(sine(getRightAscension()) * cosine(obliquity) + tangent(getDeclination()) * sine(obliquity), cosine(getRightAscension())).Reduction();
-        SexagesimalDegree latitud = SexagesimalDegree.asin(sine(getDeclination()) * cosine(obliquity) - cosine(getDeclination()) * sine(obliquity) * sine(getRightAscension())).Reduction();
+        SexagesimalDegree longitud = SexagesimalDegree.atan2(sine(getRightAscension()) * cosine(obliquity) + tangent(getDeclination()) * sine(obliquity), cosine(getRightAscension())).reduction();
+        SexagesimalDegree latitud = SexagesimalDegree.asin(sine(getDeclination()) * cosine(obliquity) - cosine(getDeclination()) * sine(obliquity) * sine(getRightAscension())).reduction();
         return new Ecliptic(longitud, latitud);
     }
 
@@ -106,8 +487,8 @@ public class Equatorial
     {
         SexagesimalDegree oblicuidadEcliptica = julianDay.getTrueObliquityEcliptic(APPROXIMATE);
         HourAngle anguloHorarioLocal = julianDay.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(longitude)).minus(getRightAscension());
-        SexagesimalDegree acimut = SexagesimalDegree.atan2(sine(anguloHorarioLocal), cosine(anguloHorarioLocal) * sine(latitude) - tangent(getDeclination()) * cosine(latitude)).plus(new SexagesimalDegree(180)).Reduction();
-        SexagesimalDegree elevacion = SexagesimalDegree.asin(sine(latitude) * sine(getDeclination()) + cosine(latitude) * cosine(getDeclination()) * cosine(anguloHorarioLocal)).Reduction();
+        SexagesimalDegree acimut = SexagesimalDegree.atan2(sine(anguloHorarioLocal), cosine(anguloHorarioLocal) * sine(latitude) - tangent(getDeclination()) * cosine(latitude)).plus(new SexagesimalDegree(180)).reduction();
+        SexagesimalDegree elevacion = SexagesimalDegree.asin(sine(latitude) * sine(getDeclination()) + cosine(latitude) * cosine(getDeclination()) * cosine(anguloHorarioLocal)).reduction();
         return new Horizontal(acimut, elevacion);
     }
 
@@ -138,9 +519,9 @@ public class Equatorial
      * 
      * @param day Julian day
      * @return stellar aberration correction in declination and right ascension
-     * @throws ProcessException 
+     * @throws ProcessException Format error
      */
-    public Equatorial StellarAberrationCorrection(JulianDay day) throws ProcessException
+    public Equatorial stellarAberrationCorrection(JulianDay day) throws ProcessException
     {
         double T = day.getCenturiesSince2000();
 
@@ -402,30 +783,30 @@ public class Equatorial
      * @return coordinates transformed from geocentric to topocentric coordinate system
      * @throws ProcessException  Format error
      */
-    public Equatorial Geocentric2Topocentric(Geographic surfacePosition, JulianDay day) throws ProcessException
+    public Equatorial geocentric2Topocentric(Geographic surfacePosition, JulianDay day) throws ProcessException
     {
-        if (getDistancia() == 0)
+        if (getDistance() == 0)
         {
             return new Equatorial(getDeclination(), getRightAscension());
         }
         else
         {
-            SexagesimalDegree paralaje = SexagesimalDegree.asin(sine(new SexagesimalDegree(8.794 / 3600)) / getDistancia());
+            SexagesimalDegree paralaje = SexagesimalDegree.asin(sine(new SexagesimalDegree(8.794 / 3600)) / getDistance());
             double a = 6378140;
             double f = 1 / 298.257;
             double b = a * (1 - f);
 
             SexagesimalDegree u = SexagesimalDegree.atan2(b * tangent(surfacePosition.getLatitude()), a);
 
-            double A = b * sine(u) / a + surfacePosition.getAltitud() * sine(surfacePosition.getLatitude()) / 6378140;
-            double B = cosine(u) + surfacePosition.getAltitud() * cosine(surfacePosition.getLatitude()) / 6378140;
+            double A = b * sine(u) / a + surfacePosition.getElevation() * sine(surfacePosition.getLatitude()) / 6378140;
+            double B = cosine(u) + surfacePosition.getElevation() * cosine(surfacePosition.getLatitude()) / 6378140;
             SexagesimalDegree oblicuidadEcliptica = day.getTrueObliquityEcliptic(PRECISE);
             HourAngle anguloHorarioLocal = day.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(surfacePosition.getLongitude())).minus(getRightAscension());
 
             HourAngle incrAR = HourAngle.atan2(-B * sine(paralaje) * sine(anguloHorarioLocal), cosine(getDeclination()) - B * sine(paralaje) * cosine(anguloHorarioLocal));
             SexagesimalDegree nuevaDE = SexagesimalDegree.atan2((sine(getDeclination()) - A * sine(paralaje)) * cosine(incrAR), cosine(getDeclination()) - B * sine(paralaje) * cosine(anguloHorarioLocal));
 
-            return new Equatorial(nuevaDE, getRightAscension().plus(incrAR), getDistancia());
+            return new Equatorial(nuevaDE, getRightAscension().plus(incrAR), getDistance());
         }
     }
 
@@ -456,7 +837,7 @@ public class Equatorial
     /**
      * @param rightAscension Right ascension to set
      */
-    public void setAscensionRecta(HourAngle rightAscension)
+    public void setRightAscension(HourAngle rightAscension)
     {
         this.rightAscension = rightAscension;
     }
@@ -464,7 +845,7 @@ public class Equatorial
     /**
      * @return Distance
      */
-    public double getDistancia()
+    public double getDistance()
     {
         return distance;
     }
@@ -472,7 +853,7 @@ public class Equatorial
     /**
      * @param distance Distance to set
      */
-    public void setDistancia(double distance)
+    public void setDistance(double distance)
     {
         this.distance = distance;
     }

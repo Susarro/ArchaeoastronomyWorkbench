@@ -11,10 +11,103 @@ import com.astronomy.Planet;
 import com.PlanetEnum;
 import static com.CalculusType.APPROXIMATE;
 import com.units.SexagesimalDegree;
+import com.units.HourAngle;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
 import static com.units.Tools.tangent;
-import com.units.HourAngle;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
+import static com.units.Tools.cosine;
+import static com.units.Tools.sine;
+import static com.units.Tools.tangent;
 
 /**
  * Horizontal coordinate system
@@ -62,8 +155,8 @@ public class Horizontal
     {
         SexagesimalDegree oblicuidadEcliptica = JulianDay.getTrueObliquityEcliptic(APPROXIMATE);
         HourAngle anguloHorarioLocal = HourAngle.atan2(sine(getAzimuth()), cosine(getAzimuth()) * sine(latitude) + tangent(getAltitude()) * cosine(latitude));
-        HourAngle ascensionRecta = JulianDay.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(longitude)).minus(anguloHorarioLocal).Reduction();
-        SexagesimalDegree declinacion = SexagesimalDegree.asin(sine(latitude) * sine(getAltitude()) + cosine(latitude) * cosine(getAltitude()) * cosine(getAzimuth())).Reduction();
+        HourAngle ascensionRecta = JulianDay.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(longitude)).minus(anguloHorarioLocal).reduction();
+        SexagesimalDegree declinacion = SexagesimalDegree.asin(sine(latitude) * sine(getAltitude()) + cosine(latitude) * cosine(getAltitude()) * cosine(getAzimuth())).reduction();
         return new Equatorial(declinacion, ascensionRecta);
     }
 
@@ -78,8 +171,8 @@ public class Horizontal
     {
         SexagesimalDegree oblicuidadEcliptica = JulianDay.getTrueObliquityEcliptic(APPROXIMATE);
         HourAngle anguloHorarioLocal = HourAngle.atan2(sine(getAzimuth()), cosine(getAzimuth()) * sine(site.getLatitude()) + tangent(getAltitude()) * cosine(site.getLatitude()));
-        HourAngle ascensionRecta = JulianDay.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(site.getLongitude())).minus(anguloHorarioLocal).Reduction();
-        SexagesimalDegree declinacion = SexagesimalDegree.asin(sine(site.getLatitude()) * sine(getAltitude()) + cosine(site.getLatitude()) * cosine(getAltitude()) * cosine(getAzimuth())).Reduction();
+        HourAngle ascensionRecta = JulianDay.getApparrentSiderealTimeAtGreenwich(oblicuidadEcliptica).minus(HourAngle.valueOf(site.getLongitude())).minus(anguloHorarioLocal).reduction();
+        SexagesimalDegree declinacion = SexagesimalDegree.asin(sine(site.getLatitude()) * sine(getAltitude()) + cosine(site.getLatitude()) * cosine(getAltitude()) * cosine(getAzimuth())).reduction();
         return new Equatorial(declinacion, ascensionRecta);
     }
 
@@ -88,25 +181,25 @@ public class Horizontal
      * @param planet MERCURY, VENUS, MARS, JUPITER, SATURN, SUN or MOON
      * @param day Julian day
      * @return Apparent horizontal coordinates
-     * @throws ProcessException
+     * @throws ProcessException Format error
      */
     public ApparentHorizontal toApparent(PlanetEnum planet, JulianDay day) throws ProcessException
     {
         ApparentHorizontal h = new ApparentHorizontal(this.getAzimuth(), this.getAltitude());
         SexagesimalDegree p = Horizontal.getParallax(planet, day, h.getAltitude());
-        h.setElevacion(getAparentAltitudeAffectedByAtmosphericRefraction(this.getAltitude()).minus(p));
+        h.setAltitude(getAparentAltitudeAffectedByAtmosphericRefraction(this.getAltitude()).minus(p));
         return h;
     }
 
     /**
      * True horizontal coordinates to apparent horizontal coordinates, no considering parallax
      * @return  Apparent horizontal coordinates
-     * @throws ProcessException 
+     * @throws ProcessException Format error
      */
     public ApparentHorizontal toApparent() throws ProcessException
     {
         ApparentHorizontal h = new ApparentHorizontal(this.getAzimuth(), this.getAltitude());
-        h.setElevacion(getAparentAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
+        h.setAltitude(getAparentAltitudeAffectedByAtmosphericRefraction(this.getAltitude()));
         return h;
     }
 
@@ -160,8 +253,8 @@ public class Horizontal
         double f = 1 / 298.257;
         double b = a * (1 - f);
         SexagesimalDegree u = SexagesimalDegree.atan2(b * tangent(site.getLatitude()), a);
-        double A = b * sine(u) / a + site.getAltitud() * sine(site.getLatitude()) / 6378140;
-        double B = cosine(u) + site.getAltitud() * cosine(site.getLatitude()) / 6378140;
+        double A = b * sine(u) / a + site.getElevation() * sine(site.getLatitude()) / 6378140;
+        double B = cosine(u) + site.getElevation() * cosine(site.getLatitude()) / 6378140;
         SexagesimalDegree temp = SexagesimalDegree.atan2(A, B);
         double ro = A / sine(temp);
 
@@ -239,7 +332,7 @@ public class Horizontal
     /**
      * @param altitude altitude to set
      */
-    public void setElevacion(SexagesimalDegree altitude)
+    public void setAltitude(SexagesimalDegree altitude)
     {
         this.altitude = altitude;
     }
