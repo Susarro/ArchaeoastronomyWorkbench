@@ -69,7 +69,6 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -84,66 +83,11 @@ import static com.main.Dialogs.inputTimeInterval;
 import static java.lang.Math.abs;
 import static com.units.Tools.sine;
 import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
+import java.awt.Desktop;
+import javafx.scene.web.PopupFeatures;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.util.Callback;
 
 /**
  *
@@ -980,14 +924,14 @@ public class Main extends Application
     }
 
     /**
-     * 
+     *
      * @param year Year
      * @param star Star
-     * @param azimuth Azimuth 
+     * @param azimuth Azimuth
      * @param latitude Geographical latitude of observatory
      * @param longitude Geographical longitude of observatory
      * @return
-     * @throws ProcessException 
+     * @throws ProcessException
      */
     public Node stellarVisibilityPhenomena(int year, Star star, double azimuth, SexagesimalDegree latitude, SexagesimalDegree longitude) throws ProcessException
     {
@@ -1007,7 +951,6 @@ public class Main extends Application
         axis.configSerieList.add(new SimpleSeriesConfiguration("m Star", Color.CYAN, 2, "null"));
         axes.add(axis = new AxisChart("Calendar"));
         axis.configSerieList.add(new SimpleSeriesConfiguration("festivals", Color.WHITE, 4, "null"));
-       
 
         JulianChart chart = new JulianChart("", axes, "JD");
         chart.AxesList.get(chart.AxesList.size() - 1).setVisible(false);
@@ -1065,7 +1008,7 @@ public class Main extends Application
             public void cycle()
             {
                 try
-                {                   
+                {
                     Equatorial ne = star.getApparentPosition(getCurrent(), CalculusType.PRECISE);
                     Equatorial ns = Sun.getApparentEquatorialPosition(getCurrent(), CalculusType.PRECISE);
                     Horizontal h = ne.toHorizontal(latitude, longitude, getCurrent());
@@ -1126,7 +1069,7 @@ public class Main extends Application
                         double i = C * pow(1 + sqrt(K * b), 2);
                         double X = 1 / (cos(Z) + 0.025 * exp(-11 * cos(Z)));
                         double m = -16.57 - 2.5 * log10(i) - kv * X;
-                        double logb = log10(b);                       
+                        double logb = log10(b);
 
                         if (m > -1)
                         {
@@ -1334,7 +1277,24 @@ public class Main extends Application
                     }
         });
 
-        m.getItems().add(new SeparatorMenuItem());
+        menu.getMenus().add(m = new Menu("Tools"));
+        CheckMenuItem cmi = new CheckMenuItem("Julian day");
+        m.getItems().add(cmi);
+        cmi.setOnAction((ActionEvent t)
+                -> 
+                {
+
+                    if (cmi.isSelected())
+                    {
+                        root.getChildren().add(hJulianDay);
+                    }
+                    else
+                    {
+                        root.getChildren().remove(hJulianDay);
+                    }
+
+        });
+
         mi = new MenuItem("Calendar");
         m.getItems().add(mi);
         mi.setOnAction((ActionEvent t)
@@ -1345,13 +1305,13 @@ public class Main extends Application
                     {
                         CrossQuarterFestivals fme = new CrossQuarterFestivals(Integer.valueOf(strYear));
                         GridPane10 grid = new GridPane10();
-                        grid.add(new Label("Cros-quarter gestival which marks the end of winter (Imbolc)"), 0, 0);
+                        grid.add(new Label("Cross-quarter gestival which marks the end of winter (Imbolc)"), 0, 0);
                         grid.add(new Label("Spring Apparent equinox"), 0, 1);
-                        grid.add(new Label("Cros-quarter gestival which marks the beginning of summer (Beltaine)"), 0, 2);
+                        grid.add(new Label("Cross-quarter gestival which marks the beginning of summer (Beltaine)"), 0, 2);
                         grid.add(new Label("Summer solstice"), 0, 3);
-                        grid.add(new Label("Cros-quarter gestival which marks the end of summer (Lugnasad)"), 0, 4);
+                        grid.add(new Label("Cross-quarter gestival which marks the end of summer (Lugnasad)"), 0, 4);
                         grid.add(new Label("Autumn Apparent equinox"), 0, 5);
-                        grid.add(new Label("Cros-quarter gestival which marks the beginning of winter (Samain)"), 0, 6);
+                        grid.add(new Label("Cross-quarter gestival which marks the beginning of winter (Samain)"), 0, 6);
                         grid.add(new Label("Winter solstice"), 0, 7);
 
                         grid.add(new BordererLabel(fme.imbolc.getSimpleDate().toString()), 1, 0);
@@ -1371,31 +1331,42 @@ public class Main extends Application
                     }
         });
 
-        menu.getMenus().add(m = new Menu("Tools"));
-        CheckMenuItem cmi = new CheckMenuItem("Julian day");
-        m.getItems().add(cmi);
-        cmi.setOnAction((ActionEvent t)
+        menu.getMenus().add(m = new Menu("Help"));
+        mi = new MenuItem("Help");
+        m.getItems().add(mi);
+        mi.setOnAction((ActionEvent t)
                 -> 
                 {
+                    WebView webView = new WebView();
+                    WebEngine webEngine = webView.getEngine();
+                    String urlHelp = getClass().getResource("/com/resources/help.html").toExternalForm();
+                    webEngine.load(urlHelp);
+                    Tab tab = newTab("Help");
+                    tab.setContent(webView);
 
-                    if (cmi.isSelected())
+                    webEngine.setCreatePopupHandler((PopupFeatures config) ->
                     {
-                        root.getChildren().add(hJulianDay);
-                    }
-                    else
-                    {
-                        root.getChildren().remove(hJulianDay);
-                    }
-
+                        WebView wv = new WebView();
+                        Tab tab2 = newTab("Help");
+                        tab2.setContent(wv);
+                        return wv.getEngine();
+                    });
         });
 
-        menu.getMenus().add(m = new Menu("Help"));
         mi = new MenuItem("About");
         m.getItems().add(mi);
         mi.setOnAction((ActionEvent t)
                 -> 
                 {
                     new MessageDialog(skeleton, "Archaeoastronomy Work Bench 2016", INFO).show();
+        });
+
+        mi = new MenuItem("Full screen");
+        m.getItems().add(mi);
+        mi.setOnAction((ActionEvent t)
+                -> 
+                {
+                    mainStage.setFullScreen(true);
         });
 
         mi = new MenuItem("Close");

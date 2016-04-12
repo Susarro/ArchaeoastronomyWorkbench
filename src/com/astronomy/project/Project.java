@@ -9,8 +9,8 @@ import com.CancelExcepcion;
 import com.ProcessException;
 import com.Global;
 import com.TemporalTaskTemplate;
-import static com.astronomy.project.FortuitouslyProbabilityOption.BERNOULLI;
-import static com.astronomy.project.FortuitouslyProbabilityOption.ROSENFELDT;
+import static com.astronomy.project.FortuitousProbabilityOption.BERNOULLI;
+import static com.astronomy.project.FortuitousProbabilityOption.ROSENFELDT;
 import com.chart.AxisChart;
 import com.chart.SwingChart;
 import com.chart.SimpleSeriesConfiguration;
@@ -304,20 +304,20 @@ public class Project extends VBox
         menu.getItems().add(mi);
         menu = new Menu("Data analysis");
         menuBar.getMenus().add(menu);
-        Menu submenu = new Menu("Probability of fortuitously obtaining a number of alignments");
+        Menu submenu = new Menu("Probability of fortuitous astronomical coincidences from a number of alignments");
         menu.getItems().add(submenu);
         mi = new MenuItem("Rosenfeldt");
         mi.setOnAction((ActionEvent event)
                 -> 
                 {
-                    fortuitouslyProbality(ROSENFELDT);
+                    fortuitousProbality(ROSENFELDT);
         });
         submenu.getItems().add(mi);
         mi = new MenuItem("Bernoulli");
         mi.setOnAction((ActionEvent event)
                 -> 
                 {
-                    fortuitouslyProbality(BERNOULLI);
+                    fortuitousProbality(BERNOULLI);
         });
         submenu.getItems().add(mi);
 
@@ -762,7 +762,7 @@ public class Project extends VBox
      * @params pc Option Rosenfeldt or Bernoulli
      * @param pc 
      */
-    private void fortuitouslyProbality(FortuitouslyProbabilityOption pc)
+    private void fortuitousProbality(FortuitousProbabilityOption pc)
     {
         int total = 0;
         int coincidences = 0;

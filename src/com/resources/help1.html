@@ -1,0 +1,54 @@
+<p><a href="help.html">Previous</a> - <a href="help2.html">Next</a></p>
+
+<p>A <strong>Project</strong> is a homogeneus set of alignments to be analyzed so that we can get a pattern of its main astronomical declinations and be able to value its fortuitousness in relation to a an astronomical scheme based on solstices, equinoxes, cross-quarter festivals and lunar standstills <a href="#[1]">[1]</a>. This set can be a population of orientations corresponding to the main axis of certain monuments, or alignments due to some celestial bodys rising or setting on some conspicuous horizon landmark as seen from an megalithic or rock art site, or directions defined by some features of engravings or paintings. You can create a project choosing <strong>New project</strong>&nbsp;in <strong>Project</strong> menu or open an already existing one clicking <strong>Open project</strong>. In any case a tab pane will be shown with the given project name and two menus: <strong>File</strong> and <strong>Data analysis</strong>.</p>
+
+<p>By means of <strong>File</strong> menu you will be able to add new alignments choosing <strong>New alignment</strong>, save the project or export it in comma separated values (CSV) format.</p>
+
+<p><strong>Data analysis</strong> provides two kinds of evaluations: the probability of fortuitous astronomical coincidences from a number of alignments &nbsp;using two criteria: Rosenfeldt or Bernoulli, and the probability density estimation using a Gaussian kernel.</p>
+
+<h1>1.- File</h1>
+
+<h2>1.1.- Add, delete and edit alignments.</h2>
+
+<p><strong>New alignment</strong>&nbsp;option menu allows you to add a new alignment to the current project. This selection will show a dialog for entering its name and the geographical coordinates (latitude, longitude and elevation) of the observatory site and the foresight horizon point (<strong>Coordinates</strong> option checked) or the declination and altitude angles (<strong>Coordinates</strong> option unchecked). This setting will be converted to an astronomical declination value. It&#39;s important to mention that if the <strong>Coordinates</strong>&nbsp;option is checked the observatory coordinates (and foresight coordinates too) must be as exact as posible but this accuracy is not necessary when azimuth and altitude angles are entered. Finally the new alignment is added as a row in the alignments table.</p>
+
+<p>If you select an alignment in the table you can open its context menu and select <strong>Delete</strong>&nbsp;to delete it or <strong>Edit</strong>&nbsp;to change some of its properties.&nbsp;</p>
+
+<h2>1.2.- Save project</h2>
+
+<p><strong>Save</strong>&nbsp;option menu allows to save the project in a XML (eXtensible Markup Language) file using the file extension *.awb.</p>
+
+<h2>1.3.- Export project</h2>
+
+<p><strong>Export</strong>&nbsp;option menu allows to export the project in a CSV (Comma-Separated Values) file.</p>
+
+<h2>1.4.- Alignment operations</h2>
+
+<p>When you select a row in the alignments table a pane will apper to the right with two tab panes: <strong>Details</strong>, which shows detailed information of the aligment and <strong>Validation</strong>, wich provides you some interesting validation tools that will be described bellow.</p>
+
+<p><strong>Details</strong>&nbsp;tab pane shows detailed information of the alignment to that you can include an image. To get it you should click on <strong>Update</strong>&nbsp;button which will open a dialog with a list of the thumbnails of the images imported to the project and <strong>Import</strong>, <strong>OK</strong>&nbsp;and <strong>Cancel</strong>&nbsp;buttons. If you select <strong>Import</strong>&nbsp;a file chooser dialog will be opened to select an image file that will be copied to the image folder of your project and the corresponding thumbsnail will be added to the list. If you select one of these thumbsnails and click on <strong>OK</strong>&nbsp;this image will be linked to the alignment and shown in the details pane of the alignment. <strong>Delete</strong>&nbsp;button will remove the link to the image (but not the image from the project image folder).</p>
+
+<p><br />
+<strong>Validation</strong>&nbsp;tab pane allows you to validate an alignment in relation to solstices, equinoxes, cross-quarter festivals and lunar standstills<a href="#[2]">[2]</a>. In the combo list <strong>Astronomical event</strong>&nbsp;you can choose the event to consider: winter solstice, summer solstice, Imbolc/Samain, Beltaine/Lugnasad, Southern Lunar major standstill, Northern Lunar major standstill, Southern Lunar minor standstill, Northern Lunar minor standstill or None. The year is also required to calculate the precise declination values. After selecting an astronomical event the color of a led on the right will change to green if the arror in azimuth is equal or less than 1&ordm; or to red otherwise. If the validation process is successful, i. e., the error value is not greater than 1&ordm;, the astronomical event identification is add to the comments field of the alignment. If the astronomical event selected is <strong>None</strong>&nbsp;the comments field will be erased.</p>
+
+<h1>2.- Analysis</h1>
+
+<p>This menu allows to perform to kinds of statistical analysis min the alignments population of the project: the probability of fortuitous astronomical coincidences from a number of alignments and get the probability density estimation using a Gaussian kernel.</p>
+
+<h2>2.1.- Probability of fortuitous astronomical coincidences from a number of alignments</h2>
+
+<p>The current project consists of alignments, some of them can be considered &quot;coincidences&quot; if they were validated using the Validation procedure described previously (2.1.4.). The probability of fortuitous astronomical coincidences can be calculated by means of two criteria: <span style="line-height: 20.8px;">a&nbsp;</span><a href="https://en.wikipedia.org/wiki/Bernoulli_process" style="line-height: 20.8px;">Bernoulli process</a><a href="#[3]">[3]</a>&nbsp;or&nbsp;<span style="line-height: 20.8px;">the procedure described by&nbsp;</span>Rosenfeldt<a href="#[4]">[4]</a>.</p>
+
+<h2>2.2.- Probability density estimation using a Gaussian kernel</h2>
+
+<p>This option allows you to get the estimation of the <a href="https://en.wikipedia.org/wiki/Probability_density_function">probability density function</a> using a <a href="https://en.wikipedia.org/wiki/Density_estimation">Gaussian kernel</a>&nbsp;from the declination angles population of the current project. A dialog will be shown to enter the standard deviation of the gaussian kernel and a declination step because this density estimation is dicretized.</p>
+
+<h1>References&nbsp;</h1>
+
+<p><a id="[1]" name="[1]"></a>[1] GONZ&Aacute;LEZ, M.A., La g&eacute;nesis del calendario: el calendario prehist&oacute;rico, Asturiensis Prouincia Indigena, 2011</p>
+
+<p><a id="[2]" name="[2]"></a>[2] GONZ&Aacute;LEZ, M.A., Lunasticio, Asturiensis Prouincia Indigena, 2012</p>
+
+<p><a id="[3]" name="[3]"></a>[3] RUGGLES, C.L.N., Astronomy in prehistoric Britain and Ireland, Yale University Press, 1999. pp. 42-43</p>
+
+<p><a id="[4]" name="[4]">[4]</a> ROSENFELDT, G., A statistical method of evaluating megalithic observatories, Archaeoastronomy n&ordm; 7, Journal for the History of Astronomy, XV, 1984, pp. S111-S118</p>

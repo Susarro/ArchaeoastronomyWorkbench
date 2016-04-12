@@ -11,7 +11,7 @@ package com.astronomy.project;
  * Bernoulli process @see <a href="https://en.wikipedia.org/wiki/Bernoulli_process">https://en.wikipedia.org/wiki/Bernoulli_process</a>
  * @author MIGUEL_ANGEL
  */
-public enum FortuitouslyProbabilityOption
+public enum FortuitousProbabilityOption
 {
 
     ROSENFELDT("Rosenfeldt"), BERNOULLI("Bernoulli");
@@ -22,7 +22,7 @@ public enum FortuitouslyProbabilityOption
      * 
      * @param name Option name
      */
-    FortuitouslyProbabilityOption(String name)
+    FortuitousProbabilityOption(String name)
     {
         this.name = name;
     }

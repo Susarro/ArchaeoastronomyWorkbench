@@ -1,0 +1,67 @@
+<p><a href="help1.html">Previous</a> - <a href="help3.html">Next</a></p>
+
+<p>Jean Meeus&#39; astronomical algorithms<a href="#[1]">[1]</a> were implemented to get the equatorial and horizontal coordinates of the Sun, the Moon, the planets visible to the naked eye (Mercury, Venus, Mars, Jupiter and Saturn) and some stars included in the catalogue. From this mathematical basis the following astronomical problems have been solved:</p>
+
+<h1>1.- Stellar visibility phenomena.</h1>
+
+<p>Allows to calculate the dates of heliacal or acronic rising or setting of a star following the procedure described in my post <a href="http://asturiense.blogspot.com.es/2015/02/el-estudio-de-los-fenomenos-estelares.html">El estudio de los fen&oacute;menos estelares en los santuarios prehist&oacute;ricos</a><a href="#[2]">[2]</a>.&nbsp;</p>
+
+<p>In <strong>Simulation</strong>&nbsp;menu, when <strong>Stellar visibility phenomena</strong>&nbsp;is selected some dialogs will be shown to enter the geographic coordinates of the observatory site, the year, the azimuth to be considered and the star. Probably your alignment is defined by an azimuth and an altitude so that star should be selected to have an astronomical declination in that year which satisfies the alignment&#39;s equatorial coordinates. The selected value of azimuth decides if that star phenomena is about rising (less than 180&ordm;) or setting (greater than 180&ordm;). After this selection a task calculates the sky bright for each day of the selected year at the instant in which the star&#39;s azimuth reaches the specified value. Finally a chart plots this sky brightness against the apparent bright of the star whose intersection marks the occurrence of the heliacal or acronic phenomena of the star. The event is heliacal if the star rising coincides with the Sun rising, i.e. Sun&#39;s azimuth is less than 180&ordm; or if the star setting coincides with the Sun setting, i.e. Sun&#39;s azimuth is greater than 180&ordm;. Otherwise the event is acronic. In the chart you will see some vertical bars wich mark the occurrence of solstices, equinoxes and cross-quarter festivals. In this way you would be abre to evaluate if and alignment thought to correspond to a star could serve to mark one of these important calendar events.</p>
+
+<h1>2.- Celestial coordinates chart</h1>
+
+<p>Allows to get a chart showng the temporal evolution of the selected equatorial and horizontal coordinates of the Sun, the Moon, the planets visible to the naked eye (Mercury, Venus, Mars, Jupiter and Saturn) and some stars included in the catalogue.</p>
+
+<p>In <strong>Simulation</strong>&nbsp;menu, when <strong>Celestial coordinates chart</strong>&nbsp;is selected some dialogs will be shown to enter the geographic coordinates of the observatory site and the celestial coordinates to plot. The dialog to select the celestial coordinates shows two lists: the one to the left enumerates the available coordinates and the one to the right the final coordinates. The name of each variable includes the celestial body name and, after a comma, the kind of coordinate: DE for declination, AR for right ascension, A for azimuth and h for altitude. The content of <strong>Filter</strong>&nbsp;text area restricts the list of available coordinates to the ones whose name contains the text entered.&nbsp;</p>
+
+<p>The button <strong>&gt;</strong>&nbsp;copies the selected variables from the list of available coordinates to the final list, the button <strong>&lt;</strong>&nbsp;remove the selected variables from the final list and the button <strong>&gt;&gt;</strong>&nbsp;copies all available variables to the final list.</p>
+
+<p>When button <strong>OK</strong>&nbsp;is clicked a dialog will be shown to enter the initial date, the final date and the step in days. This step is a decimal value, i e., if a step of 1 hour is desired the value 0.0417 (1/60) should be entered.</p>
+
+<h1>3.- Moon</h1>
+
+<p>Inside <strong>Simulation</strong>&nbsp;menu there is <strong>Moon</strong>&nbsp;menu wich allows to calculate two lunisolar astronomical targets: (a) the date of the first or last Moon since the occurrence of a solstice, equinox or cross-quarter festival <a href="#[3]">[3]</a>. (b) The date of coincidence in azimuths of the setting Sun and the full Moon, named Spring Full Moon or <em>Megalithic equinox</em><a href="#[4]">[4]</a>.</p>
+
+<h2>3.1.- First Moon</h2>
+
+<p>This option allows to plot Moon phase, azimuth and elevation at the moment of its first appearance in the sky following Gonz&aacute;lez Garc&iacute;a and Odeh papers<a href="#[3]">[3]</a> starting from a solar event: solstice, equinox and cross-quarter festival. When this option is selected some dialogs are shown to enter the geographic coordinates of the observatory site, the initial year, the number of years and the solar event to mark the start of the time to wait until the next visible new Moon.</p>
+
+<h2>3.2.- Last Moon</h2>
+
+<p>This option allows to plot Moon phase, azimuth and elevation at the moment of its first disappearance in the sky following Gonz&aacute;lez Garc&iacute;a and Odeh papers<a href="#[3]">[3]</a> starting from a solar event: solstice, equinox and cross-quarter festival. When this option is selected some dialogs are shown to enter the geographic coordinates of the observatory site, the initial year, the number of years and the solar event to mark the start of the time to wait until the next disappearance of the Moon.</p>
+
+<h2>3.3.- Spring full Moon</h2>
+
+<p>This option allows to plot Moon and Sun azimuths when there is a cross over in azimuth following the procedure described in Marciano da Silva paper <a href="#[4]">[4]</a>. When this option is selected some dialogs are shown to enter the geographic coordinates of the observatory site, the initial year and the number of years.</p>
+
+<h1>4.- Coincidence in altitude planet-star</h1>
+
+<p>Allows to calculate the coincidence in altitude of a planet and a star in the rising or in the setting. Its aim is to resolve the coincidence in altitude of Saturn and Aldebaran accounted by Plutarch in De Facie in Orbe Lunae, 26: &quot;<em>Now when at intervals of thirty years the star of Cronus, which we call &lsquo;</em>Splendent<em>&rsquo; but they, our author said, call &lsquo;</em>Nightwatchman<em>,&rsquo; enters the sign of the Bull, they, having spent a long time in preparation for the sacrifice and the</em> [expedition]&quot; <a href="#[5]">[5]</a>. In &quot;Simulation&quot; menu, when &quot;Coincidence in altitude planet-star&quot; is selected some dialogs are shown to enter the geographic coordinates of the observatory site, the temporal interval, the planet, the star and if if the coincidence is during rising or during setting.&nbsp;</p>
+
+<h1>5.- Tools</h1>
+
+<p>In <strong>Tools</strong>&nbsp;menu the are two options: Julian day and Calendar</p>
+
+<h2>5.1.- Julian day</h2>
+
+<p>Allows to transform a Julian day to a calendar date, following Gregorian calendar if is later than october 1582<a href="#[6]">[6]</a>.&nbsp;</p>
+
+<h2>5.2.- Calendar</h2>
+
+<p>Allows to calculate the dates of occurrence of solstices, equinoxes and cross-quarter festivales for a given year. Its calculation follows the procedure described in <a href="#[7]">[7]</a>. Equinoxes are the temporal midpoints between solstices while cross-quarter days are temporal midpoints between solstices and the previously calculated apparent equinoxes.</p>
+
+<h1>References</h1>
+
+<p><a name="[1]"></a>[1] MEEUS, J., Astronomical algorithms, Willmann-Bell, 1991</p>
+
+<p><a name="[2]"></a>[2] GONZ&Aacute;LEZ, M.A., <a href="http://asturiense.blogspot.com.es/2015/02/el-estudio-de-los-fenomenos-estelares.html">El estudio de los fen&oacute;menos estelares en los santuarios prehist&oacute;ricos</a>, Asturiensis Prouincia Indigena, 2015</p>
+
+<p><a name="[3]"></a>[3] GONZ&Aacute;LEZ GARC&Iacute;A, C., COSTA FERRER, L., BELMONTE, J. A., <a href="http://digital.csic.es/handle/10261/80904">Solarist vs Lunatics: modelling patterns in megalithic astronomy</a>, Lights and Shadows in Cultural Astronomy, 2007, pp. 23-30; ODEH, M. SH., <a href="http://www.icoproject.org/pdf/2006_cri.pdf">New Criterion for Lunar Crescent Visibility</a>, Experimental Astronomy, 18, 2004, pp. 39-64</p>
+
+<p><a name="[4]"></a>[4] MARCIANO DA SILVA, C, <a href="http://adsabs.harvard.edu/full/2004JHA....35..475D">The Spring Full Moon</a>, Journal for History of Astronomy, v. 3, 4, pp. 475-478</p>
+
+<p><a name="[5]"></a>[5] GONZ&Aacute;LEZ, M.A., <a href="http://asturiense.blogspot.com.es/2015/08/la-era-de-saturno_10.html">La era de Saturno</a>, Asturiensis Prouincia Indigena, 2015</p>
+
+<p><a name="[6]"></a>[6] GONZ&Aacute;LEZ, M.A., <a href="http://asturiense.blogspot.com.es/2011/09/fecha-juliana-y-calendarios-gregoriano.html">Fecha Juliana y calendarios Gregoriano y Juliano</a>, Asturiensis Prouincia Indigena, 2011</p>
+
+<p><a name="[7]"></a>[7] GONZ&Aacute;LEZ, M.A., <a href="http://asturiense.blogspot.com.es/2011/11/la-genesis-del-calendario-el-calendario.html">La g&eacute;nesis del calendario: el calendario prehist&oacute;rico</a>, Asturiensis Prouincia Indigena, 2011</p>
