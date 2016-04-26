@@ -901,6 +901,21 @@ public class Main extends Application
                         {
                             if (e.equals(tab.getContent()))
                             {
+                                if (e.isChange())
+                                {
+                                    if (new MessageDialog(skeleton, "Do yo want to save project " + e.getName() + "?", WARNING).show())
+                                    {
+                                        try
+                                        {
+                                            e.save();
+                                        }
+                                        catch (IOException ex)
+                                        {
+
+                                        }
+                                    }
+                                }
+
                                 projects.remove(e);
                             }
                         }
@@ -1344,12 +1359,13 @@ public class Main extends Application
                     Tab tab = newTab("Help");
                     tab.setContent(webView);
 
-                    webEngine.setCreatePopupHandler((PopupFeatures config) ->
-                    {
-                        WebView wv = new WebView();
-                        Tab tab2 = newTab("Help");
-                        tab2.setContent(wv);
-                        return wv.getEngine();
+                    webEngine.setCreatePopupHandler((PopupFeatures config)
+                            -> 
+                            {
+                                WebView wv = new WebView();
+                                Tab tab2 = newTab("Help");
+                                tab2.setContent(wv);
+                                return wv.getEngine();
                     });
         });
 

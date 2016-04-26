@@ -55,6 +55,11 @@ public class Alignment
     SimpleStringProperty pDeclination;
     SimpleStringProperty pComments;
 
+    public StringProperty imagenPathProperty()
+    {
+        return imagenPath.getValueProperty();
+    }
+    
     public StringProperty observatoryProperty()
     {
         return pObservatory;

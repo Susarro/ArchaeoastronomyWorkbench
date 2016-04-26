@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -81,18 +83,19 @@ public class ImageManager extends ModalDialog
         TextField tf;
         p.getChildren().addAll(new Label(text), tf = new TextField(value));
 
-        tf.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) ->
-        {
-            if (new File(this.path + System.getProperty("file.separator") + newValue + ".jpg").exists())
-            {
-                tf.setStyle("-fx-background-color: red");
-                ok = false;
-            }
-            else
-            {
-                tf.setStyle("");
-                ok = true;
-            }
+        tf.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue)
+                -> 
+                {
+                    if (new File(this.path + System.getProperty("file.separator") + newValue + ".jpg").exists())
+                    {
+                        tf.setStyle("-fx-background-color: red");
+                        ok = false;
+                    }
+                    else
+                    {
+                        tf.setStyle("");
+                        ok = true;
+                    }
         });
 
         ModalDialog dialog = new ModalDialog(null, p, true);
@@ -126,10 +129,12 @@ public class ImageManager extends ModalDialog
          * @param f Image file
          * @throws FileNotFoundException File not found error
          */
-        public Thumbsnail(File f) throws FileNotFoundException
+        public Thumbsnail(File f) throws FileNotFoundException, IOException
         {
             this.file = f;
-            thumbsnail = new ImageView(new Image(new FileInputStream(f), 300, 0, true, true));
+            FileInputStream fis;
+            thumbsnail = new ImageView(new Image(fis=new FileInputStream(f), 300, 0, true, true));
+            fis.close();
         }
 
         /**
@@ -179,10 +184,11 @@ public class ImageManager extends ModalDialog
                 {
                     items.add(new Thumbsnail(f));
                 }
-                catch (FileNotFoundException ex)
+                catch (IOException ex)
                 {
                     Global.info.log(ex);
                 }
+                
                 //Global.info.Info(f.getName());
             }
         }
@@ -248,17 +254,16 @@ public class ImageManager extends ModalDialog
         tempDir = "";
         imageList = new ListView(items);
         HBox.setHgrow(imageList, Priority.ALWAYS);
+        HBox.setHgrow(userPane, Priority.ALWAYS);
 
         userPane.getChildren().add(imageList);
         update();
 
         imageList.setCellFactory((new Callback<ListView<Thumbsnail>, ListCell<Thumbsnail>>()
         {
-
             @Override
             public ListCell<Thumbsnail> call(ListView<Thumbsnail> p)
             {
-
                 ListCell<Thumbsnail> cell = new ListCell<Thumbsnail>()
                 {
                     @Override
@@ -273,21 +278,22 @@ public class ImageManager extends ModalDialog
                             l.getStyleClass().clear();
                             l.getStyleClass().add("label_negro");
                             setGraphic(v);
-                            widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
-                            {
-                                double width = imageList.getInsets().getLeft() + imageList.getInsets().getRight() + getWidth();
-                                width += getVerticalScrollbar().getWidth();
-                                if (width > maxWidth)
-                                {
-                                    maxWidth = width;
-                                }
-                                imageList.setPrefWidth(maxWidth);
-                                imageList.setMaxWidth(maxWidth);
-                                imageList.setMinWidth(maxWidth);
+                            widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+                                    -> 
+                                    {
+                                        double width = imageList.getInsets().getLeft() + imageList.getInsets().getRight() + getWidth();
+                                        width += getVerticalScrollbar().getWidth();
+                                        if (width > maxWidth)
+                                        {
+                                            maxWidth = width;
+                                        }
+                                        imageList.setPrefWidth(maxWidth);
+                                        imageList.setMaxWidth(maxWidth);
+                                        imageList.setMinWidth(maxWidth);
+                                        stage.setWidth(maxWidth + userPane.getLayoutX() * 2);
 
                             });
                         }
-
                     }
                 };
 
@@ -298,44 +304,67 @@ public class ImageManager extends ModalDialog
         imageList.setItems(items);
 
         Button btnImportar = new Button("Import");
+        Button btnDelete = new Button("Delete");
         boxButtons.getChildren().add(0, btnImportar);
-        btnImportar.setOnAction((ActionEvent event) ->
-        {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG"));
-            if (!tempDir.isEmpty())
-            {
-                fileChooser.setInitialDirectory(new File(tempDir));
-            }
-
-            File file = fileChooser.showOpenDialog(stage);
-
-            if (file != null)
-            {
-                try
+        boxButtons.getChildren().add(btnDelete);
+        btnDelete.setOnAction((ActionEvent event)
+                -> 
                 {
-                    String nombre = inputDialog("Imagen name", "");
-                    if (!nombre.isEmpty())
+                    Thumbsnail t = (Thumbsnail) imageList.getSelectionModel().getSelectedItem();
+                    try
                     {
-                        Files.copy(Paths.get(file.getAbsolutePath()), Paths.get(new File(this.path + System.getProperty("file.separator") + nombre + ".jpg").getAbsolutePath()));
-                        tempDir = file.getAbsolutePath().replace(file.getName(), "");
+                        t.getFile().delete();
+                        imageList.setVisible(false);
+                        Platform.runLater(()
+                                -> 
+                                {
+                                    update();
+                                    imageList.setVisible(true);
+
+                        });
                     }
-                }
-                catch (IOException ex)
-                {
-                    Global.info.log(ex);
-                }
-                imageList.setVisible(false);
-                Platform.runLater(() ->
-                {
-                    update();
-                    imageList.setVisible(true);
-
-                });
-
-            }
+                    catch (Exception ex)
+                    {
+                        
+                    }
         });
 
-    }
+        btnImportar.setOnAction((ActionEvent event)
+                -> 
+                {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG"));
+                    if (!tempDir.isEmpty())
+                    {
+                        fileChooser.setInitialDirectory(new File(tempDir));
+                    }
 
+                    File file = fileChooser.showOpenDialog(stage);
+
+                    if (file != null)
+                    {
+                        try
+                        {
+                            String nombre = inputDialog("Imagen name", "");
+                            if (!nombre.isEmpty())
+                            {
+                                Files.copy(Paths.get(file.getAbsolutePath()), Paths.get(new File(this.path + System.getProperty("file.separator") + nombre + ".jpg").getAbsolutePath()));
+                                tempDir = file.getAbsolutePath().replace(file.getName(), "");
+                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            Global.info.log(ex);
+                        }
+                        imageList.setVisible(false);
+                        Platform.runLater(()
+                                -> 
+                                {
+                                    update();
+                                    imageList.setVisible(true);
+
+                        });
+                    }
+        });
+    }
 }

@@ -52,51 +52,6 @@ import javafx.scene.text.Text;
 import static com.units.Tools.cosine;
 import static com.units.Tools.sine;
 import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
-import static com.units.Tools.cosine;
-import static com.units.Tools.sine;
-import static java.lang.Math.abs;
 
 /**
  * Alignment tab pane
@@ -519,7 +474,8 @@ public class AlignmentPane extends TabPane
                             BufferedInputStream bis;
                             imageView.setImage(new Image(bis = new BufferedInputStream(new FileInputStream(currentProject.getWorkDir() + "imagenes" + System.getProperty("file.separator") + im.getImageFile().getName()))));
                             bis.close();
-                            //vistaImagen.setCache(true);                                       
+                            //vistaImagen.setCache(true);  
+                            currentProject.setChange(true);
                             alignment.setImagenPath(im.getImageFile().getName());
                         }
                         //catch (IOException | NullPointerException ex)

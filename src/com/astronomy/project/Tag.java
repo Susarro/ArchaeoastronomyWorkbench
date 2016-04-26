@@ -5,6 +5,7 @@
  */
 package com.astronomy.project;
 
+import javafx.beans.property.SimpleStringProperty;
 import org.jdom2.Element;
 
 /**
@@ -21,7 +22,7 @@ public class Tag
     /**
      * Tag value
      */
-    private String value;
+    private SimpleStringProperty value;
 
     /**
      * 
@@ -31,7 +32,7 @@ public class Tag
     public Tag(String name, String value)
     {
         this.name = name;
-        this.value = value;
+        this.value = new SimpleStringProperty(value);
     }
 
     /**
@@ -42,7 +43,7 @@ public class Tag
     public Tag(String name, Element e)
     {
         this.name = name;
-        value = e.getText();
+        value = new SimpleStringProperty(e.getText());
     }
 
     /**
@@ -50,6 +51,15 @@ public class Tag
      * @return tag value
      */
     public String getValue()
+    {
+        return value.get();
+    }
+    
+    /**
+     * 
+     * @return tag value nproperty
+     */
+    public SimpleStringProperty getValueProperty()
     {
         return value;
     }
@@ -60,7 +70,7 @@ public class Tag
      */
     public void setValue(String value)
     {
-        this.value = value;
+        this.value.set(value);
     }
 
     /**
@@ -70,7 +80,7 @@ public class Tag
     public Element getXMLElement()
     {
         Element raiz = new Element(name);
-        raiz.setText(value);
+        raiz.setText(value.get());
         return raiz;
     }
 }

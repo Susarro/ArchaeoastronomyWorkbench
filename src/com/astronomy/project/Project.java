@@ -642,7 +642,7 @@ public class Project extends VBox
         if (!found)
         {
             data.add(alignment);
-            change = true;
+            change = true;                        
         }
     }
 
