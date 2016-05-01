@@ -30,9 +30,12 @@ import com.chart.JulianChart;
 import com.chart.SimpleSeriesConfiguration;
 import com.CalculusType;
 import com.HorizontalTime;
+import com.astronomy.project.AlignmentDialogInput;
+import com.astronomy.project.FortuitousProbabilityOption;
 import static com.interfaz.skeleton.MessageDialog.MessageType.ERROR;
 import static com.interfaz.skeleton.MessageDialog.MessageType.INFO;
 import static com.interfaz.skeleton.MessageDialog.MessageType.WARNING;
+import com.interfaz.skeleton.ModalDialog;
 import static com.main.Dialogs.inputDialog;
 import static com.main.Dialogs.inputLocalCoordinates;
 import static com.main.Dialogs.inputOption;
@@ -83,11 +86,27 @@ import static com.main.Dialogs.inputTimeInterval;
 import static java.lang.Math.abs;
 import static com.units.Tools.sine;
 import static com.units.Tools.cosine;
-import java.awt.Desktop;
+import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.util.Callback;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import javafx.beans.value.ChangeListener;
 
 /**
  *
@@ -1338,12 +1357,108 @@ public class Main extends Application
                         grid.add(new BordererLabel(fme.samain.getSimpleDate().toString()), 1, 6);
                         grid.add(new BordererLabel(fme.winterSolstice.getSimpleDate().toString()), 1, 7);
 
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.imbolc, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 0);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.apparentSpringEquinox, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 1);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.beltaine, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 2);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.summerSolstice, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 3);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.lugnasad, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 4);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.apparentAutumnEquinox, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 5);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.samain, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 6);
+                        grid.add(new BordererLabel(String.format("%.1f", Sun.getApparentEquatorialPosition(fme.winterSolstice, CalculusType.PRECISE).getDeclination().getSignedValue())), 2, 7);
+
                         newTab("Calendar " + strYear).setContent(grid);
                     }
                     catch (ProcessException ex)
                     {
                         Global.info.log(ex);
                     }
+        });
+
+        mi = new MenuItem("Alignment");
+        m.getItems().add(mi);
+        mi.setOnAction((ActionEvent t)
+                -> 
+                {
+                    AlignmentDialogInput dlg = new AlignmentDialogInput(null);
+                    dlg.setForesightName("Foresight");
+                    dlg.setObservatoryName("Observatory");
+                    dlg.boxButtons.getChildren().remove(dlg.btnOK);
+                    dlg.btnCancel.setText("Close");
+                    dlg.showModal();
+
+        });
+
+        mi = new MenuItem("Probability of fortuitous astronomical coincidences from a number of alignments");
+        m.getItems().add(mi);
+        mi.setOnAction((ActionEvent t)
+                -> 
+                {
+                    TextField tfMeaningful = new TextField("18");
+                    TextField tfCoincidences = new TextField("0");
+                    TextField tfTotal = new TextField("0");
+                    TextField tfError = new TextField("1");
+                    Label lProbability = new Label();
+                    ComboBox cbOptions = new ComboBox(FXCollections.observableArrayList(FortuitousProbabilityOption.values()));
+                    cbOptions.getSelectionModel().select(0);
+
+                    GridPane gridPane = new GridPane();
+                    gridPane.setHgap(10);
+                    gridPane.setVgap(10);
+                    gridPane.setPadding(new Insets(10, 10, 10, 10));
+                    gridPane.add(new Label("Number of astronomically meaningful directions"), 0, 0);
+                    gridPane.add(tfMeaningful, 1, 0);
+                    gridPane.add(new Label("Number of coincidences to within +- error of azimuth"), 0, 1);
+                    gridPane.add(tfCoincidences, 1, 1);
+                    gridPane.add(new Label("Number of horizon aligments"), 0, 2);
+                    gridPane.add(tfTotal, 1, 2);
+                    gridPane.add(new Label("Azimuth error in sexagesimal degrees"), 0, 3);
+                    gridPane.add(tfError, 1, 3);
+                    gridPane.add(new Label("Option"), 0, 4);
+                    gridPane.add(cbOptions, 1, 4);
+                    gridPane.add(new Label("Probability of fortuitous astronomical coincidences"), 0, 5);
+                    gridPane.add(lProbability, 1, 5);
+
+                    ChangeListener cll = (ChangeListener) (ObservableValue observable, Object oldValue, Object newValue)
+                            -> 
+                            {
+                                try
+                                {
+                                    int meaningful = Integer.valueOf(tfMeaningful.getText());
+                                    int coincidences = Integer.valueOf(tfCoincidences.getText());
+                                    int total = Integer.valueOf(tfTotal.getText());
+                                    double error = Double.valueOf(tfError.getText().replace(",", "."));
+                                    Double probability = Double.NaN;
+                                    switch ((FortuitousProbabilityOption) cbOptions.getSelectionModel().getSelectedItem())
+                                    {
+                                        case BERNOULLI:
+                                            probability = Project.Bernoulli(meaningful, coincidences, total, error);
+                                            lProbability.setText(String.format("%.1f", probability * 100) + "%");
+                                            break;
+                                        case ROSENFELDT:
+
+                                            probability = Project.Rosenfeldt(meaningful, coincidences, total, error);
+                                            lProbability.setText(String.format("%.1f", probability * 100) + "%");
+                                            break;
+                                    }
+                                }
+                                catch (NumberFormatException ex)
+                                {
+                                    lProbability.setText("Error");
+                                }
+                    };
+
+                    tfMeaningful.textProperty().addListener(cll);
+                    tfCoincidences.textProperty().addListener(cll);
+                    tfTotal.textProperty().addListener(cll);
+                    tfError.textProperty().addListener(cll);
+                    cbOptions.valueProperty().addListener(cll);
+                    
+
+                    ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
+                    dialogo.boxButtons.getChildren().remove(dialogo.btnOK);
+                    dialogo.btnCancel.setText("Close");
+                    dialogo.showModal();
+
         });
 
         menu.getMenus().add(m = new Menu("Help"));

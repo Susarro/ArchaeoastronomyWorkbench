@@ -121,7 +121,7 @@ public class Project extends VBox
      *
      * @return Alignment
      */
-    public Alignment inputAlignment()
+    public static Alignment inputAlignment()
     {
         AlignmentDialogInput dlg = new AlignmentDialogInput(null);
         if (dlg.showModal())
@@ -705,7 +705,7 @@ public class Project extends VBox
      * @param error Azimuth error
      * @return Fortuitously probality of a number of coincidences or more per a total of alignments
      */
-    private double Rosentfeldt(int meaningful,int coincidences, int total, int error)
+    public static double Rosenfeldt(int meaningful,int coincidences, int total, double error)
     {
         BigDecimal P = new BigDecimal(meaningful); 
 
@@ -735,7 +735,7 @@ public class Project extends VBox
      * @param error Azimuth error
      * @return Fortuitously probality of a number of coincidences or more per a total of alignments
      */
-    private double Bernoulli(int meaningful,int coincidences, int total, int error)
+    public static double Bernoulli(int meaningful,int coincidences, int total, double error)
     {
         BigDecimal P = new BigDecimal(meaningful); 
         BigDecimal N = new BigDecimal(360).divide(new BigDecimal(2).multiply(new BigDecimal(error))); //margen de error
@@ -783,7 +783,7 @@ public class Project extends VBox
                 v = Bernoulli(18, coincidences, total, 1);
                 break;
             case ROSENFELDT:
-                v = Rosentfeldt(18, coincidences, total, 1);
+                v = Rosenfeldt(18, coincidences, total, 1);
                 break;
         }
 

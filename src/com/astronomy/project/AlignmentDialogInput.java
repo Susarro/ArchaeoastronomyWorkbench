@@ -84,6 +84,24 @@ public class AlignmentDialogInput extends ModalDialog
     private final CheckBox cbCoordinates;
 
     /**
+     * 
+     * @param name Observatory name to set
+     */
+    public void setObservatoryName(String name)
+    {
+        observatoryName.setText(name);
+    } 
+    
+     /**
+     * 
+     * @param name Foresight Name to set
+     */
+    public void setForesightName(String name)
+    {
+        foresightName.setText(name);
+    } 
+    
+    /**
      * Update
      */
     private void updateAlignment()
