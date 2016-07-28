@@ -65,7 +65,7 @@ public class Catalogue
                 mp = new Equatorial(new SexagesimalDegree(14.91 / 3600000), new HourAngle(121.17 / (3600000 * 15)));
                 return new Star(star.toString(), coord, mp, 1.85);
             case ALPHA_BOOTIS:
-                coord = new Equatorial(SexagesimalDegree.valueOf("21º36'47.35''"), HourAngle.valueOf("14:21:23.29"));
+                coord = new Equatorial(SexagesimalDegree.valueOf("19º10'56.7''"), HourAngle.valueOf("14:15:39.67"));
                 mp = new Equatorial(new SexagesimalDegree(-1999.4 / 3600000), new HourAngle(-1093.45 / (3600000 * 15)));
                 return new Star(star.toString(), coord, mp, -0.04);
             case EPSILON_ORIONIS:
