@@ -30,6 +30,8 @@ import com.chart.JulianChart;
 import com.chart.SimpleSeriesConfiguration;
 import com.CalculusType;
 import com.HorizontalTime;
+import static com.PlanetEnum.SATURN;
+import com.astronomy.Catalogue;
 import com.astronomy.project.AlignmentDialogInput;
 import com.astronomy.project.FortuitousProbabilityOption;
 import static com.interfaz.skeleton.MessageDialog.MessageType.ERROR;
@@ -82,12 +84,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
@@ -98,14 +95,8 @@ import static com.main.Dialogs.inputTimeInterval;
 import static java.lang.Math.abs;
 import static com.units.Tools.sine;
 import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
-import static com.main.Dialogs.inputTimeInterval;
-import static java.lang.Math.abs;
-import static com.units.Tools.sine;
-import static com.units.Tools.cosine;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 
 /**
@@ -174,8 +165,8 @@ public class Main extends Application
      */
     public Main() throws ProcessException
     {
-        latitude = SexagesimalDegree.valueOf("42º34'28''");
-        longitude = SexagesimalDegree.valueOf("6º20'01''");
+        latitude = SexagesimalDegree.valueOf("42º25'27''");
+        longitude = SexagesimalDegree.valueOf("-6º3'00''");
         LocalDateTime ldts = LocalDateTime.parse("01/01/" + String.valueOf(LocalDateTime.now().getYear()) + " 00:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         LocalDateTime ldte = ldts.plusYears(1);
         interval = new Interval(new JulianDay(ldts.getDayOfMonth(), ldts.getMonthValue(), ldts.getYear()),
@@ -986,6 +977,7 @@ public class Main extends Application
         axes.add(axis = new AxisChart("Calendar"));
         axis.configSerieList.add(new SimpleSeriesConfiguration("festivals", Color.WHITE, 4, "null"));
 
+
         JulianChart chart = new JulianChart("", axes, "JD");
         chart.AxesList.get(chart.AxesList.size() - 1).setVisible(false);
 
@@ -1030,7 +1022,6 @@ public class Main extends Application
                     chart.addSample(fme.apparentAutumnEquinox.getValue(), 0, "festivals");
                     chart.addSample(fme.apparentAutumnEquinox.getValue(), 1, "festivals");
                     chart.addSample(fme.apparentAutumnEquinox.getValue(), Double.NaN, "festivals");
-
                 }
                 catch (ProcessException ex)
                 {
@@ -1077,6 +1068,8 @@ public class Main extends Application
                         double distanciaAngular = abs(h.getAzimuth().minus(hs.getAzimuth()).getSignedValue()) * PI / 180;
                         double Z = Radian.valueOf(new SexagesimalDegree(90).minus(h.getAltitude())).getValue();
                         double h0 = hs.getAltitude().getSignedValue() * PI / 180;
+
+                       
 
                         double log10_bst = 4.75 - distanciaAngular * Z / 3 + h0 * (12 + 8.21 * Z) + 2.86 * Z;
                         double bst = pow(10.0, log10_bst);
@@ -1452,7 +1445,6 @@ public class Main extends Application
                     tfTotal.textProperty().addListener(cll);
                     tfError.textProperty().addListener(cll);
                     cbOptions.valueProperty().addListener(cll);
-                    
 
                     ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
                     dialogo.boxButtons.getChildren().remove(dialogo.btnOK);
@@ -1521,6 +1513,8 @@ public class Main extends Application
      */
     public static void main(String[] args)
     {
+
+        
         launch(args);
     }
 

@@ -52,7 +52,7 @@ public class ImageManager extends ModalDialog
     /**
      * temporal directory
      */
-    String tempDir;
+    static String tempDir;
     /**
      * Image list view
      */
@@ -251,7 +251,6 @@ public class ImageManager extends ModalDialog
         super(parent, new VBox(10), true);
         this.path = workDir + System.getProperty("file.separator") + "imagenes";
         new File(this.path).mkdirs();
-        tempDir = "";
         imageList = new ListView(items);
         HBox.setHgrow(imageList, Priority.ALWAYS);
         HBox.setHgrow(userPane, Priority.ALWAYS);
@@ -334,7 +333,7 @@ public class ImageManager extends ModalDialog
                 {
                     FileChooser fileChooser = new FileChooser();
                     fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG"));
-                    if (!tempDir.isEmpty())
+                    if (tempDir!=null)
                     {
                         fileChooser.setInitialDirectory(new File(tempDir));
                     }

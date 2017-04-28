@@ -21,7 +21,9 @@ import com.CalculusType;
 import static com.CalculusType.PRECISE;
 import static com.main.Main.skeleton;
 import com.units.SexagesimalDegree;
+import static com.units.SexagesimalDegree.acos;
 import static com.units.SexagesimalDegree.cos;
+import static com.units.SexagesimalDegree.sin;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -293,6 +295,7 @@ public class AlignmentPane extends TabPane
                             return;
                         }
                         SexagesimalDegree astronomicalDeclination = null;
+                         SexagesimalDegree h=null;
                         switch (astEvent)
                         {
                             case NONE:
@@ -311,7 +314,7 @@ public class AlignmentPane extends TabPane
                                                 alignment.getObservatory().getCoordinates().getLongitude(),
                                                 JulianDay)
                                         .getDeclination().reduction();
-
+                                h=alignment.getOrientation().toTrue(SUN, Disk.UPPER_LIMB).getAltitude();
                                 break;
                             case NORTHERN_LUNAR_MAJOR_STANDSTILL:
                             case SOUTHERN_LUNAR_MAJOR_STANDSTILL:
@@ -323,6 +326,7 @@ public class AlignmentPane extends TabPane
                                                 alignment.getObservatory().getCoordinates().getLongitude(),
                                                 JulianDay)
                                         .getDeclination();
+                                h=alignment.getOrientation().toTrue(MOON, Disk.UPPER_LIMB).getAltitude();
 
                                 break;
                         }
@@ -330,12 +334,21 @@ public class AlignmentPane extends TabPane
                         SexagesimalDegree L = alignment.getObservatory().getCoordinates().getLatitude();
                         SexagesimalDegree l = alignment.getObservatory().getCoordinates().getLongitude();
                         SexagesimalDegree A = alignment.getOrientation().getAzimuth();
-                        SexagesimalDegree h = alignment.getOrientation().getAltitude();
-                        SexagesimalDegree delinationDifference = astEvent.getDeclination().minus(astronomicalDeclination).reduction();
-                        variacionAcimut = new SexagesimalDegree(abs(cosine(astronomicalDeclination) * delinationDifference.getSignedValue() / (sine(A) * cos(L) * cosine(h))));
+                       
+                        
+                        
+                        SexagesimalDegree A2=acos((sin(astEvent.getDeclination())-sin(L)*sin(h))/(cos(L)*cos(h)));
+                        if(A.getValue()>180) A2=new SexagesimalDegree(360).minus(A2);
+                        
+                        
+                        /*SexagesimalDegree delinationDifference = astEvent.getDeclination().minus(astronomicalDeclination).reduction();
+                        
+                        variacionAcimut = new SexagesimalDegree(abs(cos(astronomicalDeclination) * delinationDifference.getSignedValue() / (sine(A) * cos(L) * cos(h))));*/
+                        variacionAcimut =A.minus(A2);
                         lError.setText(String.format("%dº%02d'", variacionAcimut.getDegrees(), variacionAcimut.getMinutes()));
                         SexagesimalDegree error = SexagesimalDegree.valueOf(lError.getText());
-                        if (error.getSignedValue() <= 1)
+                        
+                        if (abs(error.getSignedValue()) <= 1)
                         {
                             ledValidation.setLedColor(Color.LIME);
                             alignment.setComments(astEvent.toString() + "," + tfYear.getText());
@@ -451,7 +464,9 @@ public class AlignmentPane extends TabPane
                     if (event.getClickCount() == 2)
                     {
                         Tab tab = main.newTab(alignment.getObservatory().getName() + "-" + alignment.getForesight().getName());
-                        ImageViewPane ivp = new ImageViewPane(new ImageView(imageView.getImage()));
+                        ImageView iv;
+                        ImageViewPane ivp = new ImageViewPane(iv=new ImageView(imageView.getImage()));
+                        iv.setPreserveRatio(true);
                         tab.setContent(ivp);
                     }
         });

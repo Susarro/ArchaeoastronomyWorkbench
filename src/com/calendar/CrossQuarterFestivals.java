@@ -63,24 +63,22 @@ public class CrossQuarterFestivals
 
         if (s.getSummerSolstice().isBefore(s.getWinterSolstice()))
         {
-            Solstice s1 = new Solstice(year - 1);
-            apparentSpringEquinox = new JulianDay((s1.getWinterSolstice().getValue() + s.getSummerSolstice().getValue()) / 2);
-            apparentAutumnEquinox = new JulianDay((s.getSummerSolstice().getValue() + s.getWinterSolstice().getValue()) / 2);
-            imbolc = new JulianDay((s1.getWinterSolstice().getValue() + apparentSpringEquinox.getValue()) / 2);
-            beltaine = new JulianDay((apparentSpringEquinox.getValue() + s.getSummerSolstice().getValue()) / 2);
-            lugnasad = new JulianDay((s.getSummerSolstice().getValue() + apparentAutumnEquinox.getValue()) / 2);
+            apparentSpringEquinox = new JulianDay((winterSolstice.getValue() + summerSolstice.getValue()-365.25) / 2);
+            apparentAutumnEquinox = new JulianDay((summerSolstice.getValue() + winterSolstice.getValue()) / 2);
+            imbolc = new JulianDay((winterSolstice.getValue() + apparentSpringEquinox.getValue() -365.25) / 2);
+            beltaine = new JulianDay((apparentSpringEquinox.getValue() + summerSolstice.getValue()) / 2);
+            lugnasad = new JulianDay((summerSolstice.getValue() + apparentAutumnEquinox.getValue()) / 2);
             samain = new JulianDay((apparentAutumnEquinox.getValue() + s.getWinterSolstice().getValue()) / 2);
 
         }
         else
         {
-            Solstice s2 = new Solstice(year + 1);
-            apparentSpringEquinox = new JulianDay((s.getWinterSolstice().getValue() + s.getSummerSolstice().getValue()) / 2);
-            apparentAutumnEquinox = new JulianDay((s.getSummerSolstice().getValue() + s2.getWinterSolstice().getValue()) / 2);
-            imbolc = new JulianDay((s.getWinterSolstice().getValue() + apparentSpringEquinox.getValue()) / 2);
-            beltaine = new JulianDay((apparentSpringEquinox.getValue() + s.getSummerSolstice().getValue()) / 2);
-            lugnasad = new JulianDay((s.getSummerSolstice().getValue() + apparentAutumnEquinox.getValue()) / 2);
-            samain = new JulianDay((apparentAutumnEquinox.getValue() + s2.getWinterSolstice().getValue()) / 2);
+            apparentSpringEquinox = new JulianDay((winterSolstice.getValue() + summerSolstice.getValue()) / 2);
+            apparentAutumnEquinox = new JulianDay((summerSolstice.getValue() + winterSolstice.getValue()+365.25) / 2);
+            imbolc = new JulianDay((winterSolstice.getValue() + apparentSpringEquinox.getValue()) / 2);
+            beltaine = new JulianDay((apparentSpringEquinox.getValue() + summerSolstice.getValue()) / 2);
+            lugnasad = new JulianDay((summerSolstice.getValue() + apparentAutumnEquinox.getValue()) / 2);
+            samain = new JulianDay((apparentAutumnEquinox.getValue() + winterSolstice.getValue()+365.25) / 2);
         }
 
     }
