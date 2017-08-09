@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,16 +139,20 @@ public class Project extends VBox
     /**
      * Dialog for selecting the Gaussian kernel density estimation parameters
      *
+     * @param dt Standard deviation
+     * @param d Minimum value
+     * @param h Maximum value
+     * @param i Value increment
      * @return Gaussian kernel density estimation parameters
      * @throws ProcessException Format error
      * @throws CancelExcepcion cancelation by user
      */
-    public final GaussianKernelDensityEstimationParameters inputGaussianKernelDensityEstimationParameters() throws ProcessException, CancelExcepcion
+    static public final GaussianKernelDensityEstimationParameters inputGaussianKernelDensityEstimationParameters(double dt,double d, double h, double i) throws ProcessException, CancelExcepcion
     {
-        TextField tfDesviacionTipica = new TextField("1.0");
-        TextField tfDeclinacionDesde = new TextField("-50");
-        TextField tfDeclinacionHasta = new TextField("50");
-        TextField tfDeclinacionPaso = new TextField("1.0");
+        TextField tfDesviacionTipica = new TextField(String.valueOf(dt));
+        TextField tfDeclinacionDesde = new TextField(String.valueOf(d));
+        TextField tfDeclinacionHasta = new TextField(String.valueOf(h));
+        TextField tfDeclinacionPaso = new TextField(String.valueOf(i));
 
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -155,11 +161,11 @@ public class Project extends VBox
 
         gridPane.add(new Label("Standard deviation"), 0, 0);
         gridPane.add(tfDesviacionTipica, 1, 0);
-        gridPane.add(new Label("Minimum value of declination"), 0, 1);
+        gridPane.add(new Label("Minimum value"), 0, 1);
         gridPane.add(tfDeclinacionDesde, 1, 1);
-        gridPane.add(new Label("Maximum value of declination"), 0, 2);
+        gridPane.add(new Label("Maximum value"), 0, 2);
         gridPane.add(tfDeclinacionHasta, 1, 2);
-        gridPane.add(new Label("Declination increment"), 0, 3);
+        gridPane.add(new Label("Value increment"), 0, 3);
         gridPane.add(tfDeclinacionPaso, 1, 3);
 
         ModalDialog dialogo = new ModalDialog(skeleton, gridPane, true);
@@ -324,8 +330,9 @@ public class Project extends VBox
         mi = new MenuItem("Probability density estimation using a Gaussian kernel");
         mi.setOnAction((ActionEvent event)
                 -> 
-                {
-                    probabilityDensityEstimation();
+                {           
+                    ;
+                    parent.probabilityDensityEstimation(name,new ArrayList<Alignment>(data).stream().map(a -> a.getDeclination().getSignedValue()).collect(Collectors.toList()));
         });
         menu.getItems().add(mi);
 
@@ -791,125 +798,7 @@ public class Project extends VBox
 
     }
 
-    /**
-     * Proobability density estimation using a Gaussian kernel
-     */
-    private void probabilityDensityEstimation()
-    {
-        class ProbabilityDensity_Declination
-        { 
- 
-            double probabilityDensity;
-            double declination;
-
-            public ProbabilityDensity_Declination(double declination)
-            {
-                this.declination = declination;
-                this.probabilityDensity = 0;
-            }
-
-            public void addProbabilityDensity(double f)
-            {
-                this.probabilityDensity += f;
-            }
-
-            public double ProbabilityDensity(double originDeclination, double standardDeviation, int total)
-            {
-                double d = declination;
-                double d0 = originDeclination;
-                double s = standardDeviation;
-                int n = total;
-                return (exp(-pow(d - d0, 2) / (2 * pow(s, 2))) / sqrt(2 * PI)) / (n * s);
-            }
-
-        }
-
-        try
-        {
-            List<AxisChart> axes = new ArrayList<>();
-            AxisChart categoria;
-            axes.add(categoria = new AxisChart("Density"));
-            categoria.configSerieList.add(new SimpleSeriesConfiguration("Density", Color.LIME, 4, "null"));
-            SwingChart chart = new SwingChart("", skeleton, axes, "DE");
-
-            GaussianKernelDensityEstimationParameters ifd = inputGaussianKernelDensityEstimationParameters();
-
-            (new TemporalTaskTemplate<Double>("", ifd.getMinimumValue(), ifd.getMaximumValue(), ifd.getStepValue())
-            {
-
-                @Override
-                public void cloneCurrent(Double input)
-                {
-                    setCurrent(input);
-                }
-
-                @Override
-                public double doubleValue(Double input)
-                {
-                    return input;
-                }
-
-                @Override
-                public String toString(Double input)
-                {
-                    return String.format("%.1f", input).replace(",", ".");
-                }
-
-                @Override
-                public void addToCurrent(Double increment)
-                {
-                    setCurrent(getCurrent() + increment);
-                }
-
-                @Override
-                public int compare(Double object, Double reference)
-                {
-                    if (object < reference)
-                    {
-                        return -1;
-                    }
-                    else if (object > reference)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-
-                @Override
-                public void taskEnd()
-                {
-                    Tab tab = parent.newTab("Probability density " + name);
-                    tab.setContent(chart.getChart());
-
-                }
-
-                @Override
-                public void cycle()
-                {
-                    ProbabilityDensity_Declination couple = new ProbabilityDensity_Declination(getCurrent());
-
-                    for (int i = 0; i < data.size(); i++)
-                    {
-                        Alignment al = (Alignment) data.get(i);
-                        couple.addProbabilityDensity(couple.ProbabilityDensity(
-                                al.getDeclination().getSignedValue(),
-                                ifd.getStandardDeviation(),
-                                data.size()));
-                    }
-
-                    chart.addSample(couple.declination, couple.probabilityDensity, "Density");
-                }
-            }).taskStart();
-
-        }
-        catch (ProcessException | CancelExcepcion ex)
-        {
-
-        }
-    }
+    
 
     /**
      * Check astronomical event

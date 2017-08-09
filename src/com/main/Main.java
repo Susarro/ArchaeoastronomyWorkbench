@@ -30,10 +30,14 @@ import com.chart.JulianChart;
 import com.chart.SimpleSeriesConfiguration;
 import com.CalculusType;
 import com.HorizontalTime;
-import static com.PlanetEnum.SATURN;
-import com.astronomy.Catalogue;
+import com.TemporalTaskTemplate;
+import com.astronomy.project.Alignment;
 import com.astronomy.project.AlignmentDialogInput;
 import com.astronomy.project.FortuitousProbabilityOption;
+import com.astronomy.project.GaussianKernelDensityEstimationParameters;
+import com.astronomy.project.ProbabilityDensityPair;
+import static com.astronomy.project.Project.inputGaussianKernelDensityEstimationParameters;
+import com.chart.SwingChart;
 import static com.interfaz.skeleton.MessageDialog.MessageType.ERROR;
 import static com.interfaz.skeleton.MessageDialog.MessageType.INFO;
 import static com.interfaz.skeleton.MessageDialog.MessageType.WARNING;
@@ -98,6 +102,75 @@ import static com.units.Tools.cosine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static com.main.Dialogs.inputTimeInterval;
+import static java.lang.Math.abs;
+import static com.units.Tools.sine;
+import static com.units.Tools.cosine;
+import static java.lang.Math.ceil;
+import static java.lang.Math.floor;
+import java.util.Arrays;
+import java.util.Collections;
+import javafx.scene.control.SelectionMode;
 
 /**
  *
@@ -962,6 +1035,10 @@ public class Main extends Application
     {
         List<AxisChart> axes = new ArrayList<>();
         AxisChart axis;
+        /* axes.add(axis = new AxisChart("Brightness"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("Schaefer standard", Color.YELLOW, 4, "null"));
+        axis.configSerieList.add(new SimpleSeriesConfiguration("Schaefer non-standard", Color.BEIGE, 4, "null"));*/
+
         axes.add(axis = new AxisChart("Altitude"));
         axis.configSerieList.add(new SimpleSeriesConfiguration("h Star", Color.RED, 2, "null"));
         axis.configSerieList.add(new SimpleSeriesConfiguration("h Sun", Color.RED, 4, "null"));
@@ -976,7 +1053,6 @@ public class Main extends Application
         axis.configSerieList.add(new SimpleSeriesConfiguration("m Star", Color.CYAN, 2, "null"));
         axes.add(axis = new AxisChart("Calendar"));
         axis.configSerieList.add(new SimpleSeriesConfiguration("festivals", Color.WHITE, 4, "null"));
-
 
         JulianChart chart = new JulianChart("", axes, "JD");
         chart.AxesList.get(chart.AxesList.size() - 1).setVisible(false);
@@ -1055,6 +1131,7 @@ public class Main extends Application
                     }
                     if (marca)
                     {
+
                         chart.addSample(getCurrent().getValue(), h.getAzimuth().getValue(), "A Star");
                         chart.addSample(getCurrent().getValue(), hs.getAzimuth().getValue(), "A Sun");
                         chart.addSample(getCurrent().getValue(), 0, "horizon");
@@ -1069,8 +1146,6 @@ public class Main extends Application
                         double Z = Radian.valueOf(new SexagesimalDegree(90).minus(h.getAltitude())).getValue();
                         double h0 = hs.getAltitude().getSignedValue() * PI / 180;
 
-                       
-
                         double log10_bst = 4.75 - distanciaAngular * Z / 3 + h0 * (12 + 8.21 * Z) + 2.86 * Z;
                         double bst = pow(10.0, log10_bst);
                         double mz = 6;
@@ -1083,29 +1158,34 @@ public class Main extends Application
                         double A1 = pow(-1 + pow(10, Y1), 2) / K;
                         double bst_umbral = (pow(10, 3.17) - A1) / (5 * kv) + 118;
 
-                        if (bst >= bst_umbral)
+                        /*if (bst >= bst_umbral)
                         {
                             log10_C = -8.35;
                             K = pow(10, -5.9);
-                        }
-
+                        }*/
                         double Y = -0.2 * (mz + 16.57 + kv + 2.5 * log10_C);
                         double b = pow(pow(10, Y) - 1, 2) / K + kv / 0.2 * (bst - 118);
 
                         double C = pow(10.0, log10_C);
-                        double i = C * pow(1 + sqrt(K * b), 2);
+                        double i;
+                        i = C * pow(1 + sqrt(K * b), 2);
+
                         double X = 1 / (cos(Z) + 0.025 * exp(-11 * cos(Z)));
                         double m = -16.57 - 2.5 * log10(i) - kv * X;
                         double logb = log10(b);
 
-                        if (m > -1)
+                        //chart.addSample(getCurrent().getValue(), log10_bst, "Schaefer standard");
+                        //chart.addSample(getCurrent().getValue(), logb, "Schaefer non-standard");
+                        chart.addSample(getCurrent().getValue(), m, "m Critical");
+
+                        /*if (m > -5)
                         {
-                            chart.addSample(getCurrent().getValue(), m, "m Critical");
+                           
                         }
                         else
                         {
                             chart.addSample(getCurrent().getValue(), Double.NaN, "m Critical");
-                        }
+                        }*/
                     }
                     a_temp = AEstrella;
 
@@ -1453,6 +1533,47 @@ public class Main extends Application
 
         });
 
+        mi = new MenuItem("Probability density estimation");
+        m.getItems().add(mi);
+        mi.setOnAction((ActionEvent t)
+                -> 
+                {
+                    ObservableList<Double> values = FXCollections.observableArrayList();
+                    ListView<Double> valueList = new ListView<>(values);
+                    valueList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                    Button bAdd = new Button("Add value");
+                    Button bRemove = new Button("Remove value");
+                    bAdd.setOnAction((ActionEvent event)
+                            -> 
+                            {
+                                try
+                                {
+                                    Arrays.asList(inputDialog("Comma separated values", "").split(";")).stream().map(s -> Double.valueOf(s)).forEach(v -> values.add(v));                                    
+                                }
+                                catch (NumberFormatException ex)
+                                {
+
+                                }
+                    });
+                    bRemove.setOnAction((ActionEvent event)
+                            -> 
+                            {
+                                valueList.getSelectionModel().getSelectedItems().stream().collect(Collectors.toList()).forEach(v -> values.remove(v));                                    
+                                
+                    });
+
+                    ModalDialog dialogo = new ModalDialog(skeleton, new VBox(valueList), true);
+
+                    dialogo.boxButtons.getChildren().add(0, bRemove);
+                    dialogo.boxButtons.getChildren().add(0, bAdd);
+                    dialogo.btnCancel.setText("Close");
+                    if (dialogo.showModal())
+                    {
+                        probabilityDensityEstimation("", values);
+                    }
+
+        });
+
         menu.getMenus().add(m = new Menu("Help"));
         mi = new MenuItem("Help");
         m.getItems().add(mi);
@@ -1504,6 +1625,100 @@ public class Main extends Application
     }
 
     /**
+     * // * Proobability density estimation using a Gaussian kernel
+     *
+     * @param name Name
+     * @param values List of observation values
+     */
+    public void probabilityDensityEstimation(String name, List<Double> values)
+    {
+
+        try
+        {
+            List<AxisChart> axes = new ArrayList<>();
+            AxisChart categoria;
+            axes.add(categoria = new AxisChart("Density"));
+            categoria.configSerieList.add(new SimpleSeriesConfiguration("Density", Color.LIME, 4, "null"));
+            SwingChart chart = new SwingChart("", skeleton, axes, "DE");
+
+            GaussianKernelDensityEstimationParameters ifd = inputGaussianKernelDensityEstimationParameters(1,ceil(Collections.min(values)-0.2*(Collections.max(values)-Collections.min(values))), floor(Collections.max(values)-0.2*(Collections.max(values)-Collections.min(values))),1);
+
+            (new TemporalTaskTemplate<Double>("", ifd.getMinimumValue(), ifd.getMaximumValue(), ifd.getStepValue())
+            {
+
+                @Override
+                public void cloneCurrent(Double input)
+                {
+                    setCurrent(input);
+                }
+
+                @Override
+                public double doubleValue(Double input)
+                {
+                    return input;
+                }
+
+                @Override
+                public String toString(Double input)
+                {
+                    return String.format("%.1f", input).replace(",", ".");
+                }
+
+                @Override
+                public void addToCurrent(Double increment)
+                {
+                    setCurrent(getCurrent() + increment);
+                }
+
+                @Override
+                public int compare(Double object, Double reference)
+                {
+                    if (object < reference)
+                    {
+                        return -1;
+                    }
+                    else if (object > reference)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+
+                @Override
+                public void taskEnd()
+                {
+                    Tab tab = newTab("Probability density " + name);
+                    tab.setContent(chart.getChart());
+
+                }
+
+                @Override
+                public void cycle()
+                {
+                    ProbabilityDensityPair pair = new ProbabilityDensityPair(getCurrent());
+
+                    for (int i = 0; i < values.size(); i++)
+                    {
+                        pair.updateDensity(values.get(i),
+                                ifd.getStandardDeviation(),
+                                values.size());
+                    }
+
+                    chart.addSample(pair.getValue(), pair.getProbabilityDensity(), "Density");
+                }
+            }).taskStart();
+
+        }
+        catch (ProcessException | CancelExcepcion ex)
+        {
+
+        }
+    }
+
+    /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
      * launched through deployment artifacts, e.g., in IDEs with limited FX
@@ -1514,7 +1729,6 @@ public class Main extends Application
     public static void main(String[] args)
     {
 
-        
         launch(args);
     }
 
