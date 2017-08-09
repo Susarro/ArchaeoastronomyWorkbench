@@ -149,6 +149,7 @@ public class Project extends VBox
      */
     static public final GaussianKernelDensityEstimationParameters inputGaussianKernelDensityEstimationParameters(double dt,double d, double h, double i) throws ProcessException, CancelExcepcion
     {
+        
         TextField tfDesviacionTipica = new TextField(String.valueOf(dt));
         TextField tfDeclinacionDesde = new TextField(String.valueOf(d));
         TextField tfDeclinacionHasta = new TextField(String.valueOf(h));
