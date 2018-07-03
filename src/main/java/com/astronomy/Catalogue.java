@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * Catalogue of stars and planets
- * 
+ *
  * @author MIGUEL_ANGEL
  */
 public class Catalogue
@@ -61,7 +61,7 @@ public class Catalogue
             case ALPHA_CASSIOPEIA:
                 coord = new Equatorial(SexagesimalDegree.valueOf("56º32'14.392''"), HourAngle.valueOf("00:40:30.4405"));
                 mp = new Equatorial(new SexagesimalDegree(-32.77 / 3600000), new HourAngle(50.36 / (3600000 * 15)));
-                return new Star(star.toString(), coord, mp, 2.24);    
+                return new Star(star.toString(), coord, mp, 2.24);
             case ALPHA_CENTAURI:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-60º50'02.308''"), HourAngle.valueOf("14:39:36.4951"));
                 mp = new Equatorial(new SexagesimalDegree(699 / 3600000), new HourAngle(-3642 / (3600000 * 15)));
@@ -106,6 +106,10 @@ public class Catalogue
                 coord = new Equatorial(SexagesimalDegree.valueOf("-11º09'40.75''"), HourAngle.valueOf("13:25:11.579"));
                 mp = new Equatorial(new SexagesimalDegree(-30.65 / 3600000), new HourAngle(-42.35 / (3600000 * 15)));
                 return new Star(star.toString(), coord, mp, 1.04);
+            case BETA_CASSIOPEIA:
+                coord = new Equatorial(SexagesimalDegree.valueOf("59º08'59.2120''"), HourAngle.valueOf("00:09:10.68518"));
+                mp = new Equatorial(new SexagesimalDegree(-179.77 / 3600000), new HourAngle(523.50 / (3600000 * 15)));
+                return new Star(star.toString(), coord, mp, 2.28);
             case BETA_CENTAURI:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-60º22'22.9266''"), HourAngle.valueOf("14:03:49.40535"));
                 mp = new Equatorial(new SexagesimalDegree(-23.16 / 3600000), new HourAngle(-33.27 / (3600000 * 15)));
@@ -121,7 +125,7 @@ public class Catalogue
             case BETA_ORIONIS:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-8º12'05.8981''"), HourAngle.valueOf("05:14:32.27210"));
                 mp = new Equatorial(new SexagesimalDegree(0.5 / 3600000), new HourAngle(1.31 / (3600000 * 15)));
-                return new Star(star.toString(), coord, mp, 0.13);    
+                return new Star(star.toString(), coord, mp, 0.13);
             case DELTA_CRUCIS:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-58º44'56.1369''"), HourAngle.valueOf("12:15:08.71673"));
                 mp = new Equatorial(new SexagesimalDegree(-10.36 / 3600000), new HourAngle(-35.81 / (3600000 * 15)));
@@ -153,7 +157,7 @@ public class Catalogue
             case ZETA_ORIONIS:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-1º56'34.2649''"), HourAngle.valueOf("05:40:45.52666"));
                 mp = new Equatorial(new SexagesimalDegree(2.03 / 3600000), new HourAngle(3.19 / (3600000 * 15)));
-                return new Star(star.toString(), coord, mp, 1.77);    
+                return new Star(star.toString(), coord, mp, 1.77);
             default:
                 return null;
         }
