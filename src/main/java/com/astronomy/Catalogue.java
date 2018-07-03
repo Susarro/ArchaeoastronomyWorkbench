@@ -41,7 +41,7 @@ public class Catalogue
             case ALPHA_AQUILAE:
                 coord = new Equatorial(SexagesimalDegree.valueOf("8º52'05.9563''"), HourAngle.valueOf("19:50:46.99855"));
                 mp = new Equatorial(new SexagesimalDegree(385.29 / 3600000), new HourAngle(536.23 / (3600000 * 15)));
-                return new Star(star.toString(), coord, mp, 0.77);
+                return new Star(star.toString(), coord, mp, 0.77);                
             case ALPHA_AURIGAE:
                 coord = new Equatorial(SexagesimalDegree.valueOf("45º59'52.768''"), HourAngle.valueOf("5:16:41.3591"));
                 mp = new Equatorial(new SexagesimalDegree(-427.11 / 3600000), new HourAngle(75.52 / (3600000 * 15)));
@@ -90,6 +90,10 @@ public class Catalogue
                 coord = new Equatorial(SexagesimalDegree.valueOf("7º24'25.426''"), HourAngle.valueOf("5:55:10.30530"));
                 mp = new Equatorial(new SexagesimalDegree(9.56 / 3600000), new HourAngle(24.95 / (3600000 * 15)));
                 return new Star(star.toString(), coord, mp, 0.42);
+            case ALPHA_PERSEI:
+                coord = new Equatorial(SexagesimalDegree.valueOf("49º51'40.2455''"), HourAngle.valueOf("3:24:19.37009"));
+                mp = new Equatorial(new SexagesimalDegree(-26.23 / 3600000), new HourAngle(23.75 / (3600000 * 15)));
+                return new Star(star.toString(), coord, mp, 1.806);
             case ALPHA_PISCIS_AUSTRINI:
                 coord = new Equatorial(SexagesimalDegree.valueOf("-29º37'20.050''"), HourAngle.valueOf("22:57:39.0465"));
                 mp = new Equatorial(new SexagesimalDegree(-158.98 / 3600000), new HourAngle(-331.11 / (3600000 * 15)));

@@ -19,6 +19,7 @@ public enum StarEnum
     ALPHA_CANIS_MINORIS("Alpha Canis Minoris"),
     ALPHA_CENTAURI("Alpha Centauri"),
     ALPHA_CORONAE("Alpha Coronae"),
+    ALPHA_PERSEI("Alpha Persei"),
     BETA_CASSIOPEIA("Beta Cassiopeia"),
     BETA_CENTAURI("Beta Centauri"),
     BETA_ORIONIS("Beta Orionis"),
